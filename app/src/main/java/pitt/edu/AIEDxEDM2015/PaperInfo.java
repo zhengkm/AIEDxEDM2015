@@ -24,7 +24,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class PaperInfo extends Activity implements Runnable, OnClickListener {
-    private String key, activity, id, title, authors, pAbstract, pContent, pRoom, bTime, eTime, paperID, paperStatus, date, presentationID;
+    private String key, activity, id, title, authors, pAbstract, pContent, pRoom, bTime, eTime, paperID, paperStatus, date, presentationID,track;
     private TextView t1, t2, t3, t4, bv;
     private WebView wv;
     private ImageButton b1, b2, b, b3;
@@ -62,6 +62,7 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
             presentationID = b.getString("presentationID");
             activity = b.getString("activity");
             key = b.getString("key");
+            track=b.getString("track");
         }
 
         us2s = new UserScheduledToServer();
@@ -104,6 +105,7 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
 
 
         bv = (TextView) findViewById(R.id.PaperButton);
+        bv.setText(track);
         //bv.setOnClickListener(this);
 
 
@@ -200,6 +202,7 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
         in.putExtra("room", pRoom);
         in.putExtra("date", date);
         in.putExtra("presentationID", presentationID);
+        in.putExtra("track", track);
         startActivity(in);
     }
 

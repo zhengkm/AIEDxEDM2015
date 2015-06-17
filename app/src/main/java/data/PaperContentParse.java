@@ -90,6 +90,10 @@ public class PaperContentParse {
                 se.type = sb.toString();
                 return;
             }
+            if (localName.equals("contentTrack")) {
+                se.track = sb.toString();
+                return;
+            }
             if (localName.equals("name") && contentStart) {
                 se.authors = se.authors + sb.toString() + ", ";
                 return;

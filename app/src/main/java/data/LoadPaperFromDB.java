@@ -178,6 +178,9 @@ public class LoadPaperFromDB {
                 p.type = sb.toString();
                 return;
             }
+            if(localName.equals("track")){
+                p.track=sb.toString();
+            }
             if (localName.equals("PRESENTATION")) {
                 pList.add(p);
                 return;
@@ -186,6 +189,7 @@ public class LoadPaperFromDB {
                 presentationStart = false;
                 return;
             }
+
         }
 
         public void characters(char ch[], int start, int length) {

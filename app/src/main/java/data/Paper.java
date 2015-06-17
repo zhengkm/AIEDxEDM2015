@@ -17,5 +17,6 @@ public class Paper {
 	public String contentlink = "null";
 	public String title="no";
 	public String authors="no";
+	public String track;
 
 }

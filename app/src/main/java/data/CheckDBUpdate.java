@@ -36,8 +36,9 @@ public class CheckDBUpdate {
 				int start = result.indexOf("<timestamp>");
 				int end = result.indexOf("</timestamp>");
 				result = result.substring(start+11, end);
-				if (result.compareTo(Conference.timstamp) == 0)
-					needUpdate=false;
+				if (result.compareTo(Conference.timstamp) == 0) {
+					needUpdate = false;
+				}
 				else{
 					needUpdate=true;
 					Conference.timstamp =result;
@@ -49,10 +50,10 @@ public class CheckDBUpdate {
 				needUpdate = false;
 			}
 		} catch (Exception e) {
-			System.out.print("exception" + e);
+			System.out.println("exception" + e);
 		}
 
-		return true;
+		return needUpdate;
 	}
 }
 

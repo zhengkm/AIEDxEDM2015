@@ -10,5 +10,6 @@ public class PaperContent {
     public String title;
     public String type;
     public String contentlink;
+    public String track;
 
 }
