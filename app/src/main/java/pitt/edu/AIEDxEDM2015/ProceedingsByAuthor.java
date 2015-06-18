@@ -556,7 +556,7 @@ public class ProceedingsByAuthor extends Activity implements OnItemClickListener
         db.open();
         pList = new ArrayList<Paper>();
         pList = db.getPapersByauthorName();
-        System.out.println(pList.size());
+        //System.out.println(pList.size());
         db.close();
 
 

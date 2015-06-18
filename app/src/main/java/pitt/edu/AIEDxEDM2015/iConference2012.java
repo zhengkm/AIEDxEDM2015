@@ -4,6 +4,7 @@ package pitt.edu.AIEDxEDM2015;
 import java.util.ArrayList;
 
 
+import data.CheckDBUpdate;
 import data.Conference;
 import data.ConferenceInfoParser;
 import data.DBAdapter;
@@ -94,6 +95,8 @@ public class iConference2012 extends Activity {
         };
 
     }
+
+
 
     public void updateApp() {
         alpha -= 5;

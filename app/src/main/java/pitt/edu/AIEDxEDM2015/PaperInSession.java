@@ -317,7 +317,7 @@ public class PaperInSession extends Activity implements Runnable {
 
             vh.schedule.setOnClickListener(this);
             vh.schedule.setTag(pList.get(position).id + ";" + position);
-            System.out.println("!!!!!!!!!!!!!!"+vh.schedule.getTag()+"   "+vh.t2.getText());
+            //System.out.println("!!!!!!!!!!!!!!"+vh.schedule.getTag()+"   "+vh.t2.getText());
 
             if (pList.get(position).starred.compareTo("yes") == 0)
                 vh.star.setImageResource(R.drawable.yes_star);

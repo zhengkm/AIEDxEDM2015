@@ -1,6 +1,7 @@
 package pitt.edu.AIEDxEDM2015;
 
 
+import data.CheckDBUpdate;
 import data.Conference;
 import data.DBAdapter;
 
@@ -37,6 +38,24 @@ public class MainInterface extends Activity {
     private Spinner spinner2;
     private ArrayAdapter adapter2;
 
+    private void checkUpdate(){
+        CheckDBUpdate checkDBUpdate=new CheckDBUpdate();
+        syncB = (ImageButton) findViewById(R.id.ImageButton01);
+        if(checkDBUpdate.check()){
+            syncB.setImageResource(R.drawable.need_update);
+
+        }else{
+            syncB.setImageResource(R.drawable.update);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkUpdate();
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +69,7 @@ public class MainInterface extends Activity {
 //        spinner2 = (Spinner) findViewById(R.id.spinner1);
 
         db = new DBAdapter(this);
+
 //        adapter2 = ArrayAdapter.createFromResource(this, R.array.conference_array, android.R.layout.simple_spinner_item);
 
         syncB = (ImageButton) findViewById(R.id.ImageButton01);
@@ -173,6 +193,8 @@ public class MainInterface extends Activity {
                 }
             });
         }
+
+        checkUpdate();
     }
 
     private void CallSignin() {

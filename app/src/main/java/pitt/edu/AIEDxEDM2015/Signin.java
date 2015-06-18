@@ -221,7 +221,7 @@ public class Signin extends Activity implements Runnable {
 
             Conference.userSignin = true;
             Conference.userID = au.userID;
-            System.out.println("*******************User ID" + au.userID);
+            //System.out.println("*******************User ID" + au.userID);
 			
 			
 			/*

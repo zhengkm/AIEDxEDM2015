@@ -39,7 +39,6 @@ public class MyStaredPapers extends Activity implements Runnable {
 	private DBAdapter db;
 	private ListView lv;
 	private TextView tx2;
-	private boolean starClicked, scheduleClicked;
 	private UserScheduledToServer us2s;
 	private String paperStatus;
 	private int show;
@@ -76,7 +75,7 @@ public class MyStaredPapers extends Activity implements Runnable {
 		lv = (ListView) findViewById(R.id.ListView01);
 		lv.setAdapter(adapter);
 
-		starClicked = scheduleClicked = false;
+		//starClicked = scheduleClicked = false;
 		if(pList.size() != 0){
 			show +=1;
 		}
@@ -249,14 +248,14 @@ public class MyStaredPapers extends Activity implements Runnable {
 	private class ListViewAdapter extends BaseAdapter implements
 	OnClickListener {
 
-ArrayList<Paper> pList;
+ArrayList<Paper> paperList;
 
 public ListViewAdapter(ArrayList pList) {
-	this.pList = pList;
+	this.paperList = pList;
 }
 
 public int getCount() {
-	return pList.size();
+	return paperList.size();
 }
 
 public Object getItem(int position) {
@@ -297,29 +296,29 @@ public View getView(int position, View convertView, ViewGroup parent) {
 		vh = (ViewHolder) convertView.getTag();
 	}
 
-	if (pList.get(position).scheduled.compareTo("yes") == 0)
+	if (paperList.get(position).scheduled.compareTo("yes") == 0)
 		vh.schedule.setImageResource(R.drawable.yes_schedule);
 	else
 		vh.schedule.setImageResource(R.drawable.no_schedule);
 
 	vh.schedule.setOnClickListener(this);
-	vh.schedule.setTag(pList.get(position).id+";"+position);
+	vh.schedule.setTag(paperList.get(position).id+";"+position);
 	
-	if (pList.get(position).starred.compareTo("yes") == 0)
+	if (paperList.get(position).starred.compareTo("yes") == 0)
 		vh.star.setImageResource(R.drawable.yes_star);
 	else
 		vh.star.setImageResource(R.drawable.no_star);
 
 	vh.star.setOnClickListener(this);
-	vh.star.setTag(pList.get(position).presentationID+";"+position);
-	if (pList.get(position).recommended.compareTo("yes") == 0)
-		vh.t2.setText(Html.fromHtml(pList.get(position).title+"<font color=\"#ff0000\"> &lt;Recommended&gt; </font>"));
+	vh.star.setTag(paperList.get(position).presentationID+";"+position);
+	if (paperList.get(position).recommended.compareTo("yes") == 0)
+		vh.t2.setText(Html.fromHtml(paperList.get(position).title+"<font color=\"#ff0000\"> &lt;Recommended&gt; </font>"));
 		else
-			vh.t2.setText(pList.get(position).title);
+			vh.t2.setText(paperList.get(position).title);
 	vh.t2.setOnClickListener(this);
 	vh.t2.setTag(position);
-	vh.t3.setText(pList.get(position).authors);
-	vh.type.setText(pList.get(position).type);
+	vh.t3.setText(paperList.get(position).authors);
+	vh.type.setText(paperList.get(position).type);
 	//vh.tr.setText(idTotrackName.get(pList.get(position).trackID).toString());
 	//vh.tr.setBackgroundDrawable(getResources().getDrawable(R.drawable.track));
 	
@@ -329,8 +328,8 @@ public View getView(int position, View convertView, ViewGroup parent) {
 	 */
 
 	try {
-		beginDate = sdfSource.parse(pList.get(position).exactbeginTime);
-		endDate = sdfSource.parse(pList.get(position).exactendTime);
+		beginDate = sdfSource.parse(paperList.get(position).exactbeginTime);
+		endDate = sdfSource.parse(paperList.get(position).exactendTime);
 		begTime = sdfDestination.format(beginDate);
 		endTime = sdfDestination.format(endDate);
 		vh.t1.setText(begTime + " - " + endTime);
@@ -340,12 +339,12 @@ public View getView(int position, View convertView, ViewGroup parent) {
 	int idx = position - 1;   
 	String previewChar;
 	if(idx >=0){
-	previewChar = pList.get(idx).date;
+	previewChar = paperList.get(idx).date;
 	}
 	else
 	previewChar = " ";
 	
-    String currentChar = pList.get(position).date; 
+    String currentChar = paperList.get(position).date;
 
     String newPreviewChar = previewChar;  
     String newCurrentChar = currentChar;  
@@ -369,17 +368,17 @@ public void onClick(View v) {
 		index = Integer.parseInt(tv.getTag().toString());
 		MyStaredPapers.this.finish();
 		Intent in = new Intent(MyStaredPapers.this, PaperDetail.class);
-		in.putExtra("id", pList.get(index).id);
-		in.putExtra("title", pList.get(index).title);
-		in.putExtra("authors", pList.get(index).authors);
-		in.putExtra("date", pList.get(index).date);
-		in.putExtra("abstract", pList.get(index).paperAbstract);
-		in.putExtra("contentlink", pList.get(index).contentlink);
+		in.putExtra("id", paperList.get(index).id);
+		in.putExtra("title", paperList.get(index).title);
+		in.putExtra("authors", paperList.get(index).authors);
+		in.putExtra("date", paperList.get(index).date);
+		in.putExtra("abstract", paperList.get(index).paperAbstract);
+		in.putExtra("contentlink", paperList.get(index).contentlink);
 
-		in.putExtra("room", pList.get(index).room);
-		in.putExtra("bTime", pList.get(index).exactbeginTime);
-		in.putExtra("eTime", pList.get(index).exactendTime);
-		in.putExtra("presentationID", pList.get(index).presentationID);
+		in.putExtra("room", paperList.get(index).room);
+		in.putExtra("bTime", paperList.get(index).exactbeginTime);
+		in.putExtra("eTime", paperList.get(index).exactendTime);
+		in.putExtra("presentationID", paperList.get(index).presentationID);
 		in.putExtra("activity","MyStaredPapers");
 		in.putExtra("key","no");
 		startActivity(in);
@@ -426,16 +425,18 @@ public void onClick(View v) {
 			ib.setImageResource(R.drawable.yes_star);
 			updateUserPaperStatus(paperID, "yes", "star");
 			insertMyStarredPaper(paperID);
-			pList= getData();
+			paperList= getData();
+			pList=paperList;
 			adapter.notifyDataSetChanged();
-			starClicked = true;
+			//starClicked = true;
 		} else {
 			ib.setImageResource(R.drawable.no_star);
 			updateUserPaperStatus(paperID, "no", "star");
 			deleteMyStarredPaper(paperID);
-			pList= getData();
+			paperList= getData();
+			pList=paperList;
 			adapter.notifyDataSetChanged();
-			starClicked = false;
+			//starClicked = false;
 		}
 
 		break;
@@ -462,20 +463,18 @@ public void onClick(View v) {
 			// update interface here
 
 			if (paperStatus.compareTo("yes") == 0) {
-				ib.setImageResource(R.drawable.yes_schedule);
+				//ib.setImageResource(R.drawable.yes_schedule);
 				updateUserPaperStatus(paperID, "yes", "schedule");
 				insertMyScheduledPaper(paperID);
 				pList.get(pos).scheduled="yes";
 				adapter.notifyDataSetChanged();
-				scheduleClicked = true;
 			}
-			if (paperStatus.compareTo("no") == 0) {
-				ib.setImageResource(R.drawable.no_schedule);
+			else if (paperStatus.compareTo("no") == 0) {
+				//ib.setImageResource(R.drawable.no_schedule);
 				updateUserPaperStatus(paperID, "no", "schedule");
 				deleteMyScheduledPaper(paperID);
 				pList.get(pos).scheduled="no";
 				adapter.notifyDataSetChanged();
-				scheduleClicked = false;
 			}
 		}
 	};

@@ -35,7 +35,7 @@ public class UserScheduleParse {
         } catch (Exception ee) {
             System.out.print(ee.toString());
         }
-        System.out.println("*&*&*&*&*&*&*& " + pidList.size());
+        //System.out.println("*&*&*&*&*&*&*& " + pidList.size());
         return pidList;
     }
 

@@ -76,7 +76,7 @@ public class UpdateOption extends Activity {
                 if (isConnect(UpdateOption.this)) {
                     ad = new AlertDialog.Builder(UpdateOption.this)
                             .setTitle("Update Options")
-                            .setMessage("It takes time to update the whole local DB, do you still want to update?")
+                            .setMessage("It takes about \"1 to 2 minutes\" to update local DB")
                             .setPositiveButton("Yes",
                                     new DialogInterface.OnClickListener() {
                                         @Override
