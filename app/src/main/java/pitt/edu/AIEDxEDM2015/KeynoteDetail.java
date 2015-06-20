@@ -7,6 +7,7 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -19,9 +20,11 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import data.Conference;
+
 public class KeynoteDetail extends Activity {
     private TextView tw1, tw2, tw3, tw6, tw7;
-    private Button tw4;
+    private Button tw4,googlemap;
     private WebView wv;
     private RelativeLayout rl;
     private String title, date, beginTime, kendTime, room, description, speaker, Affiliation;
@@ -76,14 +79,11 @@ public class KeynoteDetail extends Activity {
         }
 
         tw3 = (TextView) this.findViewById(R.id.TextView04);
-        if (room.compareTo("null") != 0)
-            tw3.setText(room);
+        if (room.compareTo("null") == 0||"".equals(room)||room==null)
+            tw3.setText(" N/A");
         else {
-            this.findViewById(R.id.TextView03).setVisibility(View.GONE);
-            tw3.setVisibility(View.GONE);
+            tw3.setText(room);
         }
-        tw4 = (Button) this.findViewById(R.id.map);
-        tw4.setVisibility(View.GONE);
 
         rl = (RelativeLayout) this.findViewById(R.id.LinearLayout02);
         rl.setVisibility(View.VISIBLE);
@@ -99,6 +99,21 @@ public class KeynoteDetail extends Activity {
         wv = (WebView) this.findViewById(R.id.WebView01);
         wv.getSettings().setJavaScriptEnabled(true);
         wv.loadData(description, "text/html", "utf-8");
+
+        googlemap = (Button) findViewById(R.id.map);
+        googlemap.setOnClickListener(new View.OnClickListener() {
+                 public void onClick(View v) {
+                     Uri googlemap = Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q", room).build();
+                     Intent intent = new Intent(Intent.ACTION_VIEW);
+                     intent.setData(googlemap);
+
+                     if (intent.resolveActivity(getPackageManager()) != null) {
+                         startActivity(intent);
+                     }
+                 }
+
+             }
+        );
     }
 
     @Override

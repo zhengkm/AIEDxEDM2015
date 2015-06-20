@@ -10,6 +10,7 @@ public class Workshop {
     public String date;
     public String day_id;
     public String content;
-    public String childsessionID;
+    public String eventSessionID;
+    //public String childsessionID;
 
 }

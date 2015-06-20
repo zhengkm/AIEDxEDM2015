@@ -72,13 +72,13 @@ public class ConferenceInfo extends Activity {
 		{
 
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//String location1 = "Hotel Holiday-Inn Montreal"+"420 Sherbrooke Street West Montreal, QC H3A 1B4";
-				Intent map = new Intent(Intent.ACTION_VIEW, Uri
-						.parse("https://maps.google.com/maps?q=Worthington%20Renaissance%20google%20map&um=1&ie=UTF-8&hl=en&sa=N&tab=wl"));
-				startActivity(map);
-				
-				
+				Uri googlemap=Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q",Conference.location).build();
+				Intent intent=new Intent(Intent.ACTION_VIEW);
+				intent.setData(googlemap);
+
+				if(intent.resolveActivity(getPackageManager())!=null){
+					startActivity(intent);
+				}
 			}
 			
 		}

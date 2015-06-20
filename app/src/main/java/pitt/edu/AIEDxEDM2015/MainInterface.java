@@ -70,6 +70,7 @@ public class MainInterface extends Activity {
 
         db = new DBAdapter(this);
 
+        db.open().getConferenceInfo();
 //        adapter2 = ArrayAdapter.createFromResource(this, R.array.conference_array, android.R.layout.simple_spinner_item);
 
         syncB = (ImageButton) findViewById(R.id.ImageButton01);
@@ -85,8 +86,8 @@ public class MainInterface extends Activity {
 
         //Row 1
         GridView gv1 = (GridView) findViewById(R.id.GridView01);
-        Integer[] i1 = {R.drawable.about, R.drawable.keynote, R.drawable.sessionbig, R.drawable.proceeding};
-        String[] t1 = {"About", "Keynotes", "Schedule", "Proceedings"};
+        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.workshop,R.drawable.sessionbig,R.drawable.proceeding};
+        String[] t1={ "About","Keynotes","Workshops","Schedule","Proceedings"};
         gv1.setAdapter(new ImageViewAdapter(this, i1, t1));
 
         gv1.setOnItemClickListener(new OnItemClickListener() {
@@ -104,11 +105,15 @@ public class MainInterface extends Activity {
                         startActivity(in);
                         break;
                     case 2:
+                        in = new Intent(MainInterface.this, Workshops.class);
+                        startActivity(in);
+                        break;
+                    case 3:
                         in = new Intent(MainInterface.this, ProgramByDay.class);
                         startActivity(in);
                         break;
                     // Proceedings
-                    case 3:
+                    case 4:
                         in = new Intent(MainInterface.this, Proceedings.class);
                         startActivity(in);
                         break;
@@ -147,6 +152,7 @@ public class MainInterface extends Activity {
                             SharedPreferences userinfo = getSharedPreferences("userinfo", 0);
                             SharedPreferences.Editor editor = userinfo.edit();
                             editor.putString("userID", "");
+
                             //
                             editor.putBoolean("userSignin", false);
                             editor.commit();
@@ -220,9 +226,10 @@ public class MainInterface extends Activity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             finish();
-            System.runFinalizersOnExit(true);
-            this.moveTaskToBack(true);
-            android.os.Process.killProcess(android.os.Process.myPid());
+            Intent home=new Intent(Intent.ACTION_MAIN);
+            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            home.addCategory(Intent.CATEGORY_HOME);
+            startActivity(home);
         }
 
         return super.onKeyDown(keyCode, event);

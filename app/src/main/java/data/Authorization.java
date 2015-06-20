@@ -23,6 +23,8 @@ public class Authorization {
 		String url = ConferenceURL.Login;
 		HttpPost httpRequest = new HttpPost(url);
 
+		email=email.trim();
+		password=password.trim();
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("email", email));
 		params.add(new BasicNameValuePair("password", password));
@@ -74,6 +76,9 @@ public class Authorization {
 	{
 		String url = ConferenceURL.Signup;
 		HttpPost httpRequest = new HttpPost(url);
+		name=name.trim();
+		password=password.trim();
+		email=email.trim();
 
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("name", name));

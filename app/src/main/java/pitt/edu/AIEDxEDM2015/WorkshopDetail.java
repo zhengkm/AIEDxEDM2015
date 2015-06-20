@@ -11,10 +11,13 @@ import data.DBAdapter;
 import data.Paper;
 import data.Session;
 import data.UserScheduledToServer;
+import data.Workshop;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -34,11 +37,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class WorkshopDetail extends Activity implements Runnable{
-	private String wtitle, wid,wbtime, wetime,room, date,content,childsessionID;
+	private String wtitle, wid,wbtime, wetime,room, date,content,childsessionID,eventSessionID;
 	private TextView tv,t1,t2,t3,t4,button;
 	private WebView wv;
 	private ExpandableListView lv;
-	private DBAdapter db;
+	private DBAdapter db=new DBAdapter(this);
 	private UserScheduledToServer us2s;
 	private String paperStatus;
 	private ProgressDialog pd;
@@ -46,8 +49,9 @@ public class WorkshopDetail extends Activity implements Runnable{
 	private String paperID;
 	private int Pos,pos;
 	private MyListViewAdapter adapter;
+	private Session session=new Session();
 	private ArrayList<ArrayList<Paper>> pList= new ArrayList<ArrayList<Paper>>();
-	private ArrayList<Session> sList;
+	private ArrayList<Session> sList=new ArrayList<Session>();
 	private final int MENU_HOME = Menu.FIRST;
 	private final int MENU_TRACK = Menu.FIRST + 1;
 	private final int MENU_SESSION = Menu.FIRST + 2;
@@ -67,14 +71,16 @@ public class WorkshopDetail extends Activity implements Runnable{
 
 		Bundle b = getIntent().getExtras();
 		if (b != null) {
-			wid = b.getString("id");
-			wtitle = b.getString("title");
-			wbtime = b.getString("bTime");
-			wetime = b.getString("eTime");
-			room = b.getString("room");
-			date = b.getString("date");
-			content = b.getString("content");
-			childsessionID = b.getString("childsessionID");
+			eventSessionID=b.getString("eventSessionID");
+
+			session=db.open().getSessionByID(eventSessionID);
+			sList.add(session);
+			wtitle=session.name;
+			wbtime=session.beginTime;
+			wetime=session.endTime;
+			room=session.room;
+			date=session.date;
+
 		}
 
 		tv = (TextView) findViewById(R.id.TextView);
@@ -88,75 +94,97 @@ public class WorkshopDetail extends Activity implements Runnable{
     	Date beginDate, endDate;
     	String begTime, endTime;
     	try {
-    	beginDate = sdfSource.parse(wbtime);
-		endDate = sdfSource.parse(wetime);
-		begTime = sdfDestination.format(beginDate);
-		endTime = sdfDestination.format(endDate);
-		t2 = (TextView)this.findViewById(R.id.TextView02);
-		t2.setText(date+"\t"+begTime+"-"+endTime);
-    	}catch (Exception e) {
-    		System.out.println("Date Exception");
+			beginDate = sdfSource.parse(wbtime);
+			endDate = sdfSource.parse(wetime);
+			begTime = sdfDestination.format(beginDate);
+			endTime = sdfDestination.format(endDate);
+			t2 = (TextView)this.findViewById(R.id.TextView02);
+			t2.setText(date+"\t"+begTime+"-"+endTime);
+			}catch (Exception e) {
+				System.out.println("Date Exception");
     	}
 
-    	t3 = (TextView) findViewById(R.id.TextView03);
+    	//t3 = (TextView) findViewById(R.id.TextView03);
 		t4 = (TextView) findViewById(R.id.TextView04);
-		 if(room.compareToIgnoreCase("NULL")==0){
-         	t3.setVisibility(View.GONE);
-		 	t4.setVisibility(View.GONE);
+		 if(room==null||"null".compareToIgnoreCase(room)==0||"".compareTo(room)==0){
+			 t4.setText("N/A");
 		 }
          else{
-         	t3.setVisibility(View.VISIBLE);	
-         	t4.setVisibility(View.VISIBLE);	
          	t4.setText(room);
          }
-	
-		String[] sidlist = childsessionID.split(";");
-		
-		sList = getSessionData(sidlist);
+		t4.setOnClickListener(new View.OnClickListener()
+							  {
 
-		for(int i=0; i<sList.size();i++){
-			pList.add(getPaperData(sList.get(i).ID));
-		}
+								  public void onClick(View v) {
+				  Uri googlemap=Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q",room).build();
+				  Intent intent=new Intent(Intent.ACTION_VIEW);
+				  intent.setData(googlemap);
+
+				  if(intent.resolveActivity(getPackageManager())!=null){
+					  startActivity(intent);
+				  }
+			  }
+
+		  }
+		);
+		//get paper by session ID
+
+
+		//get Workshop By SessionID
+//		ArrayList<Workshop> wsList=new ArrayList<Workshop>();
+//		wsList=db.open().getWorkshopBySessionID(eventSessionID);
+//		db.close();
+
+//		String[] sidlist = childsessionID.split(";");
+//
+//		sList = getSessionData(sidlist);
+//
+
+		//get paper by session ID
+		pList.add(getPaperData(eventSessionID));
+		db.close();
+
 
 		HeaderView listheaderview = new HeaderView(this);
 		listheaderview.setWebView(content);
-		wv= (WebView) listheaderview.findViewById(R.id.WebView01);
+		//wv= (WebView) listheaderview.findViewById(R.id.WebView01);
 		/*wv.getSettings().setJavaScriptEnabled(true);
 		wv.loadData(content, "text/html", "utf-8");*/
-		
-		button = (TextView) listheaderview.findViewById(R.id.expandbutton);
-		button.setOnClickListener(new OnClickListener(){
 
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-
-				if(wv.getVisibility()== View.GONE){
-				wv.setVisibility(View.VISIBLE);
-				button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bullet_arrow_down, 0, 0, 0);
-				}
-				else if(wv.getVisibility() == View.VISIBLE){
-					wv.setVisibility(View.GONE);
-					button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bullet_arrow_up,0,0,0);
-				}
-			}});
+//		button = (TextView) listheaderview.findViewById(R.id.expandbutton);
+//		button.setOnClickListener(new OnClickListener(){
+//
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//
+//				if(wv.getVisibility()== View.GONE){
+//				wv.setVisibility(View.VISIBLE);
+//				button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bullet_arrow_down, 0, 0, 0);
+//				}
+//				else if(wv.getVisibility() == View.VISIBLE){
+//					wv.setVisibility(View.GONE);
+//					button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bullet_arrow_up,0,0,0);
+//				}
+//			}});
 		lv = (ExpandableListView) findViewById(R.id.ListView01);
-		lv.addHeaderView(listheaderview);
+		//lv.addHeaderView(listheaderview);
 		adapter = new MyListViewAdapter(sList, pList);
 		lv.setAdapter(adapter);
 		for(int i=0; i<sList.size();i++){
 			lv.expandGroup(i);}
 	}
-	public ArrayList<Session> getSessionData(String[] s){
-		ArrayList<Session> sessions= new ArrayList<Session>();
-		db = new DBAdapter(this);
-		
-		db.open();
-		sessions = db.getSessionByidList(s);
-		db.close();
-		
-		return sessions;
-	}
+
+//	public ArrayList<Session> getSessionData(String[] s){
+//		ArrayList<Session> sessions= new ArrayList<Session>();
+//		db = new DBAdapter(this);
+//
+//		db.open();
+//		sessions = db.getSessionByidList(s);
+//		db.close();
+//
+//		return sessions;
+//	}
 	public ArrayList<Paper> getPaperData(String sessionID){
 		ArrayList<Paper> papers = new ArrayList<Paper>();
 		// get data at local
@@ -238,7 +266,7 @@ public class WorkshopDetail extends Activity implements Runnable{
 		in.putExtra("date", date);
 		in.putExtra("room", room);
 		in.putExtra("content", content);
-		in.putExtra("childsessionID", childsessionID);
+		in.putExtra("eventSessionID", eventSessionID);
 		startActivity(in);
 	}
 
@@ -520,14 +548,12 @@ public class WorkshopDetail extends Activity implements Runnable{
 				updateUserPaperStatus(paperID, "yes", "star");
 				insertMyStarredPaper(paperID);
 				childs.get(Pos).get(pos).starred= "yes";
-				this.notifyDataSetChanged();
 				
 			} else {
 				ib.setImageResource(R.drawable.no_star);
 				updateUserPaperStatus(paperID, "no", "star");
 				deleteMyStarredPaper(paperID);
 				childs.get(Pos).get(pos).starred= "no";
-				this.notifyDataSetChanged();
 				
 			}
 			
@@ -553,7 +579,7 @@ public class WorkshopDetail extends Activity implements Runnable{
 			in.putExtra("eTime", childs.get(idx).get(idxs).exactendTime);
 			in.putExtra("presentationID", childs.get(idx).get(idxs).presentationID);
 			in.putExtra("activity","WorkshopDetail");
-			in.putExtra("key",wid+"%"+wtitle+"%"+wbtime+"%"+wetime+"%"+room+"%"+date+"%"+content+"%"+childsessionID);
+			in.putExtra("key",wid+"%"+wtitle+"%"+wbtime+"%"+wetime+"%"+room+"%"+date+"%"+eventSessionID);
 			startActivity(in);
 			break;
 		default:

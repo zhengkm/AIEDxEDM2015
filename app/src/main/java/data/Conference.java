@@ -7,7 +7,7 @@ public final class Conference {
 
 	public static String  startDate  = "";
 	public static String  endDate  = "";
-	public static int     days=5;
+	public static int     days=8;
 	public static String  location = "";
 
 

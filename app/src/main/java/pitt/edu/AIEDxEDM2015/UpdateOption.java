@@ -9,7 +9,7 @@ import data.Conference;
 import data.ConferenceInfoParser;
 import data.DBAdapter;
 import data.ConferenceDataLoad;
-import data.KeynoteParse;
+import data.KeynoteWorkshopParse;
 import data.LoadPaperFromDB;
 import data.LoadSessionFromDB;
 import data.Paper;
@@ -221,19 +221,18 @@ public class UpdateOption extends Activity {
                 ArrayList<String> pidList = new ArrayList<String>();
                 ArrayList<String> pidRList = new ArrayList<String>();
                 ArrayList<String> pidLList = new ArrayList<String>();
+                ArrayList<Workshop> wListDes = new ArrayList<Workshop>();
 
                 ConferenceDataLoad cdl = new ConferenceDataLoad();
 
                 cdl.loadConferenceInfo();
 
-//                knList = cdl.loadKeynote();
-
-
-                //Update keynote info
+                //Update keynote and workshop info
                 publishProgress(14);
-                KeynoteParse knp = new KeynoteParse();
+                KeynoteWorkshopParse knp = new KeynoteWorkshopParse();
                 knList = knp.getKeynoteData();
-                if (knList.size() != 0) {
+                wListDes=knp.getwWorkshopData();
+                if (knList.size() != 0 && wListDes.size() != 0) {
                     publishProgress(12);
                 } else {
                     publishProgress(13);
@@ -269,16 +268,24 @@ public class UpdateOption extends Activity {
                     publishProgress(5);
                 }
 
-                if (knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
+                if (wListDes.size()!=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
                     try {
                         db.open();
                         db.deleteKeynote();
+                        db.deleteWorkshop();
                         db.deleteSession();
                         db.deletePaper();
                         db.deletePaperContent();
 
+
                         for (int i = 0; i < knList.size(); i++) {
                             long error = db.insertKeynote(knList.get(i));
+                            if (error == -1)
+                                System.out.println("error occured");
+                        }
+
+                        for (int i = 0; i < wListDes.size(); i++) {
+                            long error = db.insertWorkshopDes(wListDes.get(i));
                             if (error == -1)
                                 System.out.println("error occured");
                         }
@@ -426,15 +433,15 @@ public class UpdateOption extends Activity {
                     break;
                 case 12:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.accept, 0, 0, 0);
-                    keynote.setText("Update keynote information: success!");
+                    keynote.setText("Update keynote and workshop information: success!");
                     break;
                 case 13:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.error, 0, 0, 0);
-                    keynote.setText("Fail to update keynote information");
+                    keynote.setText("Fail to update keynote and workshop information");
                     break;
                 case 14:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.db_refresh, 0, 0, 0);
-                    keynote.setText("Updating keynote information ...");
+                    keynote.setText("Updating keynote and workshop information ...");
                     break;
                 default:
                     break;

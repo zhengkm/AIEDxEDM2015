@@ -15,6 +15,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -93,16 +94,29 @@ public class PaperInSession extends Activity implements Runnable {
             System.out.println("Date Exception");
         }
 
-        t3 = (TextView) findViewById(R.id.TextView03);
         t4 = (TextView) findViewById(R.id.TextView04);
-        if (room.compareToIgnoreCase("NULL") == 0) {
-            t3.setVisibility(View.GONE);
-            t4.setVisibility(View.GONE);
-        } else {
-            t3.setVisibility(View.VISIBLE);
-            t4.setVisibility(View.VISIBLE);
+        if (room==null || "".compareTo(room) == 0||"null".compareToIgnoreCase(room)==0)
+            t4.setText("N/A");
+        else {
             t4.setText(room);
         }
+
+        t4.setOnClickListener(new View.OnClickListener()
+                              {
+
+                                  public void onClick(View v) {
+                  Uri googlemap=Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q",room).build();
+                  Intent intent=new Intent(Intent.ACTION_VIEW);
+                  intent.setData(googlemap);
+
+                  if(intent.resolveActivity(getPackageManager())!=null){
+                      startActivity(intent);
+                  }
+              }
+
+          }
+        );
+
 
         lv = (ListView) findViewById(R.id.ListView01);
         pList = new ArrayList<Paper>();

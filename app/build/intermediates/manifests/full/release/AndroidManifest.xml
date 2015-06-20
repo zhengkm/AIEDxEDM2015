@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pitt.edu.AIEDxEDM2015"
-    android:versionCode="5"
-    android:versionName="3.2" >
+    android:versionCode="6"
+    android:versionName="4.1" >
 
     <uses-sdk
         android:minSdkVersion="4"
@@ -99,6 +99,11 @@
         <activity
             android:name="pitt.edu.AIEDxEDM2015.Proceedings"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="pitt.edu.AIEDxEDM2015.FirstLaunchUpdate"
+            android:label="@string/title_activity_first_launch_update"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

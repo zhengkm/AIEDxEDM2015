@@ -89,7 +89,7 @@ public class DBAdapter {
             "date text," +
             "dayid text," +
             "content text," +
-            "childsessionID text," +
+            "eventSessionID text," +
             "room text)";
 
     public DBAdapter(Context ctx) {
@@ -203,14 +203,14 @@ public class DBAdapter {
         values.put("room", w.room);
         values.put("dayid", w.day_id);
         values.put("content", w.content);
-        values.put("childsessionID", w.childsessionID);
+        values.put("eventSessionID", w.eventSessionID);
         return mDb.insert("workshopDes", null, values);
     }
 
     public ArrayList<Workshop> getWorkshopsDes() {
         ArrayList<Workshop> tList = new ArrayList<Workshop>();
         Cursor cursor = mDb.query("workshopDes", new String[]{"ID", "name",
-                "beginTime", "endTime", "date", "room", "content", "childsessionID"}, null, null, null, null, "dayid");
+                "beginTime", "endTime", "date", "room", "content", "eventSessionID"}, null, null, null, null, "dayid");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -222,7 +222,7 @@ public class DBAdapter {
             t.date = cursor.getString(4);
             t.room = cursor.getString(5);
             t.content = cursor.getString(6);
-            t.childsessionID = cursor.getString(7);
+            t.eventSessionID = cursor.getString(7);
             tList.add(t);
             cursor.moveToNext();
         }
@@ -233,6 +233,34 @@ public class DBAdapter {
         return tList;
     }
 
+    public ArrayList<Workshop> getWorkshopBySessionID(String eventSessionID){
+        ArrayList<Workshop> tList=new ArrayList<Workshop>();
+        //Workshop ws=new Workshop();
+        Cursor cursor=mDb.query("workshopDes", new String[]{"ID", "name",
+                "beginTime", "endTime", "date", "room", "content", "eventSessionID"}, "eventSessionID='" + eventSessionID + "'", null, null,null, "beginTime, endTime");
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Workshop t = new Workshop();
+            t.ID = cursor.getString(0);
+            t.name = cursor.getString(1);
+            t.beginTime = cursor.getString(2);
+            t.endTime = cursor.getString(3);
+            t.date = cursor.getString(4);
+            t.room = cursor.getString(5);
+            t.content = cursor.getString(6);
+            t.eventSessionID = cursor.getString(7);
+            tList.add(t);
+            cursor.moveToNext();
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return tList;
+    }
+    public int deleteWorkshop() {
+        return mDb.delete("workshopDes", null, null);
+    }
     //Session
     public long insertSession(Session se) {
         ContentValues values = new ContentValues();

@@ -41,6 +41,7 @@
         android:layout_centerInParent="true"
         android:background="@drawable/roundshape"
         android:paddingLeft="5pt"
+        android:paddingTop="20px"
         android:paddingRight="5pt">
 
         <TextView

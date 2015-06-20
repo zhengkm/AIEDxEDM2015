@@ -3,9 +3,11 @@ package pitt.edu.AIEDxEDM2015;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 import data.DBAdapter;
+import data.Session;
 import data.Workshop;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,10 +27,11 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class Workshops extends Activity {
-	private ArrayList<Workshop> wList;
+
 	private DBAdapter db;
 	private ListView lv;
 	private TextView t1;
+	private ArrayList<Session> seList;
 	
 	private final int MENU_HOME = Menu.FIRST;
 	private final int MENU_TRACK = Menu.FIRST + 1;
@@ -51,13 +54,38 @@ public class Workshops extends Activity {
 		ListViewAdapter adapter;
 		db = new DBAdapter(this);
 		db.open();
-		
+		ArrayList<Workshop> wList =new ArrayList();
 		wList = new ArrayList<Workshop>();	
 		wList = db.getWorkshopsDes();
 
+		//get workshop session
+		HashSet<String> saveEventSession=new HashSet<String>();
+		seList=new ArrayList<Session>();
+
+		for(int i=0;i<wList.size();i++){
+			String eventSessionID=wList.get(i).eventSessionID;
+			if(!saveEventSession.contains(eventSessionID)){
+				saveEventSession.add(eventSessionID);
+
+			}
+		}
+
+		ArrayList<Session> tmp=new ArrayList<Session>();
+		for(int j=0;j<8;j++){
+			tmp=db.getSessionBydayID(String.valueOf(j));
+			for(int i=0;i<tmp.size();i++){
+				if(saveEventSession.contains(tmp.get(i).ID)){
+					seList.add(tmp.get(i));
+				}
+			}
+
+		}
+
+
 		db.close();
+
 		
-		adapter = new ListViewAdapter(wList);
+		adapter = new ListViewAdapter(seList);
 		
 		lv = (ListView) findViewById(R.id.ListView01);
 		lv.setAdapter(adapter);
@@ -66,14 +94,14 @@ public class Workshops extends Activity {
 				
 				Intent in = new Intent(Workshops.this, WorkshopDetail.class);
 				//in.putExtra("day_id", buttonNum);
-				in.putExtra("id", wList.get(pos).ID);
-				in.putExtra("title", wList.get(pos).name);
-				in.putExtra("date", wList.get(pos).date);
-				in.putExtra("bTime", wList.get(pos).beginTime);
-				in.putExtra("eTime", wList.get(pos).endTime);
-				in.putExtra("room", wList.get(pos).room);
-				in.putExtra("content", wList.get(pos).content);
-				in.putExtra("childsessionID", wList.get(pos).childsessionID);
+//				in.putExtra("id", wList.get(pos).ID);
+//				in.putExtra("title", wList.get(pos).name);
+//				in.putExtra("date", wList.get(pos).date);
+//				in.putExtra("bTime", wList.get(pos).beginTime);
+//				in.putExtra("eTime", wList.get(pos).endTime);
+//				in.putExtra("room", wList.get(pos).room);
+//				in.putExtra("content", wList.get(pos).content);
+				in.putExtra("eventSessionID", seList.get(pos).ID);
 				startActivity(in);
 				
 				
@@ -138,13 +166,14 @@ public class Workshops extends Activity {
 		TextView t1,t2,t3,firstCharHintTextView;
 	}
 	private class ListViewAdapter extends BaseAdapter {
-		ArrayList<Workshop> wList;
+		ArrayList<Session> seList;
+		//ArrayList<Workshop> wList;
 		public ListViewAdapter(ArrayList w) {
-			this.wList = w;
+			this.seList = w;
 		}
 
 		public int getCount() {
-			return wList.size();
+			return seList.size();
 		}
 
 		public Object getItem(int position) {
@@ -169,25 +198,25 @@ public class Workshops extends Activity {
 			else {
 				v = (ViewHolder) convertView.getTag();
 			}
-			v.t1.setText(wList.get(position).name);
-			if(wList.get(position).room.compareToIgnoreCase("NULL")==0)
-            	v.t3.setVisibility(View.GONE);
+			v.t1.setText(seList.get(position).name);
+			v.t3.setVisibility(View.VISIBLE);
+			if(seList.get(position).room==null||"null".compareToIgnoreCase(seList.get(position).room)==0 ||"".compareTo(seList.get(position).room)==0)
+				v.t3.setText("At N/A");
             else{
-            	v.t3.setVisibility(View.VISIBLE);	
-            	v.t3.setText("At "+wList.get(position).room);
+            	v.t3.setText("At "+seList.get(position).room);
             }
 			
 			int idx = position - 1;   
 			 
-            String preview = idx >= 0 ? wList.get(idx).date : "";   
-            String current = wList.get(position).date;
+            String preview = idx >= 0 ? seList.get(idx).date : "";
+            String current = seList.get(position).date;
       
             if (current.compareTo(preview) == 0) {
             	v.firstCharHintTextView.setVisibility(View.GONE);   
             } else {   
                
             	v.firstCharHintTextView.setVisibility(View.VISIBLE);
-            	v.firstCharHintTextView.setText(wList.get(position).date); 
+            	v.firstCharHintTextView.setText(seList.get(position).date);
             }
 			return convertView;
 		}

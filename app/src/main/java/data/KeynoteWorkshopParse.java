@@ -26,9 +26,10 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 
-public class KeynoteParse {
+public class KeynoteWorkshopParse {
 
     private ArrayList<Keynote> knList = new ArrayList<Keynote>();
+    private ArrayList<Workshop> wsList = new ArrayList<Workshop>();
     private Hashtable<String, String> Datetrans, Dtrans;
 
     public void daytoDate() {
@@ -55,12 +56,20 @@ public class KeynoteParse {
         Dtrans.put("2015-06-29", "8");
     }
 
-    public KeynoteParse() {
+    public KeynoteWorkshopParse() {
         this.daytoDate();
         this.daytoid();
     }
 
-    public ArrayList<Keynote> getKeynoteData() {
+
+    public ArrayList<Keynote> getKeynoteData(){
+        return knList;
+    }
+
+    public ArrayList<Workshop> getwWorkshopData(){
+        return wsList;
+    }
+    public void getData() {
 
         InputStreamReader isr = null;
         InputStream stream = null;
@@ -85,8 +94,8 @@ public class KeynoteParse {
             SAXParser saxParser = spf.newSAXParser();
             XMLReader xr = saxParser.getXMLReader();
 
-            KeynoteParseHandler khandler = new KeynoteParseHandler();
-            xr.setContentHandler(khandler);
+            DataParseHandler dhandler = new DataParseHandler();
+            xr.setContentHandler(dhandler);
             isr = new InputStreamReader(stream, "iso-8859-1");
             //InputStreamReader isr = new InputStreamReader(entity.getContent(),"UTF-8");
 
@@ -107,16 +116,18 @@ public class KeynoteParse {
             }
         }
 
-        return knList;
     }
 
 
-    private class KeynoteParseHandler extends DefaultHandler {
-        private KeynoteDescriptionParser descriptionParser = new KeynoteDescriptionParser();
+    private class DataParseHandler extends DefaultHandler {
+        private DataDescriptionParser descriptionParser = new DataDescriptionParser();
         private String contentID = "";
         private Keynote ke;
-        private boolean keynoteStart = false;
+        private Workshop ws;
+        private boolean dataStart = false;
         private boolean isKeynote = false;
+        private boolean isWorkshop = false;
+
         private StringBuilder sb = new StringBuilder();
 
         public void startDocument() throws SAXException {
@@ -129,13 +140,19 @@ public class KeynoteParse {
                                  String qName, Attributes atts) throws SAXException {
             sb.setLength(0);
             if (localName.equals("Items")) {
-                keynoteStart = true;
+                dataStart = true;
                 return;
             }
             if (localName.equals("Item")) {
                 ke = new Keynote();
+
                 ke.speakerAffiliation = " ";
                 ke.description = " ";
+
+                ws=new Workshop();
+                ws.content="";
+                ws.eventSessionID="";
+
                 return;
             }
         }
@@ -144,7 +161,11 @@ public class KeynoteParse {
                                String qName) throws SAXException {
             if (localName.equals("eventSessionID")) {
                 ke.ID = sb.toString();
+                ws.eventSessionID=sb.toString();
                 return;
+            }
+            if(localName.equals("presentationID")){
+                ws.ID = sb.toString();
             }
             if (localName.equals("sessionDate")) {
                 String content = sb.toString();
@@ -158,33 +179,45 @@ public class KeynoteParse {
                 String str = formatter.format(date);
                 ke.date = Datetrans.get(str);
                 ke.dayid = Dtrans.get(str);
+
+                ws.date=ke.date;
+                ws.day_id=ke.dayid;
                 return;
             }
             if (localName.equals("contentID")) {
                 contentID = sb.toString();
                 return;
             }
+
             if (localName.equals("paperTitle")) {
                 ke.title = sb.toString();
+                ws.name=sb.toString();
                 return;
             }
             if (localName.equals("contentType")) {
                 if ("Keynote".equals(sb.toString()))
                     isKeynote = true;
-                else
+                else if ("Workshop Paper".equals(sb.toString()))
+                    isWorkshop = true;
+                else {
                     isKeynote = false;
+                    isWorkshop = false;
+                }
                 return;
             }
-            if (localName.equals("begintime") && keynoteStart) {
+            if (localName.equals("begintime") && dataStart) {
                 ke.beginTime = sb.toString();
+                ws.beginTime= ke.beginTime;
                 return;
             }
-            if (localName.equals("endtime") && keynoteStart) {
+            if (localName.equals("endtime") && dataStart) {
                 ke.endTime = sb.toString();
+                ws.endTime=ke.endTime;
                 return;
             }
             if (localName.equals("location")) {
                 ke.room = sb.toString();
+                ws.room=ke.room;
                 return;
             }
             if (localName.equals("authors")) {
@@ -195,12 +228,16 @@ public class KeynoteParse {
                 if (isKeynote) {
                     ke.description = descriptionParser.getDescription(contentID);
                     knList.add(ke);
+                }else if(isWorkshop){
+                    ws.content = descriptionParser.getDescription(contentID);
+                    wsList.add(ws);
                 }
                 isKeynote = false;
+                isWorkshop=false;
                 return;
             }
             if (localName.equals("Items")) {
-                keynoteStart = false;
+                dataStart = false;
                 return;
             }
         }
@@ -210,7 +247,7 @@ public class KeynoteParse {
         }
     }
 
-    private class KeynoteDescriptionParser {
+    private class DataDescriptionParser {
 
         public String getDescription(String ID) {
             String data = "";

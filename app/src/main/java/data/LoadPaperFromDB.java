@@ -178,9 +178,9 @@ public class LoadPaperFromDB {
                 p.type = sb.toString();
                 return;
             }
-            if(localName.equals("track")){
-                p.track=sb.toString();
-            }
+//            if(localName.equals("track")){
+//                p.track=sb.toString();
+//            }
             if (localName.equals("PRESENTATION")) {
                 pList.add(p);
                 return;

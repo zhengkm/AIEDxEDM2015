@@ -75,122 +75,122 @@ public class ConferenceDataLoad {
         return poList;
     }
 
-    public ArrayList<Workshop> loadWorkshopsDes() {
-        //this.IdtoDate();
-
-        ArrayList<Workshop> wList = new ArrayList<Workshop>();
-
-        Workshop s;
-        s = new Workshop();
-        s.ID = "1";
-        s.name = "To Be Announced";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "00:00";
-        s.endTime = "00:00";
-        s.room = "null";
-        s.content = "<p></p>";
-        s.childsessionID = "1908";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "2";
-        s.name = "DataWiz 2014 - Session 1&2";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "11:00";
-        s.endTime = "12:30";
-        s.room = "Sala 8, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1948";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "3";
-        s.name = "DataWiz 2014 - Session 3 - 'Data Journalism II'";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "14:00";
-        s.endTime = "15:30";
-        s.room = "Sala 8, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1950";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "4";
-        s.name = "DataWiz 2014 - Session 4 - 'Data Explorations and Exploitations'";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "16:00";
-        s.endTime = "18:00";
-        s.room = "Sala 8, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1951";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "5";
-        s.name = "SP 2014 - Session 1";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "09:00";
-        s.endTime = "10:30";
-        s.room = "Sala 2a, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1952";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "6";
-        s.name = "SP 2014 - Session 2";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "11:00";
-        s.endTime = "12:30";
-        s.room = "Sala 2a, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1953";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "7";
-        s.name = "SP 2014 - Session 3";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "14:00";
-        s.endTime = "15:30";
-        s.room = "Sala 2a, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1954";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "8";
-        s.name = "DataWiz 2014 - Welcome";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "09:00";
-        s.endTime = "10:30";
-        s.room = "Sala 8, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1958";
-        wList.add(s);
-
-        s = new Workshop();
-        s.ID = "9";
-        s.name = "LinkQS 2014";
-        s.date = "Monday, Sept.1";
-        s.day_id = "1";
-        s.beginTime = "09:00";
-        s.endTime = "10:30";
-        s.room = "Sala 2b, Centro Extension PUC";
-        s.content = "<p></p>";
-        s.childsessionID = "1960";
-        wList.add(s);
-
-        return wList;
-    }
+//    public ArrayList<Workshop> loadWorkshopsDes() {
+//        //this.IdtoDate();
+//
+//        ArrayList<Workshop> wList = new ArrayList<Workshop>();
+//
+//        Workshop s;
+//        s = new Workshop();
+//        s.ID = "1";
+//        s.name = "To Be Announced";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "00:00";
+//        s.endTime = "00:00";
+//        s.room = "null";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1908";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "2";
+//        s.name = "DataWiz 2014 - Session 1&2";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "11:00";
+//        s.endTime = "12:30";
+//        s.room = "Sala 8, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1948";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "3";
+//        s.name = "DataWiz 2014 - Session 3 - 'Data Journalism II'";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "14:00";
+//        s.endTime = "15:30";
+//        s.room = "Sala 8, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1950";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "4";
+//        s.name = "DataWiz 2014 - Session 4 - 'Data Explorations and Exploitations'";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "16:00";
+//        s.endTime = "18:00";
+//        s.room = "Sala 8, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1951";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "5";
+//        s.name = "SP 2014 - Session 1";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "09:00";
+//        s.endTime = "10:30";
+//        s.room = "Sala 2a, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1952";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "6";
+//        s.name = "SP 2014 - Session 2";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "11:00";
+//        s.endTime = "12:30";
+//        s.room = "Sala 2a, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1953";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "7";
+//        s.name = "SP 2014 - Session 3";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "14:00";
+//        s.endTime = "15:30";
+//        s.room = "Sala 2a, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1954";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "8";
+//        s.name = "DataWiz 2014 - Welcome";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "09:00";
+//        s.endTime = "10:30";
+//        s.room = "Sala 8, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1958";
+//        wList.add(s);
+//
+//        s = new Workshop();
+//        s.ID = "9";
+//        s.name = "LinkQS 2014";
+//        s.date = "Monday, Sept.1";
+//        s.day_id = "1";
+//        s.beginTime = "09:00";
+//        s.endTime = "10:30";
+//        s.room = "Sala 2b, Centro Extension PUC";
+//        s.content = "<p></p>";
+//        s.childsessionID = "1960";
+//        wList.add(s);
+//
+//        return wList;
+//    }
 
     public ArrayList<Session> loadSessions() {
         ArrayList<Session> sList = new ArrayList<Session>();

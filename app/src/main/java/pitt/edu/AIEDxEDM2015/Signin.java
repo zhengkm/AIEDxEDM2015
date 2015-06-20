@@ -41,7 +41,7 @@ public class Signin extends Activity implements Runnable {
             sessionDate = "";
     private String contentID = "";
     private String presentationID, paperTitle, paperbTime, papereTime, paperAbstract, paperAuthors, date, room = "";
-    private String workshopID, workshopTitle, content, workshopDate, wbtime, wetime, childsessionID = "";
+    private String workshopID, workshopTitle, content, workshopDate, wbtime, wetime, eventSessionID = "";
     private TextView tw4;
     private DBAdapter db;
 
@@ -114,7 +114,7 @@ public class Signin extends Activity implements Runnable {
                 wbtime = b.getString("wbtime");
                 wetime = b.getString("wetime");
                 content = b.getString("content");
-                childsessionID = b.getString("childsessionID");
+                eventSessionID = b.getString("eventSessionID");
 
             } else if (activityName.compareTo("PosterDetail") == 0) {
                 paperID = b.getString("paperID");
@@ -302,7 +302,7 @@ public class Signin extends Activity implements Runnable {
                 in.putExtra("bTime", wbtime);
                 in.putExtra("eTime", wetime);
                 in.putExtra("content", content);
-                in.putExtra("childsessionID", childsessionID);
+                in.putExtra("eventSessionID", eventSessionID);
             } else if (activityName.compareTo("PosterDetail") == 0) {
                 updatePaperStatus(paperID);
                 syncDB();
@@ -387,7 +387,7 @@ public class Signin extends Activity implements Runnable {
             in.putExtra("bTime", wbtime);
             in.putExtra("eTime", wetime);
             in.putExtra("content", content);
-            in.putExtra("childsessionID", childsessionID);
+            in.putExtra("eventSessionID", eventSessionID);
         } else if (activityName.compareTo("PosterDetail") == 0) {
 
             in.putExtra("paperID", paperID);
