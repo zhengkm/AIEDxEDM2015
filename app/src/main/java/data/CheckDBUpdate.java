@@ -1,5 +1,9 @@
 package data;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,43 +18,53 @@ import org.apache.http.util.EntityUtils;
 
 public class CheckDBUpdate {
 	public boolean needUpdate;
-	public String result=null;
+
 
 
 	public String getTimstamp(){
+		String result=null;
+		try{
+			URL Url=new URL(ConferenceURL.CheckUpdate+"eventID="+Conference.id);
+			InputStream in=Url.openStream();
+			result=convertToString(in);
+			int start = result.indexOf("<timestamp>");
+			int end = result.indexOf("</timestamp>");
+			result = result.substring(start+11, end);
 
-		String url = ConferenceURL.CheckUpdate;
-		HttpPost httpRequest = new HttpPost(url);
-
-
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("eventID", Conference.id));
-		try {
-
-			httpRequest.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
-
-			HttpResponse httpResponse = new DefaultHttpClient()
-					.execute(httpRequest);
-
-			if (httpResponse.getStatusLine().getStatusCode() == 200) {
-
-				result = EntityUtils.toString(httpResponse.getEntity());
-				int start = result.indexOf("<timestamp>");
-				int end = result.indexOf("</timestamp>");
-				result = result.substring(start+11, end);
-			} else {
-				result=null;
-				// System.out.print("error: status code not 200");
-			}
-		} catch (Exception e) {
-			System.out.println("exception" + e);
+			//System.out.println("!!!!!!!!FFFFF"+result+Conference.id);
+		}catch(Exception ee){
+			System.out.println(ee.getStackTrace());
 		}
-
 		return result;
+	}
+
+	public String convertToString(InputStream is) {
+		if (is != null) {
+			StringBuilder sb = new StringBuilder();
+			String line;
+			try {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+				while ((line = reader.readLine()) != null) {
+					sb.append(line).append(" ");
+				}
+			} catch (Exception e) {
+				System.out.print(e.getMessage());
+			} finally {
+				try {
+					is.close();
+				} catch (Exception e) {
+
+				}
+			}
+			return sb.toString();
+		} else {
+			return "";
+		}
 	}
 	public boolean compare() {
 		String result=getTimstamp();
-		if (result.compareTo(Conference.timstamp) == 0) {
+		if (result==null||!Character.isDigit(result.charAt(0))||result.compareTo(Conference.timstamp) == 0) {
 			needUpdate = false;
 		}
 		else{
@@ -62,12 +76,12 @@ public class CheckDBUpdate {
 
 	public boolean check() {
 		String result=getTimstamp();
-		if (result.compareTo(Conference.timstamp) == 0) {
+		if (result==null||!Character.isDigit(result.charAt(0))||result.compareTo(Conference.timstamp) == 0) {
 			needUpdate = false;
 		}
 		else{
 			needUpdate=true;
-			Conference.timstamp =result;
+			//Conference.timstamp =result;
 		}
 		return needUpdate;
 	}

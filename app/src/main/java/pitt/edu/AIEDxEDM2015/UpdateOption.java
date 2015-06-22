@@ -9,13 +9,14 @@ import data.Conference;
 import data.ConferenceInfoParser;
 import data.DBAdapter;
 import data.ConferenceDataLoad;
-import data.KeynoteWorkshopParse;
+import data.KeynoteWorkshopPosterParse;
 import data.LoadPaperFromDB;
 import data.LoadSessionFromDB;
 import data.Paper;
 import data.PaperContent;
 import data.PaperContentParse;
 import data.Keynote;
+import data.Poster;
 import data.RecommendParse;
 import data.Session;
 import data.UserScheduleParse;
@@ -222,21 +223,28 @@ public class UpdateOption extends Activity {
                 ArrayList<String> pidRList = new ArrayList<String>();
                 ArrayList<String> pidLList = new ArrayList<String>();
                 ArrayList<Workshop> wListDes = new ArrayList<Workshop>();
+                ArrayList<Poster> poList = new ArrayList<Poster>();
 
                 ConferenceDataLoad cdl = new ConferenceDataLoad();
 
                 cdl.loadConferenceInfo();
 
-                //Update keynote and workshop info
+                //Update keynote and workshop and poster info
                 publishProgress(14);
-                KeynoteWorkshopParse knp = new KeynoteWorkshopParse();
+                KeynoteWorkshopPosterParse knp = new KeynoteWorkshopPosterParse();
+                knp.getData();
                 knList = knp.getKeynoteData();
                 wListDes=knp.getwWorkshopData();
-                if (knList.size() != 0 && wListDes.size() != 0) {
+                poList=knp.getwPosterData();
+
+                if (knList.size() != 0 && wListDes.size() != 0 && poList.size()!= 0) {
                     publishProgress(12);
                 } else {
                     publishProgress(13);
+                    state=2;
+                    return state;
                 }
+
 
                 //Update session info
                 publishProgress(6);
@@ -246,6 +254,8 @@ public class UpdateOption extends Activity {
                     publishProgress(0);
                 } else {
                     publishProgress(1);
+                    state=2;
+                    return state;
                 }
 
                 //Update presentation info
@@ -256,6 +266,8 @@ public class UpdateOption extends Activity {
                     publishProgress(2);
                 } else {
                     publishProgress(3);
+                    state=2;
+                    return state;
                 }
 
                 //Update paper content info
@@ -266,13 +278,16 @@ public class UpdateOption extends Activity {
                     publishProgress(4);
                 } else {
                     publishProgress(5);
+                    state=2;
+                    return state;
                 }
 
-                if (wListDes.size()!=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
+                if (poList.size()!= 0 && wListDes.size()!=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
                     try {
                         db.open();
                         db.deleteKeynote();
                         db.deleteWorkshop();
+                        db.deletePoster();
                         db.deleteSession();
                         db.deletePaper();
                         db.deletePaperContent();
@@ -286,6 +301,12 @@ public class UpdateOption extends Activity {
 
                         for (int i = 0; i < wListDes.size(); i++) {
                             long error = db.insertWorkshopDes(wListDes.get(i));
+                            if (error == -1)
+                                System.out.println("error occured");
+                        }
+
+                        for (int i = 0; i < poList.size(); i++) {
+                            long error = db.insertPoster(poList.get(i));
                             if (error == -1)
                                 System.out.println("error occured");
                         }
@@ -433,15 +454,15 @@ public class UpdateOption extends Activity {
                     break;
                 case 12:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.accept, 0, 0, 0);
-                    keynote.setText("Update keynote and workshop information: success!");
+                    keynote.setText("Update keynote, poster and workshop information: success!");
                     break;
                 case 13:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.error, 0, 0, 0);
-                    keynote.setText("Fail to update keynote and workshop information");
+                    keynote.setText("Fail to update keynote, poster and workshop information");
                     break;
                 case 14:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.db_refresh, 0, 0, 0);
-                    keynote.setText("Updating keynote and workshop information ...");
+                    keynote.setText("Updating keynote, poster and workshop information ...");
                     break;
                 default:
                     break;

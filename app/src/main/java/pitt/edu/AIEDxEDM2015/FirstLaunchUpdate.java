@@ -21,12 +21,13 @@ import data.ConferenceDataLoad;
 import data.ConferenceInfoParser;
 import data.DBAdapter;
 import data.Keynote;
-import data.KeynoteWorkshopParse;
+import data.KeynoteWorkshopPosterParse;
 import data.LoadPaperFromDB;
 import data.LoadSessionFromDB;
 import data.Paper;
 import data.PaperContent;
 import data.PaperContentParse;
+import data.Poster;
 import data.Session;
 import data.Workshop;
 
@@ -39,6 +40,7 @@ public class FirstLaunchUpdate extends Activity {
     private ProgressDialog pd;
     private DBAdapter db;
     private TextView session, keynote, presentation, paper, success;
+    private int count=0;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -49,9 +51,9 @@ public class FirstLaunchUpdate extends Activity {
 
         setContentView(R.layout.first_update);
         db = new DBAdapter(this);
-
         new AsyncUpdate().execute();
     }
+
 
     public void showDialog(String s) {
         pd = ProgressDialog.show(this, "Synchronization", s, true, false);
@@ -85,26 +87,23 @@ public class FirstLaunchUpdate extends Activity {
         @Override
         protected Integer doInBackground(Void... arg0) {
             // TODO Auto-generated method stub
+            count++;
             int state = 0;
+            if(!isConnect(FirstLaunchUpdate.this)){
+                state=3;
+                return state;
+            }
 
 
-            ConferenceInfoParser.getConferenceInfo("135");
-            db.open();
-            db.deleteConference();
             String timestamp= new CheckDBUpdate().getTimstamp();
-            long errorr = db.insertConference(Conference.id, Conference.title, Conference.startDate,
-                    Conference.endDate, Conference.location, Conference.description, timestamp);
-            if (errorr == -1)
-                System.out.println("Insertion ConferenceInfo Failed");
-            db.close();
 
             //execute update
-            if (true) {
                 ArrayList<Session> sList = new ArrayList<Session>();
                 ArrayList<Paper> pList = new ArrayList<Paper>();
                 ArrayList<PaperContent> pcList = new ArrayList<PaperContent>();
                 ArrayList<Keynote> knList = new ArrayList<Keynote>();
                 ArrayList<Workshop> wListDes = new ArrayList<Workshop>();
+                ArrayList<Poster> poList = new ArrayList<Poster>();
 
                 ConferenceDataLoad cdl = new ConferenceDataLoad();
 
@@ -112,14 +111,19 @@ public class FirstLaunchUpdate extends Activity {
 
                 //Update keynote and workshop info
                 publishProgress(14);
-                KeynoteWorkshopParse knp = new KeynoteWorkshopParse();
+
+                KeynoteWorkshopPosterParse knp = new KeynoteWorkshopPosterParse();
                 knp.getData();
                 knList = knp.getKeynoteData();
                 wListDes=knp.getwWorkshopData();
-                if (knList.size() != 0 && wListDes.size() != 0) {
+                poList=knp.getwPosterData();
+
+                if (knList.size() != 0 && wListDes.size() != 0 && poList.size()!= 0) {
                     publishProgress(12);
                 } else {
                     publishProgress(13);
+                    state=2;
+                    return state;
                 }
 
                 //Update session info
@@ -130,6 +134,8 @@ public class FirstLaunchUpdate extends Activity {
                     publishProgress(0);
                 } else {
                     publishProgress(1);
+                    state=2;
+                    return state;
                 }
 
                 //Update presentation info
@@ -140,6 +146,8 @@ public class FirstLaunchUpdate extends Activity {
                     publishProgress(2);
                 } else {
                     publishProgress(3);
+                    state=2;
+                    return state;
                 }
 
                 //Update paper content info
@@ -150,14 +158,27 @@ public class FirstLaunchUpdate extends Activity {
                     publishProgress(4);
                 } else {
                     publishProgress(5);
+                    state=2;
+                    return state;
                 }
 
-                if (wListDes.size() !=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
+                ConferenceInfoParser.getConferenceInfo("135");
+                db.open();
+                db.deleteConference();
+                long errorr = db.insertConference(Conference.id, Conference.title, Conference.startDate,
+                        Conference.endDate, Conference.location, Conference.description, timestamp);
+                if (errorr == -1)
+                    System.out.println("Insertion ConferenceInfo Failed");
+                db.close();
+
+
+                if (poList.size() !=0 &&wListDes.size() !=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
                     try {
                         db.open();
                         db.deleteWorkshop();
                         db.deleteKeynote();
                         db.deleteSession();
+                        db.deletePoster();
                         db.deletePaper();
                         db.deletePaperContent();
 
@@ -170,6 +191,12 @@ public class FirstLaunchUpdate extends Activity {
 
                         for (int i = 0; i < wListDes.size(); i++) {
                             long error = db.insertWorkshopDes(wListDes.get(i));
+                            if (error == -1)
+                                System.out.println("error occured");
+                        }
+
+                        for (int i = 0; i < poList.size(); i++) {
+                            long error = db.insertPoster(poList.get(i));
                             if (error == -1)
                                 System.out.println("error occured");
                         }
@@ -205,13 +232,10 @@ public class FirstLaunchUpdate extends Activity {
                     } catch (Exception e) {
                         System.out.print(e.getMessage());
                     }
-                    state += 1;//success
+                    state = 1;//success
                 } else {
                     state = 2;//error
                 }
-            } else {
-                state = 0;
-            }
 
             return state;
         }
@@ -226,11 +250,11 @@ public class FirstLaunchUpdate extends Activity {
             switch (command) {
                 case 0:
                     session.setCompoundDrawablesWithIntrinsicBounds(R.drawable.accept, 0, 0, 0);
-                    session.setText("Update introduction,keynote,workshop information: success!");
+                    session.setText("Update introduction information: success!");
                     break;
                 case 1:
                     session.setCompoundDrawablesWithIntrinsicBounds(R.drawable.error, 0, 0, 0);
-                    session.setText("Fail to update introduction,keynote,workshop information");
+                    session.setText("Fail to update introduction information");
                     break;
                 case 2:
                     presentation.setCompoundDrawablesWithIntrinsicBounds(R.drawable.accept, 0, 0, 0);
@@ -250,7 +274,7 @@ public class FirstLaunchUpdate extends Activity {
                     break;
                 case 6:
                     session.setCompoundDrawablesWithIntrinsicBounds(R.drawable.db_refresh, 0, 0, 0);
-                    session.setText("Updating introduction,keynote,workshop information ...");
+                    session.setText("Updating introduction information ...");
                     break;
                 case 7:
                     presentation.setCompoundDrawablesWithIntrinsicBounds(R.drawable.db_refresh, 0, 0, 0);
@@ -274,15 +298,15 @@ public class FirstLaunchUpdate extends Activity {
 //                    break;
                 case 12:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.accept, 0, 0, 0);
-                    keynote.setText("Update keynote and workshop information: success!");
+                    keynote.setText("Update keynote, poster and workshop information: success!");
                     break;
                 case 13:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.error, 0, 0, 0);
-                    keynote.setText("Fail to update keynote and workshop information");
+                    keynote.setText("Fail to update keynote, poster and workshop information");
                     break;
                 case 14:
                     keynote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.db_refresh, 0, 0, 0);
-                    keynote.setText("Updating keynote and workshop information ...");
+                    keynote.setText("Updating keynote, poster and workshop information ...");
                     break;
                 default:
                     break;
@@ -315,31 +339,20 @@ public class FirstLaunchUpdate extends Activity {
                             .show();
 
                     success.setText("Update Fail!");
+                    if(count<3){
+                        new AsyncUpdate().execute();
+                        success.setText("Restart Update");
+                    }else{
+                        success.setText("server crashed, please try later");
+                    }
                     break;
-                case 0:
+                case 3:
                     Toast.makeText(getApplicationContext(),
-                            "Is the latest data, server last update was on " + Conference.timstamp,
+                            "No Internet has connected!",
                             Toast.LENGTH_LONG)
                             .show();
-
-                    success.setText("No need to update.");
+                    success.setText("Internet no Connection");
                     break;
-//                case 5:
-//                    Toast.makeText(getApplicationContext(),
-//                            "Conference information is updated, but no personal schedule information",
-//                            Toast.LENGTH_LONG)
-//                            .show();
-//
-//                    success.setText("Update Success!Please go to \"My schedule\" to schedule or sync with DB.");
-//                    break;
-//                case 4:
-//                    Toast.makeText(getApplicationContext(),
-//                            "Conference information is updated, but not personal schedule information due to not sign in.",
-//                            Toast.LENGTH_LONG)
-//                            .show();
-//
-//                    success.setText("Update Success!Please go to \"My schedule\" to schedule or sync with DB.");
-//                    break;
                 default:
                     break;
             }

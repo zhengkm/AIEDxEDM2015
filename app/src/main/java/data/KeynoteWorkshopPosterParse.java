@@ -26,10 +26,11 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 
 
-public class KeynoteWorkshopParse {
+public class KeynoteWorkshopPosterParse {
 
     private ArrayList<Keynote> knList = new ArrayList<Keynote>();
     private ArrayList<Workshop> wsList = new ArrayList<Workshop>();
+    private ArrayList<Poster> poList = new ArrayList<Poster>();
     private Hashtable<String, String> Datetrans, Dtrans;
 
     public void daytoDate() {
@@ -56,7 +57,7 @@ public class KeynoteWorkshopParse {
         Dtrans.put("2015-06-29", "8");
     }
 
-    public KeynoteWorkshopParse() {
+    public KeynoteWorkshopPosterParse() {
         this.daytoDate();
         this.daytoid();
     }
@@ -68,6 +69,10 @@ public class KeynoteWorkshopParse {
 
     public ArrayList<Workshop> getwWorkshopData(){
         return wsList;
+    }
+
+    public ArrayList<Poster> getwPosterData(){
+        return poList;
     }
     public void getData() {
 
@@ -124,9 +129,11 @@ public class KeynoteWorkshopParse {
         private String contentID = "";
         private Keynote ke;
         private Workshop ws;
+        private Poster ps;
         private boolean dataStart = false;
         private boolean isKeynote = false;
         private boolean isWorkshop = false;
+        private boolean isPoster=false;
 
         private StringBuilder sb = new StringBuilder();
 
@@ -153,6 +160,7 @@ public class KeynoteWorkshopParse {
                 ws.content="";
                 ws.eventSessionID="";
 
+                ps=new Poster();
                 return;
             }
         }
@@ -182,16 +190,21 @@ public class KeynoteWorkshopParse {
 
                 ws.date=ke.date;
                 ws.day_id=ke.dayid;
+
+                ps.date=ke.date;
+                ps.day_id=ke.dayid;
                 return;
             }
             if (localName.equals("contentID")) {
                 contentID = sb.toString();
+                ps.ID=contentID;
                 return;
             }
 
             if (localName.equals("paperTitle")) {
                 ke.title = sb.toString();
                 ws.name=sb.toString();
+                ps.name=sb.toString();
                 return;
             }
             if (localName.equals("contentType")) {
@@ -199,25 +212,31 @@ public class KeynoteWorkshopParse {
                     isKeynote = true;
                 else if ("Workshop Paper".equals(sb.toString()))
                     isWorkshop = true;
+                else if ("Poster".equals(sb.toString()))
+                    isPoster = true;
                 else {
                     isKeynote = false;
                     isWorkshop = false;
+                    isPoster=false;
                 }
                 return;
             }
             if (localName.equals("begintime") && dataStart) {
                 ke.beginTime = sb.toString();
                 ws.beginTime= ke.beginTime;
+                ps.beginTime=ke.beginTime;
                 return;
             }
             if (localName.equals("endtime") && dataStart) {
                 ke.endTime = sb.toString();
                 ws.endTime=ke.endTime;
+                ps.endTime=ke.endTime;
                 return;
             }
             if (localName.equals("location")) {
                 ke.room = sb.toString();
                 ws.room=ke.room;
+                ps.room=ke.room;
                 return;
             }
             if (localName.equals("authors")) {
@@ -231,9 +250,12 @@ public class KeynoteWorkshopParse {
                 }else if(isWorkshop){
                     ws.content = descriptionParser.getDescription(contentID);
                     wsList.add(ws);
+                }else if(isPoster){
+                    poList.add(ps);
                 }
                 isKeynote = false;
                 isWorkshop=false;
+                isPoster=false;
                 return;
             }
             if (localName.equals("Items")) {

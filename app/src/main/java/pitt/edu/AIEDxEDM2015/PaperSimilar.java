@@ -575,12 +575,9 @@ public void onClick(View v) {
 					Intent in = new Intent(this, WorkshopDetail.class);
 					in.putExtra("id", s[0]);
 					in.putExtra("title", s[1]);
-					in.putExtra("bTime", s[2]);
-					in.putExtra("eTime", s[3]);
-					in.putExtra("room", s[4]);
-					in.putExtra("date", s[5]);
-					in.putExtra("content", s[6]);
-					in.putExtra("childsessionID", s[7]);
+					in.putExtra("room", s[2]);
+					in.putExtra("eventSessionID", s[3]);
+					in.putExtra("eventSessionIDList",s[4]);
 					startActivity(in);
 				}
 				else if(activity.compareToIgnoreCase("PosterDetail")==0){

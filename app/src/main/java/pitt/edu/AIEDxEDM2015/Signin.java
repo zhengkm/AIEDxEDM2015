@@ -294,14 +294,14 @@ public class Signin extends Activity implements Runnable {
                 updatePaperStatus(paperID);
                 syncDB();
                 in = new Intent(Signin.this, WorkshopDetail.class);
-                in.putExtra("paperID", paperID);
-                in.putExtra("id", workshopID);
+//                in.putExtra("paperID", paperID);
+//                in.putExtra("id", workshopID);
                 in.putExtra("title", workshopTitle);
-                in.putExtra("date", workshopDate);
+//                in.putExtra("date", workshopDate);
                 in.putExtra("room", room);
-                in.putExtra("bTime", wbtime);
-                in.putExtra("eTime", wetime);
-                in.putExtra("content", content);
+//                in.putExtra("bTime", wbtime);
+//                in.putExtra("eTime", wetime);
+//                in.putExtra("content", content);
                 in.putExtra("eventSessionID", eventSessionID);
             } else if (activityName.compareTo("PosterDetail") == 0) {
                 updatePaperStatus(paperID);
@@ -380,13 +380,13 @@ public class Signin extends Activity implements Runnable {
 
         } else if (activityName.compareTo("WorkshopDetail") == 0) {
 
-            in.putExtra("id", workshopID);
+           // in.putExtra("id", workshopID);
             in.putExtra("title", workshopTitle);
-            in.putExtra("date", workshopDate);
+//            in.putExtra("date", workshopDate);
             in.putExtra("room", room);
-            in.putExtra("bTime", wbtime);
-            in.putExtra("eTime", wetime);
-            in.putExtra("content", content);
+//            in.putExtra("bTime", wbtime);
+//            in.putExtra("eTime", wetime);
+          //  in.putExtra("content", content);
             in.putExtra("eventSessionID", eventSessionID);
         } else if (activityName.compareTo("PosterDetail") == 0) {
 

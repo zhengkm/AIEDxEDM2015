@@ -122,8 +122,7 @@ public class iConference2012 extends Activity {
             startActivity(in);
 
         }
-
-
+        db.close();
 
     }
 

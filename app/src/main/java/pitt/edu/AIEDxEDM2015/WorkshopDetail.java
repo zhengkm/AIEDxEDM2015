@@ -31,16 +31,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class WorkshopDetail extends Activity implements Runnable{
-	private String wtitle, wid,wbtime, wetime,room, date,content,childsessionID,eventSessionID;
+	private String wtitle, wid,room,content,childsessionID,eventSessionIDList;
 	private TextView tv,t1,t2,t3,t4,button;
 	private WebView wv;
-	private ExpandableListView lv;
+	private ListView lv;
 	private DBAdapter db=new DBAdapter(this);
 	private UserScheduledToServer us2s;
 	private String paperStatus;
@@ -48,9 +50,10 @@ public class WorkshopDetail extends Activity implements Runnable{
 	private ImageButton ib;
 	private String paperID;
 	private int Pos,pos;
+	private String[] eventSessionID;
 	private MyListViewAdapter adapter;
 	private Session session=new Session();
-	private ArrayList<ArrayList<Paper>> pList= new ArrayList<ArrayList<Paper>>();
+	private ArrayList<Paper> pList= new ArrayList<Paper>();
 	private ArrayList<Session> sList=new ArrayList<Session>();
 	private final int MENU_HOME = Menu.FIRST;
 	private final int MENU_TRACK = Menu.FIRST + 1;
@@ -71,15 +74,19 @@ public class WorkshopDetail extends Activity implements Runnable{
 
 		Bundle b = getIntent().getExtras();
 		if (b != null) {
-			eventSessionID=b.getString("eventSessionID");
+			eventSessionIDList=b.getString("eventSessionIDList");
+			eventSessionID=eventSessionIDList.split(";");
+			for(int i=0;i<eventSessionID.length;i++){
+				//System.out.println("!!!!!!!!!!!!!"+eventSessionID[i]);
+				session=db.open().getSessionByID(eventSessionID[i]);
+				sList.add(session);
+			}
 
-			session=db.open().getSessionByID(eventSessionID);
-			sList.add(session);
 			wtitle=session.name;
-			wbtime=session.beginTime;
-			wetime=session.endTime;
+//			wbtime=session.beginTime;
+//			wetime=session.endTime;
 			room=session.room;
-			date=session.date;
+//			date=session.date;
 
 		}
 
@@ -89,20 +96,20 @@ public class WorkshopDetail extends Activity implements Runnable{
 		t1 = (TextView) findViewById(R.id.TextView01);
 		t1.setText(wtitle);
 		
-		SimpleDateFormat sdfSource = new SimpleDateFormat("HH:mm");
-    	SimpleDateFormat sdfDestination = new SimpleDateFormat("h:mm a");
-    	Date beginDate, endDate;
-    	String begTime, endTime;
-    	try {
-			beginDate = sdfSource.parse(wbtime);
-			endDate = sdfSource.parse(wetime);
-			begTime = sdfDestination.format(beginDate);
-			endTime = sdfDestination.format(endDate);
-			t2 = (TextView)this.findViewById(R.id.TextView02);
-			t2.setText(date+"\t"+begTime+"-"+endTime);
-			}catch (Exception e) {
-				System.out.println("Date Exception");
-    	}
+//		SimpleDateFormat sdfSource = new SimpleDateFormat("HH:mm");
+//    	SimpleDateFormat sdfDestination = new SimpleDateFormat("h:mm a");
+//    	Date beginDate, endDate;
+//    	String begTime, endTime;
+//    	try {
+//			beginDate = sdfSource.parse(wbtime);
+//			endDate = sdfSource.parse(wetime);
+//			begTime = sdfDestination.format(beginDate);
+//			endTime = sdfDestination.format(endDate);
+//			t2 = (TextView)this.findViewById(R.id.TextView02);
+//			t2.setText(date+"\t"+begTime+"-"+endTime);
+//			}catch (Exception e) {
+//				System.out.println("Date Exception");
+//    	}
 
     	//t3 = (TextView) findViewById(R.id.TextView03);
 		t4 = (TextView) findViewById(R.id.TextView04);
@@ -141,7 +148,10 @@ public class WorkshopDetail extends Activity implements Runnable{
 //
 
 		//get paper by session ID
-		pList.add(getPaperData(eventSessionID));
+		for(int i=0;i<eventSessionID.length;i++){
+			pList.addAll(getPaperData(eventSessionID[i]));
+		}
+
 		db.close();
 
 
@@ -167,12 +177,11 @@ public class WorkshopDetail extends Activity implements Runnable{
 //					button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bullet_arrow_up,0,0,0);
 //				}
 //			}});
-		lv = (ExpandableListView) findViewById(R.id.ListView01);
+		lv = (ListView) findViewById(R.id.ListView01);
 		//lv.addHeaderView(listheaderview);
-		adapter = new MyListViewAdapter(sList, pList);
+		adapter = new MyListViewAdapter(pList);
 		lv.setAdapter(adapter);
-		for(int i=0; i<sList.size();i++){
-			lv.expandGroup(i);}
+
 	}
 
 //	public ArrayList<Session> getSessionData(String[] s){
@@ -258,14 +267,14 @@ public class WorkshopDetail extends Activity implements Runnable{
 	private void CallSignin() {
 		Intent in = new Intent(WorkshopDetail.this, Signin.class);
 		in.putExtra("activity", "WorkshopDetail");
-		in.putExtra("id", wid);
+		//in.putExtra("id", wid);
 		in.putExtra("wtitle", wtitle);
-		in.putExtra("paperID", paperID);
-		in.putExtra("wbtime", wbtime);
-		in.putExtra("wetime", wetime);
-		in.putExtra("date", date);
+		//in.putExtra("paperID", paperID);
+//		in.putExtra("wbtime", wbtime);
+//		in.putExtra("wetime", wetime);
+		//in.putExtra("date", date);
 		in.putExtra("room", room);
-		in.putExtra("content", content);
+		//in.putExtra("content", content);
 		in.putExtra("eventSessionID", eventSessionID);
 		startActivity(in);
 	}
@@ -340,31 +349,30 @@ public class WorkshopDetail extends Activity implements Runnable{
   
     } 
 
-	private class MyListViewAdapter extends BaseExpandableListAdapter implements
+	private class MyListViewAdapter extends BaseAdapter implements
 	OnClickListener{
-		private ArrayList<Session> parents;
-		private ArrayList<ArrayList<Paper>> childs;
-		
-	public MyListViewAdapter(ArrayList<Session> parent, ArrayList<ArrayList<Paper>> child){
-		this.parents=parent;
+		//private ArrayList<Session> parents;
+		private ArrayList<Paper> childs;
+
+		public int getCount() {
+			return childs.size();
+		}
+
+		public Object getItem(int position) {
+			return position;
+		}
+
+		public long getItemId(int position) {
+			return position;
+		}
+	public MyListViewAdapter( ArrayList<Paper> child){
+		//this.parents=parent;
 		this.childs=child;
 	}
-	@Override
-	public Object getChild(int parentPos, int childPos) {
-		// TODO Auto-generated method stub
-		return childs.get(parentPos).get(childPos);
 
-	}
 
 	@Override
-	public long getChildId(int parentPos, int childPos) {
-		// TODO Auto-generated method stub
-		return childPos;
-	}
-
-	@Override
-	public View getChildView(int parentPos, int childPos, boolean islastchild, View convertView,
-			ViewGroup parent) {
+	public View getView(int childPos, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		ViewHolder vh = null;
 		SimpleDateFormat sdfSource = new SimpleDateFormat("HH:mm");
@@ -390,131 +398,40 @@ public class WorkshopDetail extends Activity implements Runnable{
 			vh = (ViewHolder) convertView.getTag();
 		}
 		try {
-			beginDate = sdfSource.parse(childs.get(parentPos).get(childPos).exactbeginTime);
-			endDate = sdfSource.parse(childs.get(parentPos).get(childPos).exactendTime);
+			beginDate = sdfSource.parse(childs.get(childPos).exactbeginTime);
+			endDate = sdfSource.parse(childs.get(childPos).exactendTime);
 			begTime = sdfDestination.format(beginDate);
 			endTime = sdfDestination.format(endDate);
-			vh.t1.setText(childs.get(parentPos).get(childPos).date+"\t"+begTime + " - " + endTime);
+			vh.t1.setText(childs.get(childPos).date+"\t"+begTime + " - " + endTime);
 		} catch (Exception e) {
 			System.out.println("Date Exception");
 		}
-		if (childs.get(parentPos).get(childPos).scheduled.compareTo("yes") == 0)
+		if (childs.get(childPos).scheduled.compareTo("yes") == 0)
 			vh.schedule.setImageResource(R.drawable.yes_schedule);
 		else
 			vh.schedule.setImageResource(R.drawable.no_schedule);
 		vh.schedule.setFocusable(false);
 		vh.schedule.setOnClickListener(this);
-		vh.schedule.setTag(childs.get(parentPos).get(childPos).id+";"+parentPos+";"+childPos);
+		vh.schedule.setTag(childs.get(childPos).id+";"+childPos);
 		
-		if (childs.get(parentPos).get(childPos).starred.compareTo("yes") == 0)
+		if (childs.get(childPos).starred.compareTo("yes") == 0)
 			vh.star.setImageResource(R.drawable.yes_star);
 		else
 			vh.star.setImageResource(R.drawable.no_star);
 		vh.star.setFocusable(false);
 		vh.star.setOnClickListener(this);
-		vh.star.setTag(childs.get(parentPos).get(childPos).presentationID+";"+parentPos+";"+childPos);
+		vh.star.setTag(childs.get(childPos).presentationID+";"+childPos);
 		
-		if (childs.get(parentPos).get(childPos).recommended.compareTo("yes") == 0)
-			vh.t2.setText(Html.fromHtml(childs.get(parentPos).get(childPos).title+"<font color=\"#ff0000\"> &lt;Recommended&gt; </font>"));
+		if (childs.get(childPos).recommended.compareTo("yes") == 0)
+			vh.t2.setText(Html.fromHtml(childs.get(childPos).title+"<font color=\"#ff0000\"> &lt;Recommended&gt; </font>"));
 			else
-				vh.t2.setText(childs.get(parentPos).get(childPos).title);
-		vh.t2.setTag(parentPos+";"+childPos);
-		vh.t3.setText(childs.get(parentPos).get(childPos).authors);
-		vh.type.setText(childs.get(parentPos).get(childPos).type);
+				vh.t2.setText(childs.get(childPos).title);
+		vh.t2.setTag(childPos);
+		vh.t3.setText(childs.get(childPos).authors);
+		vh.type.setText(childs.get(childPos).type);
 		return convertView;
 	}
 
-	@Override
-	public int getChildrenCount(int parentPos) {
-		// TODO Auto-generated method stub
-		return childs.get(parentPos).size();
-
-	}
-
-	@Override
-	public Object getGroup(int parentPos) {
-		// TODO Auto-generated method stub
-		return parents.get(parentPos);
-
-	}
-
-	@Override
-	public int getGroupCount() {
-		// TODO Auto-generated method stub
-		return parents.size();
-	}
-
-	@Override
-	public long getGroupId(int parentPos) {
-		// TODO Auto-generated method stub
-		return parentPos;
-	}
-
-	@Override
-	public View getGroupView(int parentPos, boolean isExpanded, View convertView,
-			ViewGroup parent) {
-		ViewHolder holder = null;
-        SimpleDateFormat sdfSource = new SimpleDateFormat("HH:mm");
-    	SimpleDateFormat sdfDestination = new SimpleDateFormat("h:mm a");
-    	Date beginDate, endDate;
-    	String begTime, endTime;
-        if (convertView == null) {   
-            convertView = getLayoutInflater().inflate(R.layout.sessionitem, null);   
-            holder = new ViewHolder();   
-            holder.firstCharHintTextView = (TextView) convertView.findViewById(R.id.text_first_char_hint);            
-            holder.title = (TextView) convertView.findViewById(R.id.title);	
-            holder.location = (TextView) convertView.findViewById(R.id.location);
-	
-            convertView.setTag(holder);
-        } else {   
-            holder = (ViewHolder) convertView.getTag();   
-        }   
-        
-        holder.title.setText(parents.get(parentPos).name);
-        
-        if(parents.get(parentPos).room.compareToIgnoreCase("NULL")==0)
-        	holder.location.setVisibility(View.GONE);
-        else{
-        	holder.location.setVisibility(View.VISIBLE);	
-        holder.location.setText("At "+parents.get(parentPos).room);
-        }
-        
-        int idx = parentPos - 1;   
-
-        String previewb = idx >= 0 ? parents.get(idx).beginTime : "";   
-        String currentb = parents.get(parentPos).beginTime;
-        String previewe = idx >= 0 ? parents.get(idx).endTime : "";   
-        String currente = parents.get(parentPos).endTime;
-  
-        if (currentb.compareTo(previewb) == 0 && currente.compareTo(previewe) == 0) {
-        	holder.firstCharHintTextView.setVisibility(View.GONE);   
-        } else {   
-           
-        	holder.firstCharHintTextView.setVisibility(View.VISIBLE);
-        	try {
-        		beginDate = sdfSource.parse(parents.get(parentPos).beginTime);
-        		endDate = sdfSource.parse(parents.get(parentPos).endTime);
-        		begTime = sdfDestination.format(beginDate);
-        		endTime = sdfDestination.format(endDate);
-        		holder.firstCharHintTextView.setText(begTime + " - " + endTime); 
-        	} catch (Exception e) {
-        		System.out.println("Date Exception");
-        	}  
-        }
-       return convertView;   
-    }
-
-	@Override
-	public boolean hasStableIds() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isChildSelectable(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		return true;
-	}
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -525,8 +442,8 @@ public class WorkshopDetail extends Activity implements Runnable{
 			String s = ib.getTag().toString();
 			String st[] = s.split(";");
 			paperID = st[0];
-			Pos= Integer.parseInt(st[1]);
-			pos= Integer.parseInt(st[2]);
+			pos= Integer.parseInt(st[1]);
+			//pos= Integer.parseInt(st[2]);
 			Conference.userID = getUserID();
 			if (Conference.userSignin) {
 				paperStatus = "";
@@ -540,20 +457,20 @@ public class WorkshopDetail extends Activity implements Runnable{
 			String s1 = ib.getTag().toString();
 			String st1[] = s1.split(";");
 			paperID = st1[0];
-			Pos = Integer.parseInt(st1[1]);
-			pos = Integer.parseInt(st1[2]);
+			pos = Integer.parseInt(st1[1]);
+			//pos = Integer.parseInt(st1[2]);
 			
 			if (getPaperStarred(paperID).compareTo("no") == 0) {
 				ib.setImageResource(R.drawable.yes_star);
 				updateUserPaperStatus(paperID, "yes", "star");
 				insertMyStarredPaper(paperID);
-				childs.get(Pos).get(pos).starred= "yes";
+				childs.get(pos).starred= "yes";
 				
 			} else {
 				ib.setImageResource(R.drawable.no_star);
 				updateUserPaperStatus(paperID, "no", "star");
 				deleteMyStarredPaper(paperID);
-				childs.get(Pos).get(pos).starred= "no";
+				childs.get(pos).starred= "no";
 				
 			}
 			
@@ -564,22 +481,22 @@ public class WorkshopDetail extends Activity implements Runnable{
 			String s2 = tv.getTag().toString();
 			String st2[] = s2.split(";");
 			idx= Integer.parseInt(st2[0]);
-			idxs= Integer.parseInt(st2[1]);
+			//idxs= Integer.parseInt(st2[1]);
 			
 			WorkshopDetail.this.finish();
 			Intent in = new Intent(WorkshopDetail.this, PaperDetail.class);
-			in.putExtra("id", childs.get(idx).get(idxs).id);
-			in.putExtra("title", childs.get(idx).get(idxs).title);
-			in.putExtra("authors", childs.get(idx).get(idxs).authors);
-			in.putExtra("date", childs.get(idx).get(idxs).date);
-			in.putExtra("abstract", childs.get(idx).get(idxs).paperAbstract);
+			in.putExtra("id", childs.get(idx).id);
+			in.putExtra("title", childs.get(idx).title);
+			in.putExtra("authors", childs.get(idx).authors);
+			in.putExtra("date", childs.get(idx).date);
+			in.putExtra("abstract", childs.get(idx).paperAbstract);
 			in.putExtra("room", room);
-			in.putExtra("contentlink",childs.get(idx).get(idxs).contentlink);
-			in.putExtra("bTime", childs.get(idx).get(idxs).exactbeginTime);
-			in.putExtra("eTime", childs.get(idx).get(idxs).exactendTime);
-			in.putExtra("presentationID", childs.get(idx).get(idxs).presentationID);
+			in.putExtra("contentlink",childs.get(idx).contentlink);
+			in.putExtra("bTime", childs.get(idx).exactbeginTime);
+			in.putExtra("eTime", childs.get(idx).exactendTime);
+			in.putExtra("presentationID", childs.get(idx).presentationID);
 			in.putExtra("activity","WorkshopDetail");
-			in.putExtra("key",wid+"%"+wtitle+"%"+wbtime+"%"+wetime+"%"+room+"%"+date+"%"+eventSessionID);
+			in.putExtra("key",wid+"%"+wtitle+"%"+room+"%"+sList.get(pos).ID+"%"+eventSessionIDList);
 			startActivity(in);
 			break;
 		default:

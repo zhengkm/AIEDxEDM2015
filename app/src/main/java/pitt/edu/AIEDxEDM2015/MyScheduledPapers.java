@@ -124,7 +124,7 @@ public class MyScheduledPapers extends Activity implements Runnable {
 
             //1st day tab
             TabSpec day1 = host.newTabSpec("day1");
-            day1.setIndicator("Mon, Jun.22");
+            day1.setIndicator("Mon Jun.22  ");
             day1.setContent(R.id.day1);
 
             host.addTab(day1);
@@ -132,49 +132,49 @@ public class MyScheduledPapers extends Activity implements Runnable {
 
             //2nd day tab
             TabSpec day2 = host.newTabSpec("day2");
-            day2.setIndicator("Tue, Jun.23");
+            day2.setIndicator("Tue Jun.23  ");
             day2.setContent(R.id.day2);
             host.addTab(day2);
 
             // 3rd day tab
             TabSpec day3 = host.newTabSpec("day3");
-            day3.setIndicator("Wed, Jun.24");
+            day3.setIndicator("Wed Jun.24  ");
             day3.setContent(R.id.day3);
             host.addTab(day3);
 
             // 4th day tab
             TabSpec day4 = host.newTabSpec("day4");
-            day4.setIndicator("Thu, Jun.25");
+            day4.setIndicator("Thu Jun.25  ");
             day4.setContent(R.id.day4);
             host.addTab(day4);
 
             // 5th day tab
             TabSpec day5 = host.newTabSpec("day5");
-            day5.setIndicator("Fri, Jun.26");
+            day5.setIndicator("Fri Jun.26  ");
             day5.setContent(R.id.day5);
             host.addTab(day5);
 
             // 6th day tab
             TabSpec day6 = host.newTabSpec("day6");
-            day6.setIndicator("Sat, Jun.27");
+            day6.setIndicator("Sat Jun.27  ");
             day6.setContent(R.id.day6);
             host.addTab(day6);
 
             // 7th day tab
             TabSpec day7 = host.newTabSpec("day7");
-            day7.setIndicator("Sun, Jun 28");
+            day7.setIndicator("Sun Jun.28  ");
             day7.setContent(R.id.day7);
             host.addTab(day7);
 
             // 8th day tab
             TabSpec day8 = host.newTabSpec("day8");
-            day8.setIndicator("Mon, Jun 29");
+            day8.setIndicator("Mon Jun.29  ");
             day8.setContent(R.id.day8);
             host.addTab(day8);
 
 
             for(int i=0;i<8;i++){
-                w.getChildTabViewAt(i).setMinimumWidth(screenWidth/4);
+                w.getChildTabViewAt(i).setMinimumWidth(screenWidth/5);
             }
 
             reGene();

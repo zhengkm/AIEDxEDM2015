@@ -3,6 +3,7 @@ package pitt.edu.AIEDxEDM2015;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 
@@ -32,7 +33,8 @@ public class Workshops extends Activity {
 	private ListView lv;
 	private TextView t1;
 	private ArrayList<Session> seList;
-	
+	private  HashMap<String,String> sessionMap=new HashMap<String, String>();
+	private ArrayList<Session> list=new ArrayList<Session>();
 	private final int MENU_HOME = Menu.FIRST;
 	private final int MENU_TRACK = Menu.FIRST + 1;
 	private final int MENU_SESSION = Menu.FIRST + 2;
@@ -82,10 +84,22 @@ public class Workshops extends Activity {
 		}
 
 
+		for (int i=0;i<seList.size();i++){
+			if(sessionMap.containsKey(seList.get(i).name)){
+				StringBuilder sb=new StringBuilder(seList.get(i).ID);
+				sb.append(";");
+				sb.append(seList.get(i).ID);
+				sessionMap.put(seList.get(i).name,sb.toString());
+			}else{
+				sessionMap.put(seList.get(i).name,seList.get(i).ID);
+				list.add(seList.get(i));
+			}
+		}
+
 		db.close();
 
 		
-		adapter = new ListViewAdapter(seList);
+		adapter = new ListViewAdapter(list);
 		
 		lv = (ListView) findViewById(R.id.ListView01);
 		lv.setAdapter(adapter);
@@ -93,15 +107,9 @@ public class Workshops extends Activity {
 			public void onItemClick(AdapterView av, View v, int pos, long arg) {
 				
 				Intent in = new Intent(Workshops.this, WorkshopDetail.class);
-				//in.putExtra("day_id", buttonNum);
-//				in.putExtra("id", wList.get(pos).ID);
-//				in.putExtra("title", wList.get(pos).name);
-//				in.putExtra("date", wList.get(pos).date);
-//				in.putExtra("bTime", wList.get(pos).beginTime);
-//				in.putExtra("eTime", wList.get(pos).endTime);
-//				in.putExtra("room", wList.get(pos).room);
-//				in.putExtra("content", wList.get(pos).content);
-				in.putExtra("eventSessionID", seList.get(pos).ID);
+				String sessionName=list.get(pos).name;
+				String eventSessionIDList=sessionMap.get(sessionName);
+				in.putExtra("eventSessionIDList", eventSessionIDList);
 				startActivity(in);
 				
 				

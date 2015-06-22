@@ -235,7 +235,7 @@ public class DBAdapter {
 
     public ArrayList<Workshop> getWorkshopBySessionID(String eventSessionID){
         ArrayList<Workshop> tList=new ArrayList<Workshop>();
-        //Workshop ws=new Workshop();
+        //fWorkshop ws=new Workshop();
         Cursor cursor=mDb.query("workshopDes", new String[]{"ID", "name",
                 "beginTime", "endTime", "date", "room", "content", "eventSessionID"}, "eventSessionID='" + eventSessionID + "'", null, null,null, "beginTime, endTime");
         cursor.moveToFirst();
@@ -440,6 +440,9 @@ public class DBAdapter {
 
         return poList;
     }
+
+
+    public int deletePoster() { return mDb.delete("poster", null, null); }
 
 
     //Schedule Papers

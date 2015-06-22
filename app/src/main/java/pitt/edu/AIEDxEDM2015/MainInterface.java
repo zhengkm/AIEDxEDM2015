@@ -4,12 +4,15 @@ package pitt.edu.AIEDxEDM2015;
 import data.CheckDBUpdate;
 import data.Conference;
 import data.DBAdapter;
+import data.Poster;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -42,9 +45,11 @@ public class MainInterface extends Activity {
         CheckDBUpdate checkDBUpdate=new CheckDBUpdate();
         syncB = (ImageButton) findViewById(R.id.ImageButton01);
         if(checkDBUpdate.check()){
+
             syncB.setImageResource(R.drawable.need_update);
 
         }else{
+
             syncB.setImageResource(R.drawable.update);
         }
     }
@@ -52,9 +57,15 @@ public class MainInterface extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        checkUpdate();
+//        System.out.println("!!!!!!!!!!!!!!!!!!!!onresume");
+        if(isConnect(MainInterface.this)){
+            checkUpdate();
+        }
+
+
 
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,10 +95,11 @@ public class MainInterface extends Activity {
         );
 
 
+        System.out.println("!!!!!!!!!!!!!!!!!!!!oncreate");
         //Row 1
         GridView gv1 = (GridView) findViewById(R.id.GridView01);
-        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.workshop,R.drawable.sessionbig,R.drawable.proceeding};
-        String[] t1={ "About","Keynotes","Workshops","Schedule","Proceedings"};
+        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.workshop,R.drawable.poster, R.drawable.sessionbig,R.drawable.proceeding};
+        String[] t1={ "About","Keynotes","Workshops", "Poster", "Schedule","Proceedings"};
         gv1.setAdapter(new ImageViewAdapter(this, i1, t1));
 
         gv1.setOnItemClickListener(new OnItemClickListener() {
@@ -109,11 +121,15 @@ public class MainInterface extends Activity {
                         startActivity(in);
                         break;
                     case 3:
+                        in = new Intent(MainInterface.this, Posters.class);
+                        startActivity(in);
+                        break;
+                    case 4:
                         in = new Intent(MainInterface.this, ProgramByDay.class);
                         startActivity(in);
                         break;
                     // Proceedings
-                    case 4:
+                    case 5:
                         in = new Intent(MainInterface.this, Proceedings.class);
                         startActivity(in);
                         break;
@@ -200,7 +216,28 @@ public class MainInterface extends Activity {
             });
         }
 
-        checkUpdate();
+        if(isConnect(MainInterface.this)){
+            checkUpdate();
+        }
+
+    }
+
+
+    public static boolean isConnect(Context context) {
+
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null) {
+
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void CallSignin() {
