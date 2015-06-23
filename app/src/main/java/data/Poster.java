@@ -9,5 +9,6 @@ public class Poster {
     public String room;
     public String date;
     public String day_id;
+    public String eventSessionID;
 
 }

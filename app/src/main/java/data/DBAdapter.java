@@ -39,7 +39,8 @@ public class DBAdapter {
             "endTime text, " +
             "date text," +
             "day_id text," +
-            "room text)";
+            "room text,"+
+            "eventSessionID text)";
     private final static String CreatePaper = "create table paper (" +
             "ID text, " +
             "presentationID text primary key not null, " +
@@ -412,6 +413,7 @@ public class DBAdapter {
         values.put("date", p.date);
         values.put("room", p.room);
         values.put("day_id", p.day_id);
+        values.put("eventSessionID", p.eventSessionID);
         //values.put("room", se.room);
         return mDb.insert("poster", null, values);
     }
@@ -419,7 +421,7 @@ public class DBAdapter {
     public ArrayList<Poster> getPoster() {
         ArrayList<Poster> poList = new ArrayList<Poster>();
         Cursor cursor = mDb.query("poster", new String[]{"ID", "name",
-                "beginTime", "endTime", "date", "room", "day_id"}, null, null, null, null, "beginTime");
+                "beginTime", "endTime", "date", "room", "day_id","eventSessionID"}, null, null, null, null, "beginTime");
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -431,6 +433,7 @@ public class DBAdapter {
             t.date = cursor.getString(4);
             t.room = cursor.getString(5);
             t.day_id = cursor.getString(6);
+            t.eventSessionID=cursor.getString(7);
             poList.add(t);
             cursor.moveToNext();
         }

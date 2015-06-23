@@ -170,6 +170,7 @@ public class KeynoteWorkshopPosterParse {
             if (localName.equals("eventSessionID")) {
                 ke.ID = sb.toString();
                 ws.eventSessionID=sb.toString();
+                ps.eventSessionID=sb.toString();
                 return;
             }
             if(localName.equals("presentationID")){

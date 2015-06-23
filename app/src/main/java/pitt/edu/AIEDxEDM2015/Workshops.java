@@ -84,13 +84,21 @@ public class Workshops extends Activity {
 		}
 
 
+		//combine GIFT-session 1,2,3,4, other conference can delete
+		for (int i=0;i<seList.size();i++) {
+			if (seList.get(i).name.contains("GIFT")) {
+				seList.get(i).setname("GIFT");
+			}
+		}
 		for (int i=0;i<seList.size();i++){
 			if(sessionMap.containsKey(seList.get(i).name)){
-				StringBuilder sb=new StringBuilder(seList.get(i).ID);
+				//System.out.println("!!!!!!!!!!!!!!"+sessionMap.get("GIFT")+seList.get(i).ID);
+				StringBuilder sb=new StringBuilder(sessionMap.get(seList.get(i).name));
 				sb.append(";");
 				sb.append(seList.get(i).ID);
 				sessionMap.put(seList.get(i).name,sb.toString());
 			}else{
+				//System.out.println("!!!!!!!!@@GIFT!"+sessionMap.get("GIFT")+seList.get(i).ID);
 				sessionMap.put(seList.get(i).name,seList.get(i).ID);
 				list.add(seList.get(i));
 			}

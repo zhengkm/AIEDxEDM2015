@@ -82,9 +82,10 @@ public class WorkshopDetail extends Activity implements Runnable{
 				sList.add(session);
 			}
 
+			if(session.name.contains("GIFT"))
+				wtitle="GIFT";
+			else
 			wtitle=session.name;
-//			wbtime=session.beginTime;
-//			wetime=session.endTime;
 			room=session.room;
 //			date=session.date;
 
@@ -96,22 +97,7 @@ public class WorkshopDetail extends Activity implements Runnable{
 		t1 = (TextView) findViewById(R.id.TextView01);
 		t1.setText(wtitle);
 		
-//		SimpleDateFormat sdfSource = new SimpleDateFormat("HH:mm");
-//    	SimpleDateFormat sdfDestination = new SimpleDateFormat("h:mm a");
-//    	Date beginDate, endDate;
-//    	String begTime, endTime;
-//    	try {
-//			beginDate = sdfSource.parse(wbtime);
-//			endDate = sdfSource.parse(wetime);
-//			begTime = sdfDestination.format(beginDate);
-//			endTime = sdfDestination.format(endDate);
-//			t2 = (TextView)this.findViewById(R.id.TextView02);
-//			t2.setText(date+"\t"+begTime+"-"+endTime);
-//			}catch (Exception e) {
-//				System.out.println("Date Exception");
-//    	}
 
-    	//t3 = (TextView) findViewById(R.id.TextView03);
 		t4 = (TextView) findViewById(R.id.TextView04);
 		 if(room==null||"null".compareToIgnoreCase(room)==0||"".compareTo(room)==0){
 			 t4.setText("N/A");
@@ -134,18 +120,6 @@ public class WorkshopDetail extends Activity implements Runnable{
 
 		  }
 		);
-		//get paper by session ID
-
-
-		//get Workshop By SessionID
-//		ArrayList<Workshop> wsList=new ArrayList<Workshop>();
-//		wsList=db.open().getWorkshopBySessionID(eventSessionID);
-//		db.close();
-
-//		String[] sidlist = childsessionID.split(";");
-//
-//		sList = getSessionData(sidlist);
-//
 
 		//get paper by session ID
 		for(int i=0;i<eventSessionID.length;i++){
@@ -157,26 +131,6 @@ public class WorkshopDetail extends Activity implements Runnable{
 
 		HeaderView listheaderview = new HeaderView(this);
 		listheaderview.setWebView(content);
-		//wv= (WebView) listheaderview.findViewById(R.id.WebView01);
-		/*wv.getSettings().setJavaScriptEnabled(true);
-		wv.loadData(content, "text/html", "utf-8");*/
-
-//		button = (TextView) listheaderview.findViewById(R.id.expandbutton);
-//		button.setOnClickListener(new OnClickListener(){
-//
-//			@Override
-//			public void onClick(View arg0) {
-//				// TODO Auto-generated method stub
-//
-//				if(wv.getVisibility()== View.GONE){
-//				wv.setVisibility(View.VISIBLE);
-//				button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bullet_arrow_down, 0, 0, 0);
-//				}
-//				else if(wv.getVisibility() == View.VISIBLE){
-//					wv.setVisibility(View.GONE);
-//					button.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bullet_arrow_up,0,0,0);
-//				}
-//			}});
 		lv = (ListView) findViewById(R.id.ListView01);
 		//lv.addHeaderView(listheaderview);
 		adapter = new MyListViewAdapter(pList);
@@ -184,16 +138,6 @@ public class WorkshopDetail extends Activity implements Runnable{
 
 	}
 
-//	public ArrayList<Session> getSessionData(String[] s){
-//		ArrayList<Session> sessions= new ArrayList<Session>();
-//		db = new DBAdapter(this);
-//
-//		db.open();
-//		sessions = db.getSessionByidList(s);
-//		db.close();
-//
-//		return sessions;
-//	}
 	public ArrayList<Paper> getPaperData(String sessionID){
 		ArrayList<Paper> papers = new ArrayList<Paper>();
 		// get data at local
@@ -269,13 +213,9 @@ public class WorkshopDetail extends Activity implements Runnable{
 		in.putExtra("activity", "WorkshopDetail");
 		//in.putExtra("id", wid);
 		in.putExtra("wtitle", wtitle);
-		//in.putExtra("paperID", paperID);
-//		in.putExtra("wbtime", wbtime);
-//		in.putExtra("wetime", wetime);
-		//in.putExtra("date", date);
 		in.putExtra("room", room);
 		//in.putExtra("content", content);
-		in.putExtra("eventSessionID", eventSessionID);
+		in.putExtra("eventSessionIDList", eventSessionIDList);
 		startActivity(in);
 	}
 
@@ -485,6 +425,7 @@ public class WorkshopDetail extends Activity implements Runnable{
 			
 			WorkshopDetail.this.finish();
 			Intent in = new Intent(WorkshopDetail.this, PaperDetail.class);
+			System.out.println("!!!!!!!!!!!!workshop");
 			in.putExtra("id", childs.get(idx).id);
 			in.putExtra("title", childs.get(idx).title);
 			in.putExtra("authors", childs.get(idx).authors);

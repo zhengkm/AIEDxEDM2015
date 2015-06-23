@@ -436,23 +436,19 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
                 Intent in = new Intent(this, WorkshopDetail.class);
                 in.putExtra("id", s[0]);
                 in.putExtra("title", s[1]);
-//                in.putExtra("bTime", s[2]);
-//                in.putExtra("eTime", s[3]);
                 in.putExtra("room", s[2]);
-//                in.putExtra("date", s[5]);
                 in.putExtra("eventSessionID", s[3]);
                 in.putExtra("eventSessionIDList",s[4]);
                 startActivity(in);
             } else if (activity.compareToIgnoreCase("PosterDetail") == 0) {
                 this.finish();
-                String[] s = key.split(";");
+                String[] s = key.split("%");
                 Intent in = new Intent(this, PosterDetail.class);
-                in.putExtra("title", s[0]);
-                in.putExtra("id", s[1]);
-                in.putExtra("date", s[2]);
-                in.putExtra("btime", s[3]);
-                in.putExtra("etime", s[4]);
-                in.putExtra("room", s[5]);
+                in.putExtra("id", s[0]);
+                in.putExtra("title", s[1]);
+                in.putExtra("room", s[2]);
+                in.putExtra("eventSessionID", s[3]);
+                in.putExtra("eventSessionIDList",s[4]);
                 startActivity(in);
             } else {
                 return false;

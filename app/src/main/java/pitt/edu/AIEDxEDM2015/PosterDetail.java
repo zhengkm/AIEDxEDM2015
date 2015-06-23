@@ -9,37 +9,52 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import data.Conference;
 import data.DBAdapter;
 import data.Paper;
+import data.Session;
 import data.UserScheduledToServer;
 
 public class PosterDetail extends Activity implements Runnable, OnClickListener {
-    private String wtitle, wid, content, date, btime, etime, room, authors, presentationID, contentLink;
-    private TextView t1, t2, t3, t4, bv;
+    private String wtitle, wid, content, date, btime, etime, room, authors, presentationID, contentLink, activityName;
+    private TextView t1, t2, t3, t4, bv,tv;
     private WebView wv;
     private ImageButton b1, b2, b, b3;
-    private DBAdapter db;
+    private DBAdapter db= new DBAdapter(this);
+    private ImageButton ib;
+    private int pos;
     private UserScheduledToServer us2s;
     private String paperStatus;
     private ProgressDialog pd;
     private String paperID;
+    private MyListViewAdapter adapter;
+    private ListView lv;
 
     private ArrayList<Paper> pList = new ArrayList<Paper>();
-
+    private String eventSessionIDList;
+    private String[] eventSessionID;
+    private Session session=new Session();
+    private ArrayList<Session> sList=new ArrayList<Session>();
     private final int MENU_HOME = Menu.FIRST;
     private final int MENU_TRACK = Menu.FIRST + 1;
     private final int MENU_SESSION = Menu.FIRST + 2;
@@ -53,59 +68,32 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.paperdetail);
+        setContentView(R.layout.workshopdetail);
 
         Bundle b = getIntent().getExtras();
         if (b != null) {
-            wtitle = b.getString("title");
-            wid = b.getString("id");
-            date = b.getString("date");
-            btime = b.getString("bTime");
-            etime = b.getString("eTime");
-            room = b.getString("room");
+            eventSessionIDList = b.getString("eventSessionIDList");
+            eventSessionID = eventSessionIDList.split(";");
+            for (int i = 0; i < eventSessionID.length; i++) {
+                //System.out.println("!!!!!!!!!!!!!"+eventSessionID[i]);
+                session = db.open().getSessionByID(eventSessionID[i]);
+                sList.add(session);
+            }
 
         }
 
-        db = new DBAdapter(this);
-        Paper poster = db.open().getPaperByID(wid);
-        authors = poster.authors;
-        content = poster.paperAbstract;
-        presentationID = poster.presentationID;
-        contentLink = poster.contentlink;
-        pList.add(poster);
-        db.close();
+            wtitle=session.name;
 
+//			wbtime=session.beginTime;
+//			wetime=session.endTime;
+            room=session.room;
 
+        tv = (TextView) findViewById(R.id.TextView);
+        tv.setText("Poster");
 
         us2s = new UserScheduledToServer();
         t1 = (TextView) findViewById(R.id.TextView01);
         t1.setText(wtitle);
-
-
-        b1 = (ImageButton) findViewById(R.id.ImageButton01);
-        if (getPaperScheduled(wid).compareTo("yes") == 0)
-            b1.setImageResource(R.drawable.yes_schedule);
-        else
-            b1.setImageResource(R.drawable.no_schedule);
-        b1.setTag(wid);
-        b1.setOnClickListener(this);
-
-        b2 = (ImageButton) findViewById(R.id.ImageButton02);
-        if (getPaperStarred(presentationID).compareTo("yes") == 0)
-            b2.setImageResource(R.drawable.yes_star);
-        else
-            b2.setImageResource(R.drawable.no_star);
-        b2.setTag(presentationID);
-        b2.setOnClickListener(this);
-
-        b3 = (ImageButton) findViewById(R.id.ImageButton03);
-        b3.setOnClickListener(this);
-
-        t2 = (TextView) findViewById(R.id.TextView06);
-        //t2.setBackgroundResource(tbColor);
-        t2.setText(authors);
-        t3 = (TextView) findViewById(R.id.TextView02);
-        t3.setText(date + " " + btime + "-" + etime);
         t4 = (TextView) findViewById(R.id.TextView04);
         if (room == null || "null".compareToIgnoreCase(room) == 0 || "".compareTo(room) == 0)
             t4.setText("N/A");
@@ -133,36 +121,192 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
         });
 
 
-        bv = (TextView) findViewById(R.id.PaperButton);
-        //bv.setOnClickListener(this);
-
-
-        if(contentLink != null && !"null".equals(contentLink)) {
-            bv.setText(contentLink);
-            bv.setOnClickListener(new TextView.OnClickListener() {
-                public void onClick(View v) {
-                /*
-	        	Intent it = new Intent(Intent.ACTION_VIEW, Uri.parse(pContent));
-				it.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
-				startActivity(it);**/
-
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    Uri data = Uri.parse(contentLink);
-                    intent.setData(data);
-                    startActivity(intent);
-                }
-            });
-        } else {
-            bv.setText("N/A");
+        //get paper by session ID
+        for(int i=0;i<eventSessionID.length;i++){
+            pList.addAll(getPaperData(eventSessionID[i]));
         }
 
 
-        wv = (WebView) findViewById(R.id.WebView01);
-        wv.getSettings().setJavaScriptEnabled(true);
-        wv.loadData(content, "text/html", "utf-8");
+        lv = (ListView) findViewById(R.id.ListView01);
+        //lv.addHeaderView(listheaderview);
+        adapter = new MyListViewAdapter(pList);
+        lv.setAdapter(adapter);
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tv = (TextView) findViewById(R.id.TextView);
+        tv.setText("Poster");
+    }
+
+    public final  class ViewHolder {
+        TextView firstCharHintTextView, title, location;
+        TextView t1, t2, t3,type;
+        ImageButton star, schedule;
+
+    }
+
+    private class MyListViewAdapter extends BaseAdapter implements
+            OnClickListener{
+        //private ArrayList<Session> parents;
+        private ArrayList<Paper> childs;
+
+        public int getCount() {
+            return childs.size();
+        }
+
+        public Object getItem(int position) {
+            return position;
+        }
+
+        public long getItemId(int position) {
+            return position;
+        }
+        public MyListViewAdapter( ArrayList<Paper> child){
+            //this.parents=parent;
+            this.childs=child;
+        }
+
+
+        @Override
+        public View getView(int childPos, View convertView, ViewGroup parent) {
+            // TODO Auto-generated method stub
+            ViewHolder vh = null;
+            SimpleDateFormat sdfSource = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat sdfDestination = new SimpleDateFormat("h:mm a");
+            Date beginDate, endDate;
+            String begTime, endTime;
+            if (convertView == null) {
+                LayoutInflater li = getLayoutInflater();
+                convertView = li.inflate(R.layout.paperitem, null);
+                vh = new ViewHolder();
+                vh.t1 = (TextView) convertView.findViewById(R.id.time);
+                vh.t2 = (TextView) convertView.findViewById(R.id.title);
+                vh.t2.setOnClickListener(this);
+                vh.t3 = (TextView) convertView.findViewById(R.id.author);
+                vh.type = (TextView) convertView.findViewById(R.id.type);
+                vh.schedule = (ImageButton) convertView
+                        .findViewById(R.id.ImageButton01);
+                vh.star = (ImageButton) convertView
+                        .findViewById(R.id.ImageButton02);
+
+                convertView.setTag(vh);
+            } else {
+                vh = (ViewHolder) convertView.getTag();
+            }
+            try {
+                beginDate = sdfSource.parse(childs.get(childPos).exactbeginTime);
+                endDate = sdfSource.parse(childs.get(childPos).exactendTime);
+                begTime = sdfDestination.format(beginDate);
+                endTime = sdfDestination.format(endDate);
+                vh.t1.setText(childs.get(childPos).date+"\t"+begTime + " - " + endTime);
+            } catch (Exception e) {
+                System.out.println("Date Exception");
+            }
+            if (childs.get(childPos).scheduled.compareTo("yes") == 0)
+                vh.schedule.setImageResource(R.drawable.yes_schedule);
+            else
+                vh.schedule.setImageResource(R.drawable.no_schedule);
+            vh.schedule.setFocusable(false);
+            vh.schedule.setOnClickListener(this);
+            vh.schedule.setTag(childs.get(childPos).id+";"+childPos);
+
+            if (childs.get(childPos).starred.compareTo("yes") == 0)
+                vh.star.setImageResource(R.drawable.yes_star);
+            else
+                vh.star.setImageResource(R.drawable.no_star);
+            vh.star.setFocusable(false);
+            vh.star.setOnClickListener(this);
+            vh.star.setTag(childs.get(childPos).presentationID+";"+childPos);
+
+            if (childs.get(childPos).recommended.compareTo("yes") == 0)
+                vh.t2.setText(Html.fromHtml(childs.get(childPos).title + "<font color=\"#ff0000\"> &lt;Recommended&gt; </font>"));
+            else
+                vh.t2.setText(childs.get(childPos).title);
+            vh.t2.setTag(childPos);
+            vh.t3.setText(childs.get(childPos).authors);
+            vh.type.setText(childs.get(childPos).type);
+            return convertView;
+        }
+
+        @Override
+        public void onClick(View v) {
+            // TODO Auto-generated method stub
+            TextView tv;
+            switch (v.getId()) {
+                case R.id.ImageButton01:
+                    ib = (ImageButton) v;
+                    String s = ib.getTag().toString();
+                    String st[] = s.split(";");
+                    paperID = st[0];
+                    pos= Integer.parseInt(st[1]);
+                    //pos= Integer.parseInt(st[2]);
+                    Conference.userID = getUserID();
+                    if (Conference.userSignin) {
+                        paperStatus = "";
+                        callThread();
+                    } else {
+                        CallSignin();
+                    }
+                    break;
+                case R.id.ImageButton02:
+                    ib = (ImageButton) v;
+                    String s1 = ib.getTag().toString();
+                    String st1[] = s1.split(";");
+                    paperID = st1[0];
+                    pos = Integer.parseInt(st1[1]);
+                    //pos = Integer.parseInt(st1[2]);
+
+                    if (getPaperStarred(paperID).compareTo("no") == 0) {
+                        ib.setImageResource(R.drawable.yes_star);
+                        updateUserPaperStatus(paperID, "yes", "star");
+                        insertMyStarredPaper(paperID);
+                        childs.get(pos).starred= "yes";
+
+                    } else {
+                        ib.setImageResource(R.drawable.no_star);
+                        updateUserPaperStatus(paperID, "no", "star");
+                        deleteMyStarredPaper(paperID);
+                        childs.get(pos).starred= "no";
+
+                    }
+
+                    break;
+                case R.id.title:
+                    int idx,idxs;
+                    tv = (TextView) v;
+                    String s2 = tv.getTag().toString();
+                    String st2[] = s2.split(";");
+                    idx= Integer.parseInt(st2[0]);
+                    //idxs= Integer.parseInt(st2[1]);
+
+                    PosterDetail.this.finish();
+                    Intent in = new Intent(PosterDetail.this, PaperDetail.class);
+                    System.out.println("!!!!!!!!!!!!!enter");
+                    in.putExtra("id", childs.get(idx).id);
+                    in.putExtra("title", childs.get(idx).title);
+                    in.putExtra("authors", childs.get(idx).authors);
+                    in.putExtra("date", childs.get(idx).date);
+                    in.putExtra("abstract", childs.get(idx).paperAbstract);
+                    in.putExtra("room", room);
+                    in.putExtra("contentID", sList.get(pos).ID);
+                    in.putExtra("contentlink",childs.get(idx).contentlink);
+                    in.putExtra("bTime", childs.get(idx).exactbeginTime);
+                    in.putExtra("eTime", childs.get(idx).exactendTime);
+                    in.putExtra("presentationID", childs.get(idx).presentationID);
+                    in.putExtra("activity","PosterDetail");
+                    in.putExtra("key",wid+"%"+wtitle+"%"+room+"%"+sList.get(pos).ID+"%"+eventSessionIDList);
+                    startActivity(in);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+    }
     public void onClick(View v) {
         // TODO Auto-generated method stub
         TextView tv;
@@ -218,17 +362,10 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
 
     private void CallSignin() {
         Intent in = new Intent(PosterDetail.this, Signin.class);
-        in.putExtra("activity", "PaperInfo");
-        in.putExtra("paperID", wid);
-        in.putExtra("title", wtitle);
-        in.putExtra("bTime", btime);
-        in.putExtra("eTime", etime);
-        in.putExtra("authors", authors);
-        in.putExtra("Abstract", content);
-        in.putExtra("contentlink", contentLink);
+        in.putExtra("activity", "WorkshopDetail");
+        in.putExtra("wtitle", wtitle);
         in.putExtra("room", room);
-        in.putExtra("date", date);
-        in.putExtra("presentationID", presentationID);
+        in.putExtra("eventSessionIDList", eventSessionIDList);
         startActivity(in);
     }
 
@@ -287,18 +424,6 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
         return false;
     }
 
-//    private void CallSignin() {
-//        Intent in = new Intent(PosterDetail.this, Signin.class);
-//        in.putExtra("activity", "PosterDetail");
-//        in.putExtra("id", wid);
-//        in.putExtra("wtitle", wtitle);
-//        in.putExtra("paperID", paperID);
-//        in.putExtra("date", date);
-//        in.putExtra("room", room);
-//        in.putExtra("wbtime", btime);
-//        in.putExtra("wetime", etime);
-//        startActivity(in);
-//    }
 
     public void updateUserPaperStatus(String paperID, String status,
                                       String which) {
@@ -379,7 +504,7 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
             // update interface here
 
             if (paperStatus.compareTo("yes") == 0) {
-                b1.setImageResource(R.drawable.yes_schedule);
+                ib.setImageResource(R.drawable.yes_schedule);
                 updateUserPaperStatus(paperID, "yes", "schedule");
                 insertMyScheduledPaper(paperID);
 //                pList.get(pos).scheduled = "yes";
@@ -387,7 +512,7 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
 
             }
             if (paperStatus.compareTo("no") == 0) {
-                b1.setImageResource(R.drawable.no_schedule);
+                ib.setImageResource(R.drawable.no_schedule);
                 updateUserPaperStatus(paperID, "no", "schedule");
                 deleteMyScheduledPaper(paperID);
 //                pList.get(pos).scheduled = "no";
@@ -397,6 +522,18 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
 
         }
     };
+
+    public ArrayList<Paper> getPaperData(String sessionID){
+        ArrayList<Paper> papers = new ArrayList<Paper>();
+        // get data at local
+        db = new DBAdapter(this);
+        db.open();
+        papers = db.getPapersBysessionID(sessionID);
+        db.close();
+
+        return papers;
+    }
+
 
     public void callThread() {
 

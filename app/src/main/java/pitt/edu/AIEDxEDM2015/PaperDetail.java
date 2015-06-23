@@ -146,7 +146,7 @@ public class PaperDetail extends TabActivity{
 }
 **/
 public class PaperDetail extends TabActivity {
-    private String key, activity, id, title, authors, pAbstract, pContent, pRoom, bTime, eTime, date, presentationID;
+    private String key, activity, id, title, authors, contentID, pAbstract, pContent, eventSessionIDList, pRoom, bTime, eTime, date, presentationID;
     private final int MENU_HOME = Menu.FIRST;
     private final int MENU_TRACK = Menu.FIRST + 1;
     private final int MENU_SESSION = Menu.FIRST + 2;
@@ -178,6 +178,8 @@ public class PaperDetail extends TabActivity {
             bTime = b.getString("bTime");
             eTime = b.getString("eTime");
             date = b.getString("date");
+            contentID=b.getString("contentID");
+            eventSessionIDList=b.getString("eventSessionIDList");
             presentationID = b.getString("presentationID");
             if (b.getString("activity") != null)
                 activity = b.getString("activity");
@@ -204,9 +206,11 @@ public class PaperDetail extends TabActivity {
         b1.putString("bTime", bTime);
         b1.putString("eTime", eTime);
         b1.putString("date", date);
+
         b1.putString("presentationID", presentationID);
         b1.putString("activity", activity);
         b1.putString("key", key);
+        b1.putString("eventSessionIDList",eventSessionIDList);
         intent.putExtras(b1);
         TabSpec detail = host.newTabSpec("Detail");
         detail.setIndicator("Detail");

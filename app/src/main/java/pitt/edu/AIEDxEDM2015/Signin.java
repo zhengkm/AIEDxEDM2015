@@ -17,6 +17,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -33,6 +35,7 @@ public class Signin extends Activity implements Runnable {
     private Button loginButton, signupButton;
     private String email, password;
     private boolean loginOK = false;
+    private boolean connectOK=true;
     private ProgressDialog pd;
     private Authorization au;
     private String activityName;
@@ -41,11 +44,12 @@ public class Signin extends Activity implements Runnable {
             sessionDate = "";
     private String contentID = "";
     private String presentationID, paperTitle, paperbTime, papereTime, paperAbstract, paperAuthors, date, room = "";
-    private String workshopID, workshopTitle, content, workshopDate, wbtime, wetime, eventSessionID = "";
+    private String workshopID, workshopTitle, content, workshopDate, wbtime, wetime, eventSessionIDList = "";
     private TextView tw4;
     private DBAdapter db;
 
     private static final int ERRORDIALOG = 1;
+    private static final int NOINTERNET = 2;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,21 +113,16 @@ public class Signin extends Activity implements Runnable {
                 paperID = b.getString("paperID");
                 workshopID = b.getString("id");
                 workshopTitle = b.getString("wtitle");
-                workshopDate = b.getString("date");
                 room = b.getString("room");
-                wbtime = b.getString("wbtime");
-                wetime = b.getString("wetime");
-                content = b.getString("content");
-                eventSessionID = b.getString("eventSessionID");
+                eventSessionIDList = b.getString("eventSessionIDList");
 
             } else if (activityName.compareTo("PosterDetail") == 0) {
                 paperID = b.getString("paperID");
                 workshopID = b.getString("id");
                 workshopTitle = b.getString("wtitle");
-                workshopDate = b.getString("date");
                 room = b.getString("room");
-                wbtime = b.getString("wbtime");
-                wetime = b.getString("wetime");
+                eventSessionIDList = b.getString("eventSessionIDList");
+
             } else {
 
             }
@@ -175,9 +174,32 @@ public class Signin extends Activity implements Runnable {
     private void validate() {
         email = emailText.getText().toString();
         password = passwordText.getText().toString();
-        au = new Authorization();
-        au.login(email, password);
-        loginOK = au.isLoginOK;
+        if(isConnect(Signin.this)){
+            au = new Authorization();
+            au.login(email, password);
+            loginOK = au.isLoginOK;
+            connectOK=true;
+        }else{
+            connectOK=false;
+        }
+
+    }
+
+    public static boolean isConnect(Context context) {
+
+        ConnectivityManager connectivity = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+
+            NetworkInfo info = connectivity.getActiveNetworkInfo();
+            if (info != null) {
+
+                if (info.getState() == NetworkInfo.State.CONNECTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void syncDB() {
@@ -205,7 +227,10 @@ public class Signin extends Activity implements Runnable {
     }
 
     private void showLoginResult() {
-        if (!loginOK) {
+        if(!connectOK){
+            showDialog(NOINTERNET);
+        }
+        else if (!loginOK) {
             showDialog(ERRORDIALOG);
         } else {
             /***
@@ -221,19 +246,6 @@ public class Signin extends Activity implements Runnable {
 
             Conference.userSignin = true;
             Conference.userID = au.userID;
-            //System.out.println("*******************User ID" + au.userID);
-			
-			
-			/*
-			db = new DBAdapter(this);
-			db.open();
-			db.insertUser(au.userID);
-			db.close();
-			Conference.userSignin  = true;
-			Conference.userID = au.userID;
-			*/
-
-            //Intent in = new Intent(Signin.this, MainInterface.class);
             Intent in;
 
             if (activityName.compareTo("PaperInSession") == 0) {
@@ -294,26 +306,20 @@ public class Signin extends Activity implements Runnable {
                 updatePaperStatus(paperID);
                 syncDB();
                 in = new Intent(Signin.this, WorkshopDetail.class);
-//                in.putExtra("paperID", paperID);
-//                in.putExtra("id", workshopID);
+                in.putExtra("id", workshopID);
                 in.putExtra("title", workshopTitle);
-//                in.putExtra("date", workshopDate);
                 in.putExtra("room", room);
-//                in.putExtra("bTime", wbtime);
-//                in.putExtra("eTime", wetime);
-//                in.putExtra("content", content);
-                in.putExtra("eventSessionID", eventSessionID);
+                in.putExtra("eventSessionIDList", eventSessionIDList);
             } else if (activityName.compareTo("PosterDetail") == 0) {
                 updatePaperStatus(paperID);
                 syncDB();
                 in = new Intent(Signin.this, PosterDetail.class);
-                in.putExtra("paperID", paperID);
                 in.putExtra("id", workshopID);
                 in.putExtra("title", workshopTitle);
-                in.putExtra("date", workshopDate);
                 in.putExtra("room", room);
-                in.putExtra("bTime", wbtime);
-                in.putExtra("eTime", wetime);
+                in.putExtra("eventSessionIDList", eventSessionIDList);
+
+                in.putExtra("eventSessionIDList", eventSessionIDList);
             } else if (activityName.compareTo("MyStaredPapers") == 0) {
                 updatePaperStatus(paperID);
                 syncDB();
@@ -379,24 +385,15 @@ public class Signin extends Activity implements Runnable {
         } else if (activityName.compareTo("ProceedingsByType") == 0) {
 
         } else if (activityName.compareTo("WorkshopDetail") == 0) {
-
-           // in.putExtra("id", workshopID);
-            in.putExtra("title", workshopTitle);
-//            in.putExtra("date", workshopDate);
-            in.putExtra("room", room);
-//            in.putExtra("bTime", wbtime);
-//            in.putExtra("eTime", wetime);
-          //  in.putExtra("content", content);
-            in.putExtra("eventSessionID", eventSessionID);
-        } else if (activityName.compareTo("PosterDetail") == 0) {
-
-            in.putExtra("paperID", paperID);
             in.putExtra("id", workshopID);
             in.putExtra("title", workshopTitle);
-            in.putExtra("date", workshopDate);
             in.putExtra("room", room);
-            in.putExtra("bTime", wbtime);
-            in.putExtra("eTime", wetime);
+            in.putExtra("eventSessionIDList", eventSessionIDList);
+        } else if (activityName.compareTo("PosterDetail") == 0) {
+            in.putExtra("id", workshopID);
+            in.putExtra("title", workshopTitle);
+            in.putExtra("room", room);
+            in.putExtra("eventSessionIDList", eventSessionIDList);
         } else {
 
         }
@@ -406,7 +403,9 @@ public class Signin extends Activity implements Runnable {
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case ERRORDIALOG:
-                return errorDialog(Signin.this, au.errorMessage);
+                return errorDialog(Signin.this, "Please check your email or password");
+            case NOINTERNET:
+                return errorDialog(Signin.this, "No Internet, Please Connect and Try it again ");
         }
         return null;
     }
@@ -418,7 +417,7 @@ public class Signin extends Activity implements Runnable {
     private Dialog errorDialog(Context context, String error) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setIcon(R.drawable.alert_dialog_icon);
-        builder.setTitle("Login: Please recheck userid or passwd");
+        builder.setTitle("Error Information");
         builder.setMessage(error);
         builder.setPositiveButton("ok", null);
         return builder.create();

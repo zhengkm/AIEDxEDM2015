@@ -19,6 +19,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,13 +37,14 @@ public class Signup extends Activity implements Runnable{
 	private String name, email, password, rPassword;
 	private String citeULike ="null";
 	private boolean registerOK = false;
+	private boolean ConnectOK = true;
 	private ProgressDialog pd;
 	private Authorization au;
 	private String activityName="";
 	private String papersessionID, sessionName, sessionBTime, sessionETime,
 	sessionDate,paperID="";
 	private String paperTitle,paperbTime, papereTime, paperAbstract, paperAuthors, room="";
-	private String workshopID, workshopTitle, content, workshopDate,childsessionID="";
+	private String workshopID, workshopTitle, content, workshopDate,eventSessionIDList="";
 	private String trackID, trackName="";
 	private DBAdapter db;
 	private String date="";
@@ -55,6 +58,7 @@ public class Signup extends Activity implements Runnable{
 	private static final int NERRORDIALOG = 3; // no name
 	private static final int EERRORDIALOG = 4; // no email
 	private static final int NPERRORDIALOG = 5; // no password
+	private static final int NOINTERNET = 6;   //no internet
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -130,22 +134,16 @@ public class Signup extends Activity implements Runnable{
 				paperID = b.getString("paperID");
 				workshopID = b.getString("id");
 				workshopTitle = b.getString("title");
-				workshopDate = b.getString("date");
 				room = b.getString("room");
-				wbtime = b.getString("bTime");
-				wetime = b.getString("eTtime");
-				content= b.getString("content");
-				childsessionID=b.getString(childsessionID);
+				eventSessionIDList=b.getString("eventSessionIDList");
 				
 			}
 			else if(activityName.compareTo("PosterDetail")== 0){
 				paperID = b.getString("paperID");
 				workshopID = b.getString("id");
 				workshopTitle = b.getString("title");
-				workshopDate = b.getString("date");
 				room = b.getString("room");
-				wbtime = b.getString("bTime");
-				wetime = b.getString("eTime");			
+				eventSessionIDList=b.getString("eventSessionIDList");
 			}
 			else{
 				
@@ -234,9 +232,66 @@ public class Signup extends Activity implements Runnable{
 	}
 
 	private void toSignIn() {
-		Intent signinIntent = new Intent();
-		signinIntent.setClass(Signup.this, Signin.class);
-		startActivity(signinIntent);
+		Intent in = new Intent();
+		in.setClass(Signup.this, Signin.class);
+
+		in.putExtra("activity", activityName);
+		in.putExtra("paperID", paperID);
+		if (activityName.compareTo("PaperInSession") == 0) {
+			in.putExtra("papersessionID", papersessionID);
+			in.putExtra("sessionName", sessionName);
+			in.putExtra("bTime", sessionBTime);
+			in.putExtra("eTime", sessionETime);
+			in.putExtra("date", sessionDate);
+		} else if (activityName.compareTo("PaperInfo") == 0) {
+			in.putExtra("title", paperTitle);
+			in.putExtra("bTime", paperbTime);
+			in.putExtra("eTime", papereTime);
+			in.putExtra("abstract", paperAbstract);
+			in.putExtra("authors", paperAuthors);
+			in.putExtra("room", room);
+			in.putExtra("date", date);
+			in.putExtra("presentationID", presentationID);
+		} else if (activityName.compareTo("PaperSimilar") == 0) {
+			in.putExtra("id", contentID);
+			in.putExtra("title", paperTitle);
+			in.putExtra("bTime", paperbTime);
+			in.putExtra("eTime", papereTime);
+			in.putExtra("abstract", paperAbstract);
+			in.putExtra("authors", paperAuthors);
+			in.putExtra("room", room);
+			in.putExtra("date", date);
+			in.putExtra("presentationID", presentationID);
+		} else if (activityName.compareTo("MyStaredPapers") == 0) {
+		} else if (activityName.compareTo("MyRecommendedPapers") == 0) {
+		} else if (activityName.compareTo("PaperInSchedule") == 0) {
+			in.putExtra("papersessionID", papersessionID);
+			in.putExtra("sessionName", sessionName);
+			in.putExtra("bTime", sessionBTime);
+			in.putExtra("eTime", sessionETime);
+			in.putExtra("date", sessionDate);
+		} else if (activityName.compareTo("ProceedingsByAuthor") == 0) {
+
+		} else if (activityName.compareTo("ProceedingsByName") == 0) {
+
+		} else if (activityName.compareTo("ProceedingsByType") == 0) {
+
+		} else if (activityName.compareTo("WorkshopDetail") == 0) {
+
+			in.putExtra("id", workshopID);
+			in.putExtra("title", workshopTitle);
+			in.putExtra("room", room);
+			in.putExtra("eventSessionIDList", eventSessionIDList);
+		} else if (activityName.compareTo("PosterDetail") == 0) {
+			in.putExtra("id", workshopID);
+			in.putExtra("title", workshopTitle);
+			in.putExtra("room", room);
+			in.putExtra("eventSessionIDList", eventSessionIDList);
+		} else {
+
+		}
+
+		startActivity(in);
 	}
 
 	private void syncDB()
@@ -259,12 +314,38 @@ public class Signup extends Activity implements Runnable{
 	
 	private void postToServer() {
 		// add authorization method below
-		au = new Authorization();
-		au.signUp(name, email, password, rPassword, citeULike);
-	    registerOK = au.isSignUp;
+		if(isConnect(Signup.this)){
+			au = new Authorization();
+			au.signUp(name, email, password, rPassword, citeULike);
+			registerOK = au.isSignUp;
+			ConnectOK=true;
+		}else{
+			ConnectOK=false;
+		}
+
+	}
+
+	public static boolean isConnect(Context context) {
+
+		ConnectivityManager connectivity = (ConnectivityManager) context
+				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivity != null) {
+
+			NetworkInfo info = connectivity.getActiveNetworkInfo();
+			if (info != null) {
+
+				if (info.getState() == NetworkInfo.State.CONNECTED) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	private void showSignupResult() {
+		if(!ConnectOK){
+			showDialog(NOINTERNET);
+		}
 		if (!registerOK) {
 			showDialog(ERRORDIALOG);
 		} else {
@@ -363,27 +444,19 @@ public class Signup extends Activity implements Runnable{
 				updatePaperStatus(paperID);
 				syncDB();
 				in = new Intent(Signup.this, WorkshopDetail.class);
-				in.putExtra("paperID", paperID);
 				in.putExtra("id", workshopID);
 				in.putExtra("title", workshopTitle);
-				in.putExtra("date", workshopDate);
 				in.putExtra("room", room);
-				in.putExtra("bTime", wbtime);
-				in.putExtra("eTime", wetime);
-				in.putExtra("content", content);
-				in.putExtra("childsessionID", childsessionID);
+				in.putExtra("eventSessionIDList", eventSessionIDList);
 			}
 			else if(activityName.compareTo("PosterDetail") == 0){
 				updatePaperStatus(paperID);
 				syncDB();
 				in = new Intent(Signup.this, PosterDetail.class);
-				in.putExtra("paperID", paperID);
 				in.putExtra("id", workshopID);
 				in.putExtra("title", workshopTitle);
-				in.putExtra("date", workshopDate);
 				in.putExtra("room", room);
-				in.putExtra("bTime", wbtime);
-				in.putExtra("eTime", wetime);
+				in.putExtra("eventSessionIDList", eventSessionIDList);
 			}
 			else if(activityName.compareTo("MyStaredPapers") == 0){
 				updatePaperStatus(paperID);
@@ -409,16 +482,18 @@ public class Signup extends Activity implements Runnable{
 	
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
-		case ERRORDIALOG:
-			return errorDialog(Signup.this);
-		case PERRORDIALOG:
-			return pErrorDialog(Signup.this);
-		case NERRORDIALOG:
-			return nErrorDialog(Signup.this);
-		case EERRORDIALOG:
-			return eErrorDialog(Signup.this);
-		case NPERRORDIALOG:
-			return npErrorDialog(Signup.this);
+			case ERRORDIALOG:
+				return errorDialog(Signup.this);
+			case PERRORDIALOG:
+				return pErrorDialog(Signup.this);
+			case NERRORDIALOG:
+				return nErrorDialog(Signup.this);
+			case EERRORDIALOG:
+				return eErrorDialog(Signup.this);
+			case NPERRORDIALOG:
+				return npErrorDialog(Signup.this);
+			case NOINTERNET:
+				return nInErrorDialog(Signup.this);
 		}
 		return null;
 	}
@@ -470,8 +545,16 @@ public class Signup extends Activity implements Runnable{
 		builder.setPositiveButton("ok", null);
 		return builder.create();
 	}
-		
-		
+
+
+	private Dialog nInErrorDialog(Context context) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setIcon(R.drawable.alert_dialog_icon);
+		builder.setTitle("Internet Error");
+		builder.setMessage("No Internet, Please Connect and Try it again");
+		builder.setPositiveButton("ok", null);
+		return builder.create();
+	}
 	}
 
 

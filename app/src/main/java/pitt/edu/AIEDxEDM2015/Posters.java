@@ -3,6 +3,8 @@ package pitt.edu.AIEDxEDM2015;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 
 import android.app.Activity;
@@ -24,13 +26,17 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import data.DBAdapter;
 import data.Poster;
+import data.Session;
+
 import java.util.Comparator;
 
 public class Posters extends Activity {
 	private ArrayList<Poster> pList;
 	private DBAdapter db;
 	private ListView lv;
-	
+	private ArrayList<Session> seList=new ArrayList<Session>();
+	private HashMap<String,String> sessionMap=new HashMap<String, String>();
+	private ArrayList<Session> list=new ArrayList<Session>();
 	private final int MENU_HOME = Menu.FIRST;
 	private final int MENU_TRACK = Menu.FIRST + 1;
 	private final int MENU_SESSION = Menu.FIRST + 2;
@@ -52,10 +58,48 @@ public class Posters extends Activity {
 
 		pList = new ArrayList<Poster>();
 		pList = db.getPoster();
-		Collections.sort(pList, new dateCompare());
+
+		//get poster session
+		HashSet<String> saveEventSession=new HashSet<String>();
+		seList=new ArrayList<Session>();
+
+		for(int i=0;i<pList.size();i++){
+			String eventSessionID=pList.get(i).eventSessionID;
+			if(!saveEventSession.contains(eventSessionID)){
+				saveEventSession.add(eventSessionID);
+
+			}
+		}
+
+		//GET session by date
+		ArrayList<Session> tmp=new ArrayList<Session>();
+		for(int j=0;j<8;j++){
+			tmp=db.getSessionBydayID(String.valueOf(j));
+			for(int i=0;i<tmp.size();i++){
+				if(saveEventSession.contains(tmp.get(i).ID)){
+					seList.add(tmp.get(i));
+				}
+			}
+
+		}
+
+
+		//combine GIFT-session 1,2,3,4, other conference can delete
+		for (int i=0;i<seList.size();i++){
+			if(sessionMap.containsKey(seList.get(i).name)){
+				StringBuilder sb=new StringBuilder(sessionMap.get(seList.get(i).name));
+				sb.append(";");
+				sb.append(seList.get(i).ID);
+				sessionMap.put(seList.get(i).name,sb.toString());
+			}else{
+				sessionMap.put(seList.get(i).name,seList.get(i).ID);
+				list.add(seList.get(i));
+			}
+		}
+
 		db.close();
 		
-		adapter = new ListViewAdapter(pList);
+		adapter = new ListViewAdapter(list);
 		
 		TextView tv = (TextView) findViewById(R.id.TextView01);
 		tv.setText("Posters");
@@ -66,47 +110,15 @@ public class Posters extends Activity {
 			public void onItemClick(AdapterView av, View v, int pos, long arg) {
 				
 				Intent in = new Intent(Posters.this, PosterDetail.class);
-				//in.putExtra("day_id", buttonNum);
-				in.putExtra("id", pList.get(pos).ID);
-				in.putExtra("title", pList.get(pos).name);
-				in.putExtra("date", pList.get(pos).date);
-				in.putExtra("bTime", pList.get(pos).beginTime);
-				in.putExtra("eTime", pList.get(pos).endTime);
-				in.putExtra("room", pList.get(pos).room);
-				
+				String sessionName=list.get(pos).name;
+				String eventSessionIDList=sessionMap.get(sessionName);
+				in.putExtra("eventSessionIDList", eventSessionIDList);
 				startActivity(in);
 			}
 		});
 		
 	}
 
-	private class dateCompare implements Comparator<Poster>{
-
-
-		@Override
-		public int compare(Poster r1, Poster r2) {
-			Hashtable<String, Integer> Dtrans = new Hashtable<String, Integer>();
-			Dtrans.put("Monday, Jun.22", 1);
-			Dtrans.put("Tuesday, Jun.23", 2);
-			Dtrans.put("Wednesday, Jun.24", 3);
-			Dtrans.put("Thursday, Jun.25", 4);
-			Dtrans.put("Friday, Jun.26", 5);
-			Dtrans.put("Saturday, Jun.27", 6);
-			Dtrans.put("Sunday, Jun.28", 7);
-			Dtrans.put("Monday, Jun.29", 8);
-			if(Dtrans.get(r1.date)>Dtrans.get(r2.date)){
-				return 1;
-
-			}else if(Dtrans.get(r1.date)<Dtrans.get(r2.date)){
-				return -1;
-			}else{
-				return 0;
-			}
-
-
-		}
-
-	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
@@ -163,13 +175,13 @@ public class Posters extends Activity {
 		TextView t1,t2,t3,firstCharHintTextView;
 	}
 	private class ListViewAdapter extends BaseAdapter {
-		ArrayList<Poster> pList;
+		ArrayList<Session> list;
 		public ListViewAdapter(ArrayList w) {
-			this.pList = w;
+			this.list = w;
 		}
 
 		public int getCount() {
-			return pList.size();
+			return list.size();
 		}
 
 		public Object getItem(int position) {
@@ -194,23 +206,23 @@ public class Posters extends Activity {
 			else {
 				v = (ViewHolder) convertView.getTag();
 			}
-			v.t1.setText(pList.get(position).name);
-			if(pList.get(position).room.compareToIgnoreCase("NULL")==0)
+			v.t1.setText(list.get(position).name);
+			if(list.get(position).room.compareToIgnoreCase("NULL")==0)
             	v.t3.setVisibility(View.GONE);
             else{
             	v.t3.setVisibility(View.VISIBLE);	
-            	v.t3.setText("At "+pList.get(position).room);}
+            	v.t3.setText("At "+list.get(position).room);}
     			int idx = position - 1;   
    			 
-                String preview = idx >= 0 ? pList.get(idx).date : "";
-                String current = pList.get(position).date;
+                String preview = idx >= 0 ? list.get(idx).date : "";
+                String current = list.get(position).date;
           
                 if (current.compareTo(preview) == 0) {
                 	v.firstCharHintTextView.setVisibility(View.GONE);   
                 } else {   
                    
                 	v.firstCharHintTextView.setVisibility(View.VISIBLE);
-                	v.firstCharHintTextView.setText(pList.get(position).date);
+                	v.firstCharHintTextView.setText(list.get(position).date);
                 }
 			return convertView;
 		}

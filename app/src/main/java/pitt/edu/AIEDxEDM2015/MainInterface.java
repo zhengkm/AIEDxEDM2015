@@ -93,9 +93,6 @@ public class MainInterface extends Activity {
                                      }
                                  }
         );
-
-
-        System.out.println("!!!!!!!!!!!!!!!!!!!!oncreate");
         //Row 1
         GridView gv1 = (GridView) findViewById(R.id.GridView01);
         Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.workshop,R.drawable.poster, R.drawable.sessionbig,R.drawable.proceeding};
