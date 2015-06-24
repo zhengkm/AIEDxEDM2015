@@ -95,8 +95,8 @@ public class MainInterface extends Activity {
         );
         //Row 1
         GridView gv1 = (GridView) findViewById(R.id.GridView01);
-        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.workshop,R.drawable.poster, R.drawable.tutorial, R.drawable.sessionbig,R.drawable.proceeding};
-        String[] t1={ "About","Keynotes","Workshops", "Poster", "Tutorial", "Schedule","Proceedings"};
+        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.workshop,R.drawable.poster, R.drawable.tutorial,R.drawable.recommend, R.drawable.sessionbig,R.drawable.proceeding};
+        String[] t1={ "About","Keynotes","Workshops", "Poster", "Tutorial", "Recommends", "Schedule","Proceedings"};
         gv1.setAdapter(new ImageViewAdapter(this, i1, t1));
 
         gv1.setOnItemClickListener(new OnItemClickListener() {
@@ -125,15 +125,22 @@ public class MainInterface extends Activity {
                         in = new Intent(MainInterface.this, Tutorial.class);
                         startActivity(in);
                         break;
+                    //recommend
                     case 5:
+                        in = new Intent(MainInterface.this, MyRecommendedPapers.class);
+                        startActivity(in);
+                        break;
+                    case 6:
                         in = new Intent(MainInterface.this, ProgramByDay.class);
                         startActivity(in);
                         break;
+
                     // Proceedings
-                    case 6:
+                    case 7:
                         in = new Intent(MainInterface.this, Proceedings.class);
                         startActivity(in);
                         break;
+
                     default:
                         break;
                 }
@@ -303,6 +310,7 @@ public class MainInterface extends Activity {
                 v = li.inflate(R.layout.imagetext, null);
                 TextView tv = (TextView) v.findViewById(R.id.TextView01);
                 tv.setText(mText[position]);
+                //tv.setTextSize(12);
                 ImageView iv = (ImageView) v.findViewById(R.id.ImageView01);
                 iv.setImageResource(mThumbIds[position]);
             } else {

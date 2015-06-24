@@ -521,7 +521,7 @@ public void onClick(View v) {
 		in.putExtra("room", pList.get(index).room);
 		in.putExtra("abstract", pList.get(index).paperAbstract);
 		in.putExtra("contentlink", pList.get(index).contentlink);
-
+		in.putExtra("track", pList.get(index).track);
 		in.putExtra("bTime", pList.get(index).exactbeginTime);
 		in.putExtra("eTime", pList.get(index).exactendTime);
 		in.putExtra("presentationID", pList.get(index).presentationID);

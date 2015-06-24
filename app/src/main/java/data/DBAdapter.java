@@ -721,8 +721,8 @@ public class DBAdapter {
 
         Cursor cursor = mDb.rawQuery("select p.ID, pc.title," +
                 "p.date,pc.paperAbstract,pc.contentlink,pc.authors,p.starred,p.scheduled, " +
-                "p.exactbeginTime, p.exactendTime,pc.type, p.dayid, p.recommended, p.presentationID, p.track" + " "
-                + "from paper p, papercontent pc, mystarredpaper mp where p.presentationID=mp.presentationID and p.ID = pc.ID order by p.dayid, p.exactbeginTime", null);
+                "p.exactbeginTime, p.exactendTime,pc.type, p.dayid, p.recommended, p.presentationID, p.track, s.room" + " "
+                + "from paper p, papercontent pc, session s, mystarredpaper mp where p.presentationID=mp.presentationID and p.sessionID = s.ID and p.ID = pc.ID order by p.dayid, p.exactbeginTime", null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             Paper p = new Paper();
@@ -741,6 +741,7 @@ public class DBAdapter {
             p.recommended = cursor.getString(12);
             p.presentationID = cursor.getString(13);
             p.track=cursor.getString(14);
+            p.room=cursor.getString(15);
             papers.add(p);
             cursor.moveToNext();
         }

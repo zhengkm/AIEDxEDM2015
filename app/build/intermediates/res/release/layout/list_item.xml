@@ -64,6 +64,15 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:paddingLeft="5pt"
         android:paddingRight="5pt">  
 	</TextView>
+	<TextView    android:id="@+id/location"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:textColor="@drawable/Gray"
+		android:background="@drawable/White"
+		android:paddingBottom="5pt"
+		android:paddingLeft="5pt"
+		android:paddingRight="5pt">
+	</TextView>
 	<TextView    android:id="@+id/author"
               android:layout_height="wrap_content"   
         android:layout_width="fill_parent"   
@@ -81,6 +90,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:paddingLeft="5pt"
         android:paddingRight="5pt">  
 	</TextView>
+
 	</LinearLayout>
 	<TextView android:id="@+id/arrow"
 		android:layout_height="fill_parent"

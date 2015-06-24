@@ -241,7 +241,7 @@ public class MyStaredPapers extends Activity implements Runnable {
 	}
 
 	static class ViewHolder {
-		TextView t1, t2,t3,tr,type,date;
+		TextView t1, t2,t3,tr,type,date,location;
 		ImageButton star, schedule;
 	}
 
@@ -281,6 +281,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
 		
 		vh.t3 = (TextView) convertView.findViewById(R.id.author);
 		vh.type = (TextView) convertView.findViewById(R.id.type);
+		vh.location= (TextView) convertView.findViewById(R.id.location);
 		//vh.tr = (TextView) convertView.findViewById(R.id.trackimage);
 		vh.date = (TextView) convertView.findViewById(R.id.text_first_char_hint);
 
@@ -302,7 +303,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
 		vh.schedule.setImageResource(R.drawable.no_schedule);
 
 	vh.schedule.setOnClickListener(this);
-	vh.schedule.setTag(paperList.get(position).id+";"+position);
+	vh.schedule.setTag(paperList.get(position).id + ";" + position);
 	
 	if (paperList.get(position).starred.compareTo("yes") == 0)
 		vh.star.setImageResource(R.drawable.yes_star);
@@ -310,7 +311,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
 		vh.star.setImageResource(R.drawable.no_star);
 
 	vh.star.setOnClickListener(this);
-	vh.star.setTag(paperList.get(position).presentationID+";"+position);
+	vh.star.setTag(paperList.get(position).presentationID + ";" + position);
 	if (paperList.get(position).recommended.compareTo("yes") == 0)
 		vh.t2.setText(Html.fromHtml(paperList.get(position).title+"<font color=\"#ff0000\"> &lt;Recommended&gt; </font>"));
 		else
@@ -318,6 +319,12 @@ public View getView(int position, View convertView, ViewGroup parent) {
 	vh.t2.setOnClickListener(this);
 	vh.t2.setTag(position);
 	vh.t3.setText(paperList.get(position).authors);
+	String loca=paperList.get(position).room;
+	if(loca==null||"null".compareToIgnoreCase(loca)==0||"".equals(loca)){
+		vh.location.setText("AT N/A");
+	}else
+	vh.location.setText("AT "+paperList.get(position).room);
+
 	vh.type.setText(paperList.get(position).type);
 	//vh.tr.setText(idTotrackName.get(pList.get(position).trackID).toString());
 	//vh.tr.setBackgroundDrawable(getResources().getDrawable(R.drawable.track));
