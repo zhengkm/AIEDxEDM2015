@@ -790,6 +790,7 @@ public class ProceedingsByType extends Activity implements OnItemClickListener, 
                     in.putExtra("bTime", pList.get(index).exactbeginTime);
                     in.putExtra("eTime", pList.get(index).exactendTime);
                     in.putExtra("room", pList.get(index).room);
+					in.putExtra("track", pList.get(index).track);
                     in.putExtra("presentationID", pList.get(index).presentationID);
                     in.putExtra("activity", "ProceedingsByType");
                     in.putExtra("key", "no");

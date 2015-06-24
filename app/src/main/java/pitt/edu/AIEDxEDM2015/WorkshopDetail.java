@@ -425,7 +425,7 @@ public class WorkshopDetail extends Activity implements Runnable{
 			
 			WorkshopDetail.this.finish();
 			Intent in = new Intent(WorkshopDetail.this, PaperDetail.class);
-			System.out.println("!!!!!!!!!!!!workshop");
+			//System.out.println("!!!!!!!!!!!!workshop");
 			in.putExtra("id", childs.get(idx).id);
 			in.putExtra("title", childs.get(idx).title);
 			in.putExtra("authors", childs.get(idx).authors);
@@ -433,6 +433,7 @@ public class WorkshopDetail extends Activity implements Runnable{
 			in.putExtra("abstract", childs.get(idx).paperAbstract);
 			in.putExtra("room", room);
 			in.putExtra("contentlink",childs.get(idx).contentlink);
+			in.putExtra("track",childs.get(idx).track);
 			in.putExtra("bTime", childs.get(idx).exactbeginTime);
 			in.putExtra("eTime", childs.get(idx).exactendTime);
 			in.putExtra("presentationID", childs.get(idx).presentationID);

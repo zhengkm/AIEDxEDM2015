@@ -374,7 +374,7 @@ public void onClick(View v) {
 		in.putExtra("date", paperList.get(index).date);
 		in.putExtra("abstract", paperList.get(index).paperAbstract);
 		in.putExtra("contentlink", paperList.get(index).contentlink);
-
+		in.putExtra("track", paperList.get(index).track);
 		in.putExtra("room", paperList.get(index).room);
 		in.putExtra("bTime", paperList.get(index).exactbeginTime);
 		in.putExtra("eTime", paperList.get(index).exactendTime);

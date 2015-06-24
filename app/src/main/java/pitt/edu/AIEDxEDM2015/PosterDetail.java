@@ -290,6 +290,7 @@ public class PosterDetail extends Activity implements Runnable, OnClickListener 
                     in.putExtra("authors", childs.get(idx).authors);
                     in.putExtra("date", childs.get(idx).date);
                     in.putExtra("abstract", childs.get(idx).paperAbstract);
+                    in.putExtra("track", childs.get(idx).track);
                     in.putExtra("room", room);
                     in.putExtra("contentID", sList.get(pos).ID);
                     in.putExtra("contentlink",childs.get(idx).contentlink);

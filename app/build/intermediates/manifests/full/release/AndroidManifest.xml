@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pitt.edu.AIEDxEDM2015"
-    android:versionCode="9"
-    android:versionName="4.4" >
+    android:versionCode="10"
+    android:versionName="4.5" >
 
     <uses-sdk
         android:minSdkVersion="4"
@@ -10,6 +10,14 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:icon="@drawable/icon"
@@ -103,6 +111,15 @@
             android:name="pitt.edu.AIEDxEDM2015.FirstLaunchUpdate"
             android:label="@string/title_activity_first_launch_update"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="pitt.edu.AIEDxEDM2015.Tutorial"
+            android:label="@string/title_activity_tutorial"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="pitt.edu.AIEDxEDM2015.TutorialDetail"
+            android:label="@string/title_activity_tutorial_detail" >
         </activity>
     </application>
 

@@ -31,184 +31,198 @@ ADDED from AndroidManifest.xml:10:5
 	android:name
 		ADDED from AndroidManifest.xml:10:22
 application
-ADDED from AndroidManifest.xml:11:5
+ADDED from AndroidManifest.xml:12:5
 	android:label
-		ADDED from AndroidManifest.xml:13:9
+		ADDED from AndroidManifest.xml:14:9
 	android:icon
-		ADDED from AndroidManifest.xml:12:9
+		ADDED from AndroidManifest.xml:13:9
 activity#pitt.edu.AIEDxEDM2015.iConference2012
-ADDED from AndroidManifest.xml:14:9
+ADDED from AndroidManifest.xml:15:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:18:13
+	android:label
 		ADDED from AndroidManifest.xml:17:13
-	android:label
+	android:name
 		ADDED from AndroidManifest.xml:16:13
-	android:name
-		ADDED from AndroidManifest.xml:15:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:18:13
+ADDED from AndroidManifest.xml:19:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:19:17
+ADDED from AndroidManifest.xml:20:17
 	android:name
-		ADDED from AndroidManifest.xml:19:25
+		ADDED from AndroidManifest.xml:20:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:21:17
+ADDED from AndroidManifest.xml:22:17
 	android:name
-		ADDED from AndroidManifest.xml:21:27
+		ADDED from AndroidManifest.xml:22:27
 activity#pitt.edu.AIEDxEDM2015.UpdateOption
-ADDED from AndroidManifest.xml:24:9
+ADDED from AndroidManifest.xml:25:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:27:13
+	android:name
 		ADDED from AndroidManifest.xml:26:13
-	android:name
-		ADDED from AndroidManifest.xml:25:13
 activity#pitt.edu.AIEDxEDM2015.MainInterface
-ADDED from AndroidManifest.xml:27:9
+ADDED from AndroidManifest.xml:28:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:30:13
+	android:name
 		ADDED from AndroidManifest.xml:29:13
-	android:name
-		ADDED from AndroidManifest.xml:28:13
 activity#pitt.edu.AIEDxEDM2015.ConferenceInfo
-ADDED from AndroidManifest.xml:30:9
+ADDED from AndroidManifest.xml:31:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:33:13
+	android:name
 		ADDED from AndroidManifest.xml:32:13
-	android:name
-		ADDED from AndroidManifest.xml:31:13
 activity#pitt.edu.AIEDxEDM2015.KeyNote
-ADDED from AndroidManifest.xml:33:9
+ADDED from AndroidManifest.xml:34:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:36:13
+	android:name
 		ADDED from AndroidManifest.xml:35:13
-	android:name
-		ADDED from AndroidManifest.xml:34:13
 activity#pitt.edu.AIEDxEDM2015.KeynoteDetail
-ADDED from AndroidManifest.xml:36:9
+ADDED from AndroidManifest.xml:37:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:39:13
+	android:name
 		ADDED from AndroidManifest.xml:38:13
-	android:name
-		ADDED from AndroidManifest.xml:37:13
 activity#pitt.edu.AIEDxEDM2015.ProgramByDay
-ADDED from AndroidManifest.xml:39:9
+ADDED from AndroidManifest.xml:40:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:42:13
+	android:name
 		ADDED from AndroidManifest.xml:41:13
-	android:name
-		ADDED from AndroidManifest.xml:40:13
 activity#pitt.edu.AIEDxEDM2015.PaperInSession
-ADDED from AndroidManifest.xml:42:9
+ADDED from AndroidManifest.xml:43:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:45:13
+	android:name
 		ADDED from AndroidManifest.xml:44:13
-	android:name
-		ADDED from AndroidManifest.xml:43:13
 activity#pitt.edu.AIEDxEDM2015.UserDetail
-ADDED from AndroidManifest.xml:45:9
+ADDED from AndroidManifest.xml:46:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:48:13
+	android:name
 		ADDED from AndroidManifest.xml:47:13
-	android:name
-		ADDED from AndroidManifest.xml:46:13
 activity#pitt.edu.AIEDxEDM2015.PaperInfo
-ADDED from AndroidManifest.xml:48:9
+ADDED from AndroidManifest.xml:49:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:51:13
+	android:name
 		ADDED from AndroidManifest.xml:50:13
-	android:name
-		ADDED from AndroidManifest.xml:49:13
 activity#pitt.edu.AIEDxEDM2015.PaperAttending
-ADDED from AndroidManifest.xml:51:9
+ADDED from AndroidManifest.xml:52:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:54:13
+	android:name
 		ADDED from AndroidManifest.xml:53:13
-	android:name
-		ADDED from AndroidManifest.xml:52:13
 activity#pitt.edu.AIEDxEDM2015.PaperSimilar
-ADDED from AndroidManifest.xml:54:9
+ADDED from AndroidManifest.xml:55:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:57:13
+	android:name
 		ADDED from AndroidManifest.xml:56:13
-	android:name
-		ADDED from AndroidManifest.xml:55:13
 activity#pitt.edu.AIEDxEDM2015.PaperDetail
-ADDED from AndroidManifest.xml:57:9
+ADDED from AndroidManifest.xml:58:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:60:13
+	android:name
 		ADDED from AndroidManifest.xml:59:13
-	android:name
-		ADDED from AndroidManifest.xml:58:13
 activity#pitt.edu.AIEDxEDM2015.MyScheduledPapers
-ADDED from AndroidManifest.xml:60:9
+ADDED from AndroidManifest.xml:61:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:63:13
+	android:name
 		ADDED from AndroidManifest.xml:62:13
-	android:name
-		ADDED from AndroidManifest.xml:61:13
 activity#pitt.edu.AIEDxEDM2015.MyStaredPapers
-ADDED from AndroidManifest.xml:63:9
+ADDED from AndroidManifest.xml:64:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:66:13
+	android:name
 		ADDED from AndroidManifest.xml:65:13
-	android:name
-		ADDED from AndroidManifest.xml:64:13
 activity#pitt.edu.AIEDxEDM2015.MyRecommendedPapers
-ADDED from AndroidManifest.xml:66:9
+ADDED from AndroidManifest.xml:67:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:69:13
+	android:name
 		ADDED from AndroidManifest.xml:68:13
-	android:name
-		ADDED from AndroidManifest.xml:67:13
 activity#pitt.edu.AIEDxEDM2015.Signin
-ADDED from AndroidManifest.xml:69:9
+ADDED from AndroidManifest.xml:70:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:72:13
+	android:name
 		ADDED from AndroidManifest.xml:71:13
-	android:name
-		ADDED from AndroidManifest.xml:70:13
 activity#pitt.edu.AIEDxEDM2015.Signup
-ADDED from AndroidManifest.xml:72:9
+ADDED from AndroidManifest.xml:73:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:75:13
+	android:name
 		ADDED from AndroidManifest.xml:74:13
-	android:name
-		ADDED from AndroidManifest.xml:73:13
 activity#pitt.edu.AIEDxEDM2015.Workshops
-ADDED from AndroidManifest.xml:75:9
+ADDED from AndroidManifest.xml:76:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:78:13
+	android:name
 		ADDED from AndroidManifest.xml:77:13
-	android:name
-		ADDED from AndroidManifest.xml:76:13
 activity#pitt.edu.AIEDxEDM2015.WorkshopDetail
-ADDED from AndroidManifest.xml:78:9
+ADDED from AndroidManifest.xml:79:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:81:13
+	android:name
 		ADDED from AndroidManifest.xml:80:13
-	android:name
-		ADDED from AndroidManifest.xml:79:13
 activity#pitt.edu.AIEDxEDM2015.Posters
-ADDED from AndroidManifest.xml:81:9
+ADDED from AndroidManifest.xml:82:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:84:13
+	android:name
 		ADDED from AndroidManifest.xml:83:13
-	android:name
-		ADDED from AndroidManifest.xml:82:13
 activity#pitt.edu.AIEDxEDM2015.PosterDetail
-ADDED from AndroidManifest.xml:84:9
+ADDED from AndroidManifest.xml:85:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:87:13
+	android:name
 		ADDED from AndroidManifest.xml:86:13
-	android:name
-		ADDED from AndroidManifest.xml:85:13
 activity#pitt.edu.AIEDxEDM2015.ProceedingsByAuthor
-ADDED from AndroidManifest.xml:87:9
+ADDED from AndroidManifest.xml:88:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:90:13
+	android:name
 		ADDED from AndroidManifest.xml:89:13
-	android:name
-		ADDED from AndroidManifest.xml:88:13
 activity#pitt.edu.AIEDxEDM2015.ProceedingsByName
-ADDED from AndroidManifest.xml:90:9
+ADDED from AndroidManifest.xml:91:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:93:13
+	android:name
 		ADDED from AndroidManifest.xml:92:13
-	android:name
-		ADDED from AndroidManifest.xml:91:13
 activity#pitt.edu.AIEDxEDM2015.ProceedingsByType
-ADDED from AndroidManifest.xml:93:9
+ADDED from AndroidManifest.xml:94:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:96:13
+	android:name
 		ADDED from AndroidManifest.xml:95:13
-	android:name
-		ADDED from AndroidManifest.xml:94:13
 activity#pitt.edu.AIEDxEDM2015.Proceedings
-ADDED from AndroidManifest.xml:96:9
+ADDED from AndroidManifest.xml:97:9
 	android:screenOrientation
+		ADDED from AndroidManifest.xml:99:13
+	android:name
 		ADDED from AndroidManifest.xml:98:13
-	android:name
-		ADDED from AndroidManifest.xml:97:13
 activity#pitt.edu.AIEDxEDM2015.FirstLaunchUpdate
-ADDED from AndroidManifest.xml:99:9
+ADDED from AndroidManifest.xml:100:9
 	android:screenOrientation
-		ADDED from AndroidManifest.xml:102:13
+		ADDED from AndroidManifest.xml:103:13
 	android:label
-		ADDED from AndroidManifest.xml:101:13
+		ADDED from AndroidManifest.xml:102:13
 	android:name
-		ADDED from AndroidManifest.xml:100:13
+		ADDED from AndroidManifest.xml:101:13
+activity#pitt.edu.AIEDxEDM2015.Tutorial
+ADDED from AndroidManifest.xml:105:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:108:13
+	android:label
+		ADDED from AndroidManifest.xml:107:13
+	android:name
+		ADDED from AndroidManifest.xml:106:13
+activity#pitt.edu.AIEDxEDM2015.TutorialDetail
+ADDED from AndroidManifest.xml:110:9
+	android:label
+		ADDED from AndroidManifest.xml:112:13
+	android:name
+		ADDED from AndroidManifest.xml:111:13

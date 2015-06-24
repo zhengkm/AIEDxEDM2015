@@ -406,6 +406,7 @@ public class PaperInSession extends Activity implements Runnable {
                     in.putExtra("date", pList.get(index).date);
                     in.putExtra("abstract", pList.get(index).paperAbstract);
                     in.putExtra("contentlink", pList.get(index).contentlink);
+                    in.putExtra("track", pList.get(index).track);
                     in.putExtra("sessionName", sessionName);
                     in.putExtra("room", room);
                     in.putExtra("bTime", pList.get(index).exactbeginTime);

@@ -78,6 +78,8 @@
         </TextView>
     </LinearLayout>
 
+
+
     <LinearLayout
         android:id="@+id/LinearLayout011"
         android:layout_width="fill_parent"
@@ -101,6 +103,34 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingRight="5pt"
+            android:textColor="@drawable/SteelBlue">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="5pt"
+        android:paddingBottom="6px"
+        android:paddingRight="5pt">
+
+        <TextView
+            android:id="@+id/TextView07"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5pt"
+            android:text="TRACK "
+            android:textColor="@drawable/Gray">
+        </TextView>
+
+        <TextView
+            android:id="@+id/TextView08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5pt"
+
             android:textColor="@drawable/SteelBlue">
         </TextView>
     </LinearLayout>

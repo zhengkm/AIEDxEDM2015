@@ -780,7 +780,7 @@ public class ProceedingsByName extends Activity implements OnItemClickListener, 
                     in.putExtra("title", pList.get(index).title);
                     in.putExtra("authors", pList.get(index).authors);
                     in.putExtra("date", pList.get(index).date);
-                    ;
+					in.putExtra("track", pList.get(index).track);
                     in.putExtra("abstract", pList.get(index).paperAbstract);
                     in.putExtra("contentlink", pList.get(index).contentlink);
                     in.putExtra("bTime", pList.get(index).exactbeginTime);

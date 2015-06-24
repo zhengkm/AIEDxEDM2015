@@ -818,7 +818,7 @@ public class ProceedingsByAuthor extends Activity implements OnItemClickListener
                     in.putExtra("date", pList.get(index).date);
                     in.putExtra("abstract", pList.get(index).paperAbstract);
                     in.putExtra("contentlink", pList.get(index).contentlink);
-
+					in.putExtra("track", pList.get(index).track);
                     in.putExtra("bTime", pList.get(index).exactbeginTime);
                     in.putExtra("eTime", pList.get(index).exactendTime);
                     in.putExtra("room", pList.get(index).room);

@@ -217,9 +217,6 @@ public class LoadSessionFromDB {
                 return;
             }
             if (localName.equals("SESSION")) {
-//                PaperAbstractParse pap=new PaperAbstractParse();
-//
-//                if(pap.getPaperAbstract(se.getID())!=null)
                 sList.add(se);
                 return;
             }

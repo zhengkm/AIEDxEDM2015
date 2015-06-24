@@ -26,7 +26,7 @@ import android.widget.TextView;
 
 public class PaperInfo extends Activity implements Runnable, OnClickListener {
     private String key, activity, id, title, authors, pAbstract, pContent, pRoom, bTime, eTime, paperID, paperStatus, date, presentationID,track;
-    private TextView t1, t2, t3, t4, bv;
+    private TextView t1, t2, t3, t4,t5, bv;
     private WebView wv;
     private ImageButton b1, b2, b, b3;
     private DBAdapter db;
@@ -55,7 +55,6 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
             authors = b.getString("authors");
             pAbstract = b.getString("abstract");
             pContent = b.getString("contentlink");
-            //tbColor = b.getInt("color");
             pRoom = b.getString("room");
             bTime = b.getString("bTime");
             eTime = b.getString("eTime");
@@ -92,11 +91,15 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
         b3.setOnClickListener(this);
 
         t2 = (TextView) findViewById(R.id.TextView06);
+
         //t2.setBackgroundResource(tbColor);
         t2.setText(authors);
         t3 = (TextView) findViewById(R.id.TextView02);
         t3.setText(date + " " + bTime + "-" + eTime);
         t4 = (TextView) findViewById(R.id.TextView04);
+
+        t5=(TextView) findViewById(R.id.TextView08);
+        t5.setText(track);
         if (pRoom==null || "".compareTo(pRoom) == 0||"null".compareToIgnoreCase(pRoom)==0)
             t4.setText("N/A");
         else {
@@ -110,7 +113,6 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
                  Uri googlemap=Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q",pRoom).build();
                  Intent intent=new Intent(Intent.ACTION_VIEW);
                  intent.setData(googlemap);
-
                  if(intent.resolveActivity(getPackageManager())!=null){
                      startActivity(intent);
                  }
@@ -142,8 +144,6 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
         } else {
             bv.setText("N/A");
         }
-
-
         wv = (WebView) findViewById(R.id.WebView01);
         wv.getSettings().setJavaScriptEnabled(true);
         wv.loadData(pAbstract, "text/html", "utf-8");

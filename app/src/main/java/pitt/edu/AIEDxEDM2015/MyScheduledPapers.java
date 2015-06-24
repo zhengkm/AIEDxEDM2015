@@ -965,7 +965,7 @@ public class MyScheduledPapers extends Activity implements Runnable {
                     in.putExtra("date", childs.get(idx).get(idxs).date);
                     in.putExtra("abstract", childs.get(idx).get(idxs).paperAbstract);
                     in.putExtra("contentlink", childs.get(idx).get(idxs).contentlink);
-
+                    in.putExtra("track", childs.get(idx).get(idxs).track);
                     //in.putExtra("sessionName", sessionName);
                     in.putExtra("room", childs.get(idx).get(idxs).room);
                     in.putExtra("bTime", childs.get(idx).get(idxs).exactbeginTime);

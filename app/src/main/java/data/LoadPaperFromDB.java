@@ -178,9 +178,14 @@ public class LoadPaperFromDB {
                 p.type = sb.toString();
                 return;
             }
-//            if(localName.equals("track")){
-//                p.track=sb.toString();
-//            }
+            if(localName.equals("track")) {
+                if (sb.toString() == null || "null".equals(sb.toString())) {
+                    p.track="N/A";
+
+                } else {
+                    p.track = sb.toString();
+                }
+            }
             if (localName.equals("PRESENTATION")) {
                 pList.add(p);
                 return;
