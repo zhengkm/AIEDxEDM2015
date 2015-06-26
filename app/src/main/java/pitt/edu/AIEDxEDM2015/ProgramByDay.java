@@ -145,22 +145,22 @@ public class ProgramByDay extends Activity {
         Calendar c = Calendar.getInstance();
         date = c.get(Calendar.DAY_OF_YEAR);
 
-        if(date<=189)
+        if(date<=173)
             //set up default tab
             host.setCurrentTabByTag("day1");
-        if(date == 190)
+        if(date == 174)
             host.setCurrentTabByTag("day2");
-        if(date == 191)
+        if(date == 175)
             host.setCurrentTabByTag("day3");
-        if(date >= 192)
+        if(date >= 176)
             host.setCurrentTabByTag("day4");
-        if(date >= 193)
+        if(date >= 177)
             host.setCurrentTabByTag("day5");
-        if(date == 194)
+        if(date == 178)
             host.setCurrentTabByTag("day6");
-        if(date == 195)
+        if(date == 179)
             host.setCurrentTabByTag("day7");
-        if(date >= 196)
+        if(date >= 180)
             host.setCurrentTabByTag("day8");
 
         //1st day

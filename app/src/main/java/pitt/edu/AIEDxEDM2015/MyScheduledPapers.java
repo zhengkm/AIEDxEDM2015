@@ -89,12 +89,9 @@ public class MyScheduledPapers extends Activity implements Runnable {
 
         if (Conference.userSignin) {
             Bundle b = getIntent().getExtras();
-            if (b != null) {
-                if (b.getString("day") != null)
-                    sday = Integer.parseInt(b.getString("day"));
-                else
-                    sday = 0;
-            }
+//            if (b != null) {
+
+//            }
             us2s = new UserScheduledToServer();
             fl.setVisibility(View.VISIBLE);
 
@@ -177,8 +174,30 @@ public class MyScheduledPapers extends Activity implements Runnable {
                 w.getChildTabViewAt(i).setMinimumWidth(screenWidth/5);
             }
 
+
+            //set the current tab
+            Calendar c = Calendar.getInstance();
+            date = c.get(Calendar.DAY_OF_YEAR);//calculate the day of year
+
+            if(date<=173)
+                host.setCurrentTabByTag("day1");
+            if(date == 174)
+                host.setCurrentTabByTag("day2");
+            if(date == 175)
+                host.setCurrentTabByTag("day3");
+            if(date >= 176)
+                host.setCurrentTabByTag("day4");
+            if(date >= 177)
+                host.setCurrentTabByTag("day5");
+            if(date == 178)
+                host.setCurrentTabByTag("day6");
+            if(date == 179)
+                host.setCurrentTabByTag("day7");
+            if(date >= 180)
+                host.setCurrentTabByTag("day8");
+
             reGene();
-            Changetab(sday);
+            //Changetab(sday);
 
         } else {
             new AlertDialog.Builder(MyScheduledPapers.this)
