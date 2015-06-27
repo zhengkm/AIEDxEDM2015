@@ -204,7 +204,7 @@ public class MyScheduledPapers extends Activity implements Runnable {
             new Handler().postDelayed((new Runnable() {
                 @Override
                 public void run() {
-                    if(host.getCurrentTab()>4)
+                    if(host.getCurrentTab()>=4)
                         scroll.scrollTo(screenWidth, 0);
 
                 }

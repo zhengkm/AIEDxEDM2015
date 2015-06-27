@@ -10,92 +10,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4749763-15c8-46f3-b321-134540fa8704" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$3$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$3$1.class" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/BuildConfig.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/BuildConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/BuildConfig.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/BuildConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/FirstLoading$AsyncUpdate.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/FirstLoading$AsyncUpdate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/FirstLoading$AsyncUpdate.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/FirstLoading$AsyncUpdate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/FriendsDetail.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/FriendsDetail.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/FriendsDetail.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/FriendsDetail.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$ImageViewAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface$ImageViewAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$ImageViewAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface$ImageViewAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MainInterface.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MainInterface.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$3.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$4$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$4$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$4.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$5.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$5.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$6.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$6.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$MyListViewAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$MyListViewAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$MyListViewAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$MyListViewAdapter.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers$ViewHolder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers$ViewHolder.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/MyScheduledPapers.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/MyScheduledPapers.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay$MyListAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay$MyListAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/ProgramByDay$MyListAdapter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/ProgramByDay$MyListAdapter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay$ViewHolder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/ProgramByDay$ViewHolder.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/ProgramByDay$ViewHolder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/ProgramByDay.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/ProgramByDay.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$id.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$id.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$layout.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$layout.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$menu.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$menu.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$string.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R$string.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/R.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/R.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/Signup.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/Signup.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/Signup.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/Signup.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/UpdateOption$AsyncUpdate.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/UpdateOption$AsyncUpdate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/UpdateOption$AsyncUpdate.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/UpdateOption$AsyncUpdate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/UserDetail.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/UserDetail.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/UserDetail.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/release/pitt/edu/AIEDxEDM2015/UserDetail.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/pitt/edu/AIEDxEDM2015/ProgramByDay$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-release-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-release-unaligned.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/release/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/release/classes.dex" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-debug.ap_" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/resources/resources-release.ap_" afterPath="$PROJECT_DIR$/app/build/intermediates/resources/resources-release.ap_" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2.1/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/manifests/full/release/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/manifests/full/release/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/pitt/edu/AIEDxEDM2015/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/pitt/edu/AIEDxEDM2015/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/release/pitt/edu/AIEDxEDM2015/BuildConfig.java" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/release/pitt/edu/AIEDxEDM2015/BuildConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MainInterface.java" afterPath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MainInterface.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyScheduledPapers.java" afterPath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyScheduledPapers.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/ProgramByDay.java" afterPath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/ProgramByDay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/debug/pitt/edu/AIEDxEDM2015/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/debug/pitt/edu/AIEDxEDM2015/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/generated/source/r/release/pitt/edu/AIEDxEDM2015/R.java" afterPath="$PROJECT_DIR$/app/build/generated/source/r/release/pitt/edu/AIEDxEDM2015/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/UpdateOption.java" afterPath="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/UpdateOption.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/lint-results-release-fatal.html" afterPath="$PROJECT_DIR$/app/build/outputs/lint-results-release-fatal.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/programbyday.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/programbyday.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/release/layout/programbyday.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/release/layout/programbyday.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/programbyday.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/programbyday.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/scheduleexpandable.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/debug/layout/scheduleexpandable.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/res/release/layout/scheduleexpandable.xml" afterPath="$PROJECT_DIR$/app/build/intermediates/res/release/layout/scheduleexpandable.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/scheduleexpandable.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/scheduleexpandable.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AIEDxEDM2015.iws" />
@@ -137,11 +75,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MyScheduledPapers.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MyScheduledPapers.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyScheduledPapers.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="202" column="40" selection-start-line="202" selection-start-column="12" selection-end-line="202" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.24038461">
+              <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -151,31 +89,31 @@
       </file>
       <file leaf-file-name="scheduleexpandable.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scheduleexpandable.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
         </entry>
       </file>
       <file leaf-file-name="programbyday.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/programbyday.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="46" column="40" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="40" />
               <folding />
             </state>
           </provider>
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
@@ -209,7 +147,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/ProgramByDay.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="40" />
+              <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1539,10 +1477,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/UpdateOption.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MainInterface.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/programbyday.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/ProgramByDay.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/scheduleexpandable.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyScheduledPapers.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/ProgramByDay.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyScheduledPapers.java" />
       </list>
     </option>
   </component>
@@ -1588,7 +1526,6 @@
     </navigator>
     <panes>
       <pane id="ProjectPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1683,6 +1620,7 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1911,33 +1849,33 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="697" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37693632" sideWeight="0.503231" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874355" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874355" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41480207" sideWeight="0.49676898" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.41480207" sideWeight="0.49676898" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24959612" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2180937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2180937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16720517" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.63511187" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -2036,14 +1974,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/track.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.2413793">
           <caret line="14" column="39" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="39" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/KeyNote.java">
@@ -2061,25 +1999,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/conference_general.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/proceedings.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/proceedings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.1034484">
           <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/data/ConferenceInfoParser.java">
@@ -2090,14 +2028,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/paperdetail.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.241379">
           <caret line="130" column="48" selection-start-line="130" selection-start-column="48" selection-end-line="130" selection-end-column="48" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/PaperInfo.java">
@@ -2206,25 +2144,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mystaredpapers.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.2413793">
           <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="15" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyStaredPapers.java">
@@ -2242,14 +2180,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sessionitem.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/data/Paper.java">
@@ -2260,36 +2198,36 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/update.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.137931">
           <caret line="29" column="59" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="59" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/myscheduledpapers.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/myscheduledpapers.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.21201414">
           <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main_interface.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/main_interface.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="80" column="19" selection-start-line="80" selection-start-column="19" selection-end-line="80" selection-end-column="19" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyRecommendedPapers.java">
@@ -2322,43 +2260,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/ProgramByDay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/programbyday.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="46" column="40" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="40" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scheduleexpandable.xml">
       <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/scheduleexpandable.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="39" selection-start-line="38" selection-start-column="39" selection-end-line="38" selection-end-column="39" />
           <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyScheduledPapers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="202" column="40" selection-start-line="202" selection-start-column="12" selection-end-line="202" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2367,6 +2287,24 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/ProgramByDay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="172" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pitt/edu/AIEDxEDM2015/MyScheduledPapers.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24038461">
+          <caret line="199" column="0" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
