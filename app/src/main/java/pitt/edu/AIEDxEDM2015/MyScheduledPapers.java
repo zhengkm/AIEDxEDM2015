@@ -39,6 +39,7 @@ import android.view.View.OnClickListener;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -53,6 +54,7 @@ public class MyScheduledPapers extends Activity implements Runnable {
     private ArrayList<ArrayList<Paper>> p1, p2, p3, p4, p5, p6, p7, p8;
     private ExpandableListView day1lv, day2lv, day3lv, day4lv, day5lv, day6lv, day7lv, day8lv;
     private int sday;
+    private HorizontalScrollView scroll;
     private FrameLayout fl;
     private ImageButton syncB;
     private ProgressDialog pd;
@@ -117,7 +119,7 @@ public class MyScheduledPapers extends Activity implements Runnable {
             TabWidget w=host.getTabWidget();
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            int screenWidth = displayMetrics.widthPixels;
+            final int screenWidth = displayMetrics.widthPixels;
 
             //1st day tab
             TabSpec day1 = host.newTabSpec("day1");
@@ -195,6 +197,18 @@ public class MyScheduledPapers extends Activity implements Runnable {
                 host.setCurrentTabByTag("day7");
             if(date >= 180)
                 host.setCurrentTabByTag("day8");
+
+            //set the display of current tab
+            scroll=(HorizontalScrollView) findViewById(R.id.scroll);
+            scroll.setLeft(screenWidth);
+            new Handler().postDelayed((new Runnable() {
+                @Override
+                public void run() {
+                    if(host.getCurrentTab()>4)
+                        scroll.scrollTo(screenWidth, 0);
+
+                }
+            }), 5);
 
             reGene();
             //Changetab(sday);

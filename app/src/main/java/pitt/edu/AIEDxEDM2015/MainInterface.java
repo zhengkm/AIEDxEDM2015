@@ -95,8 +95,8 @@ public class MainInterface extends Activity {
         );
         //Row 1
         GridView gv1 = (GridView) findViewById(R.id.GridView01);
-        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.workshop,R.drawable.poster, R.drawable.tutorial,R.drawable.recommend, R.drawable.sessionbig,R.drawable.proceeding};
-        String[] t1={ "About","Keynotes","Workshops", "Poster", "Tutorial", "Recommends", "Schedule","Proceedings"};
+        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.sessionbig,R.drawable.proceeding,R.drawable.workshop,R.drawable.poster, R.drawable.tutorial};
+        String[] t1={ "About","Keynotes","Schedule","Proceedings","Workshops", "Poster", "Tutorial"};
         gv1.setAdapter(new ImageViewAdapter(this, i1, t1));
 
         gv1.setOnItemClickListener(new OnItemClickListener() {
@@ -114,33 +114,27 @@ public class MainInterface extends Activity {
                         startActivity(in);
                         break;
                     case 2:
-                        in = new Intent(MainInterface.this, Workshops.class);
-                        startActivity(in);
-                        break;
-                    case 3:
-                        in = new Intent(MainInterface.this, Posters.class);
-                        startActivity(in);
-                        break;
-                    case 4:
-                        in = new Intent(MainInterface.this, Tutorial.class);
-                        startActivity(in);
-                        break;
-                    //recommend
-                    case 5:
-                        in = new Intent(MainInterface.this, MyRecommendedPapers.class);
-                        startActivity(in);
-                        break;
-                    case 6:
                         in = new Intent(MainInterface.this, ProgramByDay.class);
                         startActivity(in);
                         break;
 
                     // Proceedings
-                    case 7:
+                    case 3:
                         in = new Intent(MainInterface.this, Proceedings.class);
                         startActivity(in);
                         break;
-
+                    case 4:
+                        in = new Intent(MainInterface.this, Workshops.class);
+                        startActivity(in);
+                        break;
+                    case 5:
+                        in = new Intent(MainInterface.this, Posters.class);
+                        startActivity(in);
+                        break;
+                    case 6:
+                        in = new Intent(MainInterface.this, Tutorial.class);
+                        startActivity(in);
+                        break;
                     default:
                         break;
                 }
@@ -151,8 +145,8 @@ public class MainInterface extends Activity {
         GridView gv4 = (GridView) findViewById(R.id.GridView04);
 
         if (Conference.userID.compareTo("") != 0) {
-            Integer[] i4 = {R.drawable.starbig, R.drawable.schedulebig, R.drawable.logout};
-            String[] t4 = {"Favorite", "Schedule", "Log Out"};
+            Integer[] i4 = {R.drawable.starbig, R.drawable.schedulebig, R.drawable.recommend, R.drawable.logout};
+            String[] t4 = {"Favorite", "Schedule", "Recommends", "Log Out"};
             gv4.setAdapter(new ImageViewAdapter(this, i4, t4));
 
             gv4.setOnItemClickListener(new OnItemClickListener() {
@@ -170,7 +164,13 @@ public class MainInterface extends Activity {
                             startActivity(in);
                             break;
 
+                        //recommend
                         case 2:
+                            in = new Intent(MainInterface.this, MyRecommendedPapers.class);
+                            startActivity(in);
+                            break;
+
+                        case 3:
                             Conference.userID = "";
                             Conference.userSignin = false;
                             SharedPreferences userinfo = getSharedPreferences("userinfo", 0);
@@ -195,8 +195,8 @@ public class MainInterface extends Activity {
             });
 
         } else {
-            Integer[] i4 = {R.drawable.starbig, R.drawable.schedulebig, R.drawable.login};
-            String[] t4 = {"Favorite", "Schedule", "Log In"};
+            Integer[] i4 = {R.drawable.starbig, R.drawable.schedulebig, R.drawable.recommend, R.drawable.login};
+            String[] t4 = {"Favorite", "Schedule", "Recommends", "Log In"};
             gv4.setAdapter(new ImageViewAdapter(this, i4, t4));
 
             gv4.setOnItemClickListener(new OnItemClickListener() {
@@ -213,8 +213,12 @@ public class MainInterface extends Activity {
                             in = new Intent(MainInterface.this, MyScheduledPapers.class);
                             startActivity(in);
                             break;
-
+                        //recommend
                         case 2:
+                            in = new Intent(MainInterface.this, MyRecommendedPapers.class);
+                            startActivity(in);
+                            break;
+                        case 3:
                             CallSignin();
                             break;
                         default:

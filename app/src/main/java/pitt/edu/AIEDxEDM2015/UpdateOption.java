@@ -202,16 +202,9 @@ public class UpdateOption extends Activity {
             //check update
             boolean needUpdate = false;
             CheckDBUpdate cdbu = new CheckDBUpdate();
-            needUpdate = cdbu.compare();
+            needUpdate = cdbu.check();
 
-            ConferenceInfoParser.getConferenceInfo("134");
-            db.open();
-            db.deleteConference();
-            long errorr = db.insertConference(Conference.id, Conference.title, Conference.startDate,
-                    Conference.endDate, Conference.location, Conference.description, Conference.timstamp);
-            if (errorr == -1)
-                System.out.println("Insertion ConferenceInfo Failed");
-            db.close();
+
 
             //execute update
             if (needUpdate) {
@@ -281,6 +274,17 @@ public class UpdateOption extends Activity {
                     state=2;
                     return state;
                 }
+
+                ConferenceInfoParser.getConferenceInfo("135");
+                Conference.timstamp=cdbu.getTimstamp();
+                db.open();
+                db.deleteConference();
+                long errorr = db.insertConference(Conference.id, Conference.title, Conference.startDate,
+                        Conference.endDate, Conference.location, Conference.description, Conference.timstamp);
+                if (errorr == -1)
+                    System.out.println("Insertion ConferenceInfo Failed");
+                db.close();
+
 
                 if (poList.size()!= 0 && wListDes.size()!=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
                     try {

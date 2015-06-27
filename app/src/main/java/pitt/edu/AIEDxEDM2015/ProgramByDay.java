@@ -11,9 +11,11 @@ import data.DBAdapter;
 import data.Paper;
 import data.Session;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -24,6 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.HorizontalScrollView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -38,6 +41,7 @@ public class ProgramByDay extends Activity {
     private ArrayList<Session> sessions1, sessions2, sessions3, sessions4, sessions5, sessions6, sessions7, sessions8;
     private ListView day1lv, day2lv, day3lv, day4lv, day5lv, day6lv, day7lv, day8lv;
     private String sessionDate;
+    private HorizontalScrollView scroll;
 
     private final int MENU_HOME = Menu.FIRST;
     private final int MENU_TRACK = Menu.FIRST + 1;
@@ -81,13 +85,15 @@ public class ProgramByDay extends Activity {
 
 
         // Set up the tabs
-        TabHost host = (TabHost) findViewById(R.id.tabdates);
+        final TabHost host = (TabHost) findViewById(R.id.tabdates);
         host.setup();
+
 
         TabWidget w=host.getTabWidget();
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
+        final int screenWidth = displayMetrics.widthPixels;
+
 
         //1st day tab
         TabSpec day1 = host.newTabSpec("day1");
@@ -139,7 +145,8 @@ public class ProgramByDay extends Activity {
 
 
         for(int i=0;i<8;i++){
-            w.getChildTabViewAt(i).setMinimumWidth(screenWidth/5);
+            w.getChildTabViewAt(i).setMinimumWidth(screenWidth / 5);
+
         }
 
         Calendar c = Calendar.getInstance();
@@ -162,6 +169,20 @@ public class ProgramByDay extends Activity {
             host.setCurrentTabByTag("day7");
         if(date >= 180)
             host.setCurrentTabByTag("day8");
+
+
+        //set the display of current tab
+        scroll=(HorizontalScrollView) findViewById(R.id.scroll);
+        scroll.setLeft(screenWidth);
+        new Handler().postDelayed((new Runnable() {
+            @Override
+            public void run() {
+                if(host.getCurrentTab()>4)
+                scroll.scrollTo(screenWidth, 0);
+
+            }
+        }), 5);
+
 
         //1st day
         sessions1 = new ArrayList<Session>();
