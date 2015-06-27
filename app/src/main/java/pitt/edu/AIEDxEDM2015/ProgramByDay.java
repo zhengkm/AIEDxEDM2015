@@ -177,8 +177,7 @@ public class ProgramByDay extends Activity {
         new Handler().postDelayed((new Runnable() {
             @Override
             public void run() {
-                if(host.getCurrentTab()>=4)
-                scroll.scrollTo(screenWidth, 0);
+                scroll.scrollTo(screenWidth* (host.getCurrentTab()/4), 0);
 
             }
         }), 5);
