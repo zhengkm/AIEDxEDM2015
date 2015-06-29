@@ -95,8 +95,8 @@ public class MainInterface extends Activity {
         );
         //Row 1
         GridView gv1 = (GridView) findViewById(R.id.GridView01);
-        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.sessionbig,R.drawable.proceeding,R.drawable.workshop,R.drawable.poster, R.drawable.tutorial};
-        String[] t1={ "About","Keynotes","Schedule","Proceedings","Workshops", "Poster", "Tutorial"};
+        Integer[] i1={ R.drawable.about,R.drawable.keynote,R.drawable.sessionbig,R.drawable.proceeding,R.drawable.workshop,R.drawable.poster, R.drawable.tutorial,R.drawable.authors};
+        String[] t1={ "About","Keynotes","Schedule","Proceedings","Workshops", "Poster", "Tutorial", "Authors"};
         gv1.setAdapter(new ImageViewAdapter(this, i1, t1));
 
         gv1.setOnItemClickListener(new OnItemClickListener() {
@@ -133,6 +133,10 @@ public class MainInterface extends Activity {
                         break;
                     case 6:
                         in = new Intent(MainInterface.this, Tutorial.class);
+                        startActivity(in);
+                        break;
+                    case 7:
+                        in = new Intent(MainInterface.this, Authors.class);
                         startActivity(in);
                         break;
                     default:

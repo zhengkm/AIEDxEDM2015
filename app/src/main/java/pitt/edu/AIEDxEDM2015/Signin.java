@@ -45,6 +45,7 @@ public class Signin extends Activity implements Runnable {
     private String contentID = "";
     private String presentationID, paperTitle, paperbTime, papereTime, paperAbstract, paperAuthors, date, room = "";
     private String workshopID, workshopTitle, content, workshopDate, wbtime, wetime, eventSessionIDList = "";
+    private String authorID,authorName="";
     private TextView tw4;
     private DBAdapter db;
 
@@ -123,7 +124,11 @@ public class Signin extends Activity implements Runnable {
                 room = b.getString("room");
                 eventSessionIDList = b.getString("eventSessionIDList");
 
-            } else {
+            } else if (activityName.compareTo("AuthorDetail") == 0) {
+                authorID = b.getString("authorID");
+                authorName = b.getString("authorName");
+            }
+            else {
 
             }
         }
@@ -328,6 +333,12 @@ public class Signin extends Activity implements Runnable {
                 updatePaperStatus(paperID);
                 syncDB();
                 in = new Intent(Signin.this, MyRecommendedPapers.class);
+            } else if (activityName.compareTo("AuthorDetail") == 0) {
+                updatePaperStatus(paperID);
+                syncDB();
+                in = new Intent(Signin.this, AuthorDetail.class);
+                in.putExtra("authorID", authorID);
+                in.putExtra("authorName", authorName);
             } else {
                 updatePaperStatus(paperID);
                 syncDB();
@@ -394,6 +405,9 @@ public class Signin extends Activity implements Runnable {
             in.putExtra("title", workshopTitle);
             in.putExtra("room", room);
             in.putExtra("eventSessionIDList", eventSessionIDList);
+        } else if (activityName.compareTo("AuthorDetail") == 0) {
+            in.putExtra("authorID", authorID);
+            in.putExtra("authorName", authorName);
         } else {
 
         }

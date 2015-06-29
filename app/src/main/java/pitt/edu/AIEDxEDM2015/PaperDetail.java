@@ -12,7 +12,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 
 public class PaperDetail extends TabActivity {
-    private String key, activity, id, title, authors,track, contentID, pAbstract, pContent, eventSessionIDList, pRoom, bTime, eTime, date, presentationID;
+    private String key, activity, id, title, authors,track, contentID, pAbstract, pContent, eventSessionIDList, pRoom, bTime, eTime, date, presentationID,authorID,authorName;
     private final int MENU_HOME = Menu.FIRST;
     private final int MENU_TRACK = Menu.FIRST + 1;
     private final int MENU_SESSION = Menu.FIRST + 2;
@@ -45,7 +45,9 @@ public class PaperDetail extends TabActivity {
             eTime = b.getString("eTime");
             date = b.getString("date");
             track=b.getString("track");
-            System.out.println("!@@@@!!!!!!!"+track);
+            authorID=b.getString("authorID");
+            authorName=b.getString("authorName");
+           // System.out.println("!@@@@!!!!!!!"+track);
             contentID=b.getString("contentID");
             eventSessionIDList=b.getString("eventSessionIDList");
             presentationID = b.getString("presentationID");
@@ -79,6 +81,8 @@ public class PaperDetail extends TabActivity {
         b1.putString("activity", activity);
         b1.putString("key", key);
         b1.putString("eventSessionIDList",eventSessionIDList);
+        b1.putString("authorID",authorID);
+        b1.putString("authorName",authorName);
         intent.putExtras(b1);
         TabSpec detail = host.newTabSpec("Detail");
         detail.setIndicator("Detail");

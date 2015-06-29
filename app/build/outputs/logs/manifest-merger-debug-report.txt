@@ -222,7 +222,25 @@ ADDED from AndroidManifest.xml:105:9
 		ADDED from AndroidManifest.xml:106:13
 activity#pitt.edu.AIEDxEDM2015.TutorialDetail
 ADDED from AndroidManifest.xml:110:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:113:13
 	android:label
 		ADDED from AndroidManifest.xml:112:13
 	android:name
 		ADDED from AndroidManifest.xml:111:13
+activity#pitt.edu.AIEDxEDM2015.Authors
+ADDED from AndroidManifest.xml:115:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:118:13
+	android:label
+		ADDED from AndroidManifest.xml:117:13
+	android:name
+		ADDED from AndroidManifest.xml:116:13
+activity#pitt.edu.AIEDxEDM2015.AuthorDetail
+ADDED from AndroidManifest.xml:120:9
+	android:screenOrientation
+		ADDED from AndroidManifest.xml:123:13
+	android:label
+		ADDED from AndroidManifest.xml:122:13
+	android:name
+		ADDED from AndroidManifest.xml:121:13

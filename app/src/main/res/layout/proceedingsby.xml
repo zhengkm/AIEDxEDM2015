@@ -5,16 +5,35 @@
     android:background="@drawable/White"
     android:orientation="vertical">
 
+    <FrameLayout android:id="@+id/FrameLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@drawable/rectshape">
+        <TextView android:id="@+id/TextView"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:gravity="center"
+            android:textSize="10pt"
+            android:textStyle="bold"
+            android:text="Authors"
+            android:textColor="@drawable/White">
+        </TextView>
+    </FrameLayout>
+
     <ListView
         android:id="@+id/list"
         android:layout_width="wrap_content"
+        android:layout_below="@+id/FrameLayout01"
         android:layout_height="wrap_content" />
 
     <ListView
         android:id="@+id/listview"
-        android:layout_width="30dip"
+        android:layout_width="40dip"
+        android:textSize="10pt"
+        android:layout_marginTop="35dip"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/FrameLayout01"
         android:layout_centerInParent="true" />
 </RelativeLayout>

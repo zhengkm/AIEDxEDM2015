@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pitt.edu.AIEDxEDM2015"
-    android:versionCode="13"
-    android:versionName="4.8" >
+    android:versionCode="16"
+    android:versionName="4.8.2" >
 
     <uses-sdk
         android:minSdkVersion="4"
@@ -111,7 +111,18 @@
         </activity>
         <activity
             android:name="pitt.edu.AIEDxEDM2015.TutorialDetail"
-            android:label="@string/title_activity_tutorial_detail" >
+            android:label="@string/title_activity_tutorial_detail"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="pitt.edu.AIEDxEDM2015.Authors"
+            android:label="@string/title_activity_authors"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="pitt.edu.AIEDxEDM2015.AuthorDetail"
+            android:label="@string/title_activity_author_detail"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 

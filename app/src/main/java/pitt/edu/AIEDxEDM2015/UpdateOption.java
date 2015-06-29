@@ -2,8 +2,10 @@ package pitt.edu.AIEDxEDM2015;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
+import data.Author;
 import data.CheckDBUpdate;
 import data.Conference;
 import data.ConferenceInfoParser;
@@ -217,6 +219,7 @@ public class UpdateOption extends Activity {
                 ArrayList<String> pidLList = new ArrayList<String>();
                 ArrayList<Workshop> wListDes = new ArrayList<Workshop>();
                 ArrayList<Poster> poList = new ArrayList<Poster>();
+                HashMap<String, Author> authorMap=new HashMap<String, Author>();
 
                 ConferenceDataLoad cdl = new ConferenceDataLoad();
 
@@ -266,8 +269,10 @@ public class UpdateOption extends Activity {
                 //Update paper content info
                 publishProgress(8);
                 PaperContentParse pcp = new PaperContentParse();
-                pcList = pcp.getData();
-                if (pcList.size() != 0) {
+                pcp.getData();
+                pcList=pcp.getPaperContent();
+                authorMap=pcp.getAuthorMap();
+                if (pcList.size() != 0&&authorMap.size() !=0) {
                     publishProgress(4);
                 } else {
                     publishProgress(5);
@@ -286,7 +291,7 @@ public class UpdateOption extends Activity {
                 db.close();
 
 
-                if (poList.size()!= 0 && wListDes.size()!=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
+                if (authorMap.size() != 0 && poList.size()!= 0 && wListDes.size()!=0 && knList.size() != 0 && sList.size() != 0 && pList.size() != 0 && pcList.size() != 0) {
                     try {
                         db.open();
                         db.deleteKeynote();
@@ -294,6 +299,8 @@ public class UpdateOption extends Activity {
                         db.deletePoster();
                         db.deleteSession();
                         db.deletePaper();
+                        db.deleteAllAuthors();
+                        db.deleteAuthorToPaper();
                         db.deletePaperContent();
 
 
@@ -338,10 +345,23 @@ public class UpdateOption extends Activity {
                             if (pcList.get(i).paperAbstract == null || pcList.get(i).paperAbstract == "") {
                                 pcList.get(i).paperAbstract = "No abstract information available";
                             }
+                            for(String authorID:pcList.get(i).authorIDList){
+                                long error = db.insertAuthorToPaper(authorID,pcList.get(i).id);
+                                if (error == -1)
+                                    System.out.println("Insert author to paper error occured");
+                            }
                             long error = db.insertPaperContent(pcList.get(i));
                             if (error == -1)
                                 System.out.println("Insert paper content error occured");
                         }
+
+                        for (Author author:authorMap.values()) {
+                            long error = db.insertAuthor(author.ID,author.name);
+                            if (error == -1)
+                                System.out.println("Insertion Author Failed session");
+                        }
+
+
                         db.close();
                     } catch (Exception e) {
                         System.out.print(e.getMessage());

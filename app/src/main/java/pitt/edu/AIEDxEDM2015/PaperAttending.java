@@ -296,6 +296,13 @@ public class PaperAttending extends Activity {
                 in.putExtra("eventSessionID", s[3]);
                 in.putExtra("eventSessionIDList",s[4]);
                 startActivity(in);
+            } else if (activity.compareToIgnoreCase("AuthorDetail") == 0) {
+                this.finish();
+                String[] s = key.split("%");
+                Intent in = new Intent(this, AuthorDetail.class);
+                in.putExtra("authorID", s[0]);
+                in.putExtra("authorName", s[1]);
+                startActivity(in);
             } else {
                 return false;
             }

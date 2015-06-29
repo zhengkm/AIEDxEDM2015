@@ -68,16 +68,4 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:paddingRight="5pt">  
 	</TextView>
 	</LinearLayout>
-	<TextView android:id="@+id/arrow"
-		android:layout_height="fill_parent"
-		android:layout_width="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_alignTop="@id/LinearLayout02"
-		android:layout_alignBottom="@id/LinearLayout02"
-		android:gravity="center_vertical"
-		android:text=">"
-		android:textStyle="bold"
-		android:textColor="@drawable/darkblue"
-		android:background="@drawable/White">
-	</TextView>
 </RelativeLayout>

@@ -64,7 +64,7 @@ public class CheckDBUpdate {
 	}
 	public boolean compare() {
 		String result=getTimstamp();
-		if (result==null||!Character.isDigit(result.charAt(0))||result.compareTo(Conference.timstamp) == 0) {
+		if (result==null||!Character.isDigit(result.charAt(0))||result.compareTo(Conference.timstamp) == 0||!Character.isDigit(Conference.timstamp.charAt(0))) {
 			needUpdate = false;
 		}
 		else{
@@ -76,7 +76,7 @@ public class CheckDBUpdate {
 
 	public boolean check() {
 		String result=getTimstamp();
-		if (result==null||!Character.isDigit(result.charAt(0))||result.compareTo(Conference.timstamp) == 0) {
+		if (result==null||!Character.isDigit(result.charAt(0))||result.compareTo(Conference.timstamp) == 0||!Character.isDigit(Conference.timstamp.charAt(0))) {
 			needUpdate = false;
 		}
 		else{

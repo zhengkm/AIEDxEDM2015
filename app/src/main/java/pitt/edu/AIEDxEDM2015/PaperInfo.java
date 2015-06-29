@@ -25,7 +25,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class PaperInfo extends Activity implements Runnable, OnClickListener {
-    private String key, activity, id, title, authors, pAbstract, pContent, pRoom, bTime, eTime, paperID, paperStatus, date, presentationID,track;
+    private String key, activity, id, title, authors, pAbstract, pContent, pRoom, bTime, eTime, paperID, paperStatus, date, presentationID,track,authorID,authorName;
     private TextView t1, t2, t3, t4,t5, bv;
     private WebView wv;
     private ImageButton b1, b2, b, b3;
@@ -59,6 +59,8 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
             bTime = b.getString("bTime");
             eTime = b.getString("eTime");
             date = b.getString("date");
+            authorID=b.getString("authorID");
+            authorName=b.getString("authorName");
             presentationID = b.getString("presentationID");
             activity = b.getString("activity");
             key = b.getString("key");
@@ -218,6 +220,8 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
         in.putExtra("date", date);
         in.putExtra("presentationID", presentationID);
         in.putExtra("track", track);
+        in.putExtra("authorID", authorID);
+        in.putExtra("authorName", authorName);
         startActivity(in);
     }
 
@@ -449,6 +453,13 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
                 in.putExtra("room", s[2]);
                 in.putExtra("eventSessionID", s[3]);
                 in.putExtra("eventSessionIDList",s[4]);
+                startActivity(in);
+            } else if (activity.compareToIgnoreCase("AuthorDetail") == 0) {
+                this.finish();
+                String[] s = key.split("%");
+                Intent in = new Intent(this, AuthorDetail.class);
+                in.putExtra("authorID", s[0]);
+                in.putExtra("authorName", s[1]);
                 startActivity(in);
             } else {
                 return false;

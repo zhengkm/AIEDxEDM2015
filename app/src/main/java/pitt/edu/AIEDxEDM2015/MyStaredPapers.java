@@ -282,6 +282,7 @@ public View getView(int position, View convertView, ViewGroup parent) {
 		vh.t3 = (TextView) convertView.findViewById(R.id.author);
 		vh.type = (TextView) convertView.findViewById(R.id.type);
 		vh.location= (TextView) convertView.findViewById(R.id.location);
+		vh.location.setVisibility(View.VISIBLE);
 		//vh.tr = (TextView) convertView.findViewById(R.id.trackimage);
 		vh.date = (TextView) convertView.findViewById(R.id.text_first_char_hint);
 

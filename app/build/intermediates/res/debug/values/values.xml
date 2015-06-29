@@ -149,6 +149,8 @@
     <string name="hello">Hello World!</string>
     <string name="hello_world">Hello world!</string>
     <string name="select">Choose a conference</string>
+    <string name="title_activity_author_detail">AuthorDetail</string>
+    <string name="title_activity_authors">Authors</string>
     <string name="title_activity_first_launch_update">firstLaunchUpdate</string>
     <string name="title_activity_tutorial">Tutorial</string>
     <string name="title_activity_tutorial_detail">TutorialDetail</string>
