@@ -13,13 +13,16 @@ import data.Session;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -42,6 +45,9 @@ public class ProgramByDay extends Activity {
     private ListView day1lv, day2lv, day3lv, day4lv, day5lv, day6lv, day7lv, day8lv;
     private String sessionDate;
     private HorizontalScrollView scroll;
+    private TabHost host;
+    private int screenWidth,screenHeight;
+
 
     private final int MENU_HOME = Menu.FIRST;
     private final int MENU_TRACK = Menu.FIRST + 1;
@@ -49,6 +55,86 @@ public class ProgramByDay extends Activity {
     private final int MENU_SCHEDULE = Menu.FIRST + 3;
     private final int MENU_RECOMMEND = Menu.FIRST + 4;
 
+    private float mPosX,mPosY,mCurPosX,mCurPosY;
+    private void setGestureListener(View view){
+        view.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                switch (event.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+                        mPosX = event.getX();
+                        mPosY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        mCurPosX = event.getX();
+                        mCurPosY = event.getY();
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        DisplayMetrics displayMetrics = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                        final int screenHeight = displayMetrics.heightPixels;
+                        final int screenWidth = displayMetrics.widthPixels;
+                        if(Math.abs(mCurPosY-mPosY)>(screenHeight/8)){
+                            //System.out.println("!!!!!!!!"+(screenHeight/4));
+                            return false;
+                        }else if (mCurPosX - mPosX > 0
+                                && (Math.abs(mCurPosX - mPosX) > 135)) {
+                            //向右滑動
+                            final int index=host.getCurrentTab();
+                            if(index!=8-1){
+                                host.setCurrentTab(index + 1);
+                                //set the display of current tab
+                                scroll=(HorizontalScrollView) findViewById(R.id.scroll);
+                                new Handler().postDelayed((new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (host.getCurrentTab() >3) {
+                                            scroll.scrollTo(screenWidth, 0);
+                                        }else{
+                                            scroll.scrollTo(0, 0);
+                                        }
+                                    }
+                                }), 5);
+                            }
+
+                            return true;
+
+                        } else if (mCurPosX - mPosX < 0
+                                && (Math.abs(mCurPosX - mPosX) > 135)) {
+                            //向左滑动
+                            final int index=host.getCurrentTab();
+                            if(index!=0){
+                                host.setCurrentTab(index-1);
+                                //set the display of current tab
+                                scroll=(HorizontalScrollView) findViewById(R.id.scroll);
+                                scroll.setLeft(0);
+                                new Handler().postDelayed((new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (host.getCurrentTab() <=3) {
+                                            scroll.scrollTo(0, 0);
+                                            //scroll.setLeft(0);
+                                        }else{
+                                            scroll.scrollTo(screenWidth, 0);
+                                        }
+
+                                    }
+                                }), 5);
+                            }
+                            return true;
+                        }
+
+                        break;
+                }
+                return false;//will not affect other clicks
+            }
+
+        });
+    }
     /**
      * Called when the activity is first created.
      */
@@ -85,7 +171,7 @@ public class ProgramByDay extends Activity {
 
 
         // Set up the tabs
-        final TabHost host = (TabHost) findViewById(R.id.tabdates);
+        host = (TabHost) findViewById(R.id.tabdates);
         host.setup();
 
 
@@ -93,6 +179,7 @@ public class ProgramByDay extends Activity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         final int screenWidth = displayMetrics.widthPixels;
+        int screenHeight = displayMetrics.heightPixels;
 
 
         //1st day tab
@@ -177,7 +264,7 @@ public class ProgramByDay extends Activity {
         new Handler().postDelayed((new Runnable() {
             @Override
             public void run() {
-                scroll.scrollTo(screenWidth* (host.getCurrentTab()/4), 0);
+                scroll.scrollTo(screenWidth * (host.getCurrentTab() / 4), 0);
 
             }
         }), 5);
@@ -240,6 +327,18 @@ public class ProgramByDay extends Activity {
         MyListAdapter adapter8 = new MyListAdapter(sessions8);
         day8lv.setAdapter(adapter8);
         day8lv.setOnItemClickListener(adapter8);
+
+
+        //set the Gesture
+        setGestureListener(day1lv);
+        setGestureListener(day2lv);
+        setGestureListener(day3lv);
+        setGestureListener(day4lv);
+        setGestureListener(day5lv);
+        setGestureListener(day6lv);
+        setGestureListener(day7lv);
+        setGestureListener(day8lv);
+
     }
 
     @Override

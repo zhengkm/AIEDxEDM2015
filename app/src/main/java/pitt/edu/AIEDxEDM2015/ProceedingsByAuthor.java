@@ -447,8 +447,8 @@ public class ProceedingsByAuthor extends Activity implements OnItemClickListener
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		txtOverlay.setVisibility(View.INVISIBLE);
-		windowManager.removeView(txtOverlay);
+		//txtOverlay.setVisibility(View.INVISIBLE);
+//		windowManager.removeView(txtOverlay);
 	}
 
     private String py[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",

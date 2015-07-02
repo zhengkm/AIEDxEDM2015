@@ -1,40 +1,46 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/White">
-    <FrameLayout android:id="@+id/FrameLayout01"
+    android:background="@drawable/White"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/FrameLayout01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rectshape"
         android:visibility="gone">
-        <TextView android:id="@+id/TextView01"
-            android:layout_height="wrap_content"
+
+        <TextView
+            android:id="@+id/TextView01"
             android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="10pt"
-            android:textStyle="bold"
             android:text="My schedule"
-            android:textColor="@drawable/White">
-        </TextView>
-        <ImageButton android:id="@+id/ImageButton01"
-            android:src="@drawable/update"
+            android:textColor="@drawable/White"
+            android:textSize="10pt"
+            android:textStyle="bold"></TextView>
+
+        <ImageButton
+            android:id="@+id/ImageButton01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
+            android:layout_gravity="right"
             android:background="@android:color/transparent"
-            android:layout_gravity="right">
-        </ImageButton>
+            android:src="@drawable/update"
+            android:visibility="visible"></ImageButton>
     </FrameLayout>
+
     <TabHost
         android:id="@+id/tabdates"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent">
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
             <HorizontalScrollView
                 android:id="@+id/scroll"
                 android:layout_width="fill_parent"
@@ -42,116 +48,116 @@
                 android:layout_toLeftOf="@+id/next_button"
                 android:layout_toRightOf="@+id/up_button"
                 android:fillViewport="true"
-                android:scrollbars="horizontal" >
+                android:scrollbars="horizontal">
 
                 <TabWidget
                     android:id="@android:id/tabs"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/lightblue"/>
+                    android:background="@drawable/lightblue" />
             </HorizontalScrollView>
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:background="@drawable/White">
+
                 <ExpandableListView
-                    android:layout_width="fill_parent"
                     android:id="@+id/day1"
-                    android:layout_height="wrap_content"
-                    android:drawSelectorOnTop="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
+                    android:background="@drawable/White"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
+                    android:drawSelectorOnTop="true"
+                    android:fastScrollEnabled="true"
+                    android:footerDividersEnabled="true"></ExpandableListView>
+
                 <ExpandableListView
-                    android:layout_width="fill_parent"
                     android:id="@+id/day2"
-                    android:layout_height="wrap_content"
-                    android:drawSelectorOnTop="true"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
+                    android:background="@drawable/White"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
+                    android:drawSelectorOnTop="true"
+                    android:fastScrollEnabled="true"
+                    android:footerDividersEnabled="true"></ExpandableListView>
+
                 <ExpandableListView
-                    android:layout_width="fill_parent"
                     android:id="@+id/day3"
-                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/White"
+                    android:choiceMode="singleChoice"
+                    android:clickable="true"
                     android:drawSelectorOnTop="true"
-                    android:layout_weight="1"
                     android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
-                    android:choiceMode="singleChoice"
-                    android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
+                    android:footerDividersEnabled="true"></ExpandableListView>
+
                 <ExpandableListView
-                    android:layout_width="fill_parent"
                     android:id="@+id/day4"
-                    android:layout_height="wrap_content"
-                    android:drawSelectorOnTop="false"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
+                    android:background="@drawable/White"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
+                    android:drawSelectorOnTop="false"
+                    android:fastScrollEnabled="true"
+                    android:footerDividersEnabled="true"></ExpandableListView>
+
                 <ExpandableListView
-                    android:layout_width="fill_parent"
                     android:id="@+id/day5"
-                    android:layout_height="wrap_content"
-                    android:drawSelectorOnTop="false"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
+                    android:background="@drawable/White"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
+                    android:drawSelectorOnTop="false"
+                    android:fastScrollEnabled="true"
+                    android:footerDividersEnabled="true"></ExpandableListView>
+
                 <ExpandableListView
-                    android:layout_width="fill_parent"
                     android:id="@+id/day6"
-                    android:layout_height="wrap_content"
-                    android:drawSelectorOnTop="false"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
+                    android:background="@drawable/White"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
+                    android:drawSelectorOnTop="false"
+                    android:fastScrollEnabled="true"
+                    android:footerDividersEnabled="true"></ExpandableListView>
+
                 <ExpandableListView
-                    android:layout_width="fill_parent"
                     android:id="@+id/day7"
-                    android:layout_height="wrap_content"
-                    android:drawSelectorOnTop="false"
-                    android:layout_weight="1"
-                    android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
-                    android:choiceMode="singleChoice"
-                    android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
-                <ExpandableListView
                     android:layout_width="fill_parent"
-                    android:id="@+id/day8"
-                    android:layout_height="wrap_content"
-                    android:drawSelectorOnTop="false"
+                    android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:fastScrollEnabled="true"
-                    android:footerDividersEnabled="true"
+                    android:background="@drawable/White"
                     android:choiceMode="singleChoice"
                     android:clickable="true"
-                    android:background="@drawable/White">
-                </ExpandableListView>
+                    android:drawSelectorOnTop="false"
+                    android:fastScrollEnabled="true"
+                    android:footerDividersEnabled="true"></ExpandableListView>
+
+                <ExpandableListView
+                    android:id="@+id/day8"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/White"
+                    android:choiceMode="singleChoice"
+                    android:clickable="true"
+                    android:drawSelectorOnTop="false"
+                    android:fastScrollEnabled="true"
+                    android:footerDividersEnabled="true"></ExpandableListView>
 
             </FrameLayout>
         </LinearLayout>

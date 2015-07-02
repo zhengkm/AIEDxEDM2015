@@ -196,9 +196,9 @@ public class PaperInfo extends Activity implements Runnable, OnClickListener {
             case R.id.ImageButton03:
                 Intent connectSocN = new Intent(Intent.ACTION_SEND);
                 connectSocN.setType("text/plain");
-                connectSocN.putExtra(android.content.Intent.EXTRA_SUBJECT, "iConference 2013");
-                connectSocN.putExtra(Intent.EXTRA_TEXT, "The iConference is an annual gathering of a broad spectrum of scholars and researchers from around the world who share a common concern about critical information issues in contemporary society. The iConference pushes the boundaries of information studies, explores core concepts and ideas, and creates new technological and conceptual configurations???all situated in interdisciplinary discourses.<br/>The iConference series is presented by the iSchools organization, a worldwide collective of Information Schools dedicated to advancing the information field, and preparing students to meet the information challenges of the 21st Century. <br/>iConference 2013 is hosted by the University of North Texas College of Information. Presenting Sponsors include Microsoft Research. Additional sponsorships are available; visit our sponsorship page to learn more about sponsorship opportunities.\n" +
-                        "This paper will be presented on iConf:\n" + title + "\n" + "http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=98&presentationID=" + presentationID);
+                connectSocN.putExtra(android.content.Intent.EXTRA_SUBJECT, "AIEDxEDM 2015");
+                connectSocN.putExtra(Intent.EXTRA_TEXT,
+                        "#AIEDxEDM 2015: " + title + "\n" + "http://halley.exp.sis.pitt.edu/cn3/presentation2.php?conferenceID=135&presentationID=" + presentationID);
                 startActivity(Intent.createChooser(connectSocN, "Share"));
                 break;
             default:

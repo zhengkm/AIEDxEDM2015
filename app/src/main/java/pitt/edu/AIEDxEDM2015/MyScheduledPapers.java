@@ -31,6 +31,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -74,6 +75,92 @@ public class MyScheduledPapers extends Activity implements Runnable {
     private final int MENU_RECOMMEND = Menu.FIRST + 4;
     private MyListViewAdapter adapter1, adapter2, adapter3, adapter4, adapter5,adapter8,adapter6,adapter7;
 
+
+    private float mPosX,mPosY,mCurPosX,mCurPosY;
+
+    /**
+     * move the tab when slide the screen.
+     */
+    private void setGestureListener(View view){
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // TODO Auto-generated method stub
+                switch (event.getAction()) {
+
+                    case MotionEvent.ACTION_DOWN:
+                        mPosX = event.getX();
+                        mPosY = event.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        mCurPosX = event.getX();
+                        mCurPosY = event.getY();
+
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        DisplayMetrics displayMetrics = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                        final int screenHeight = displayMetrics.heightPixels;
+                        final int screenWidth = displayMetrics.widthPixels;
+                        if(Math.abs(mCurPosY-mPosY)>(screenHeight/8)){
+                            //System.out.println("!!!!!!!!"+(screenHeight/4));
+                            return false;
+                        }else if (mCurPosX - mPosX > 0
+                                && (Math.abs(mCurPosX - mPosX) > 135)) {
+                            //向右滑動
+                            final int index=host.getCurrentTab();
+                            if(index!=8-1){
+                                host.setCurrentTab(index + 1);
+                                //set the display of current tab
+                                scroll=(HorizontalScrollView) findViewById(R.id.scroll);
+                                new Handler().postDelayed((new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (host.getCurrentTab() >3) {
+                                            scroll.scrollTo(screenWidth, 0);
+                                        }else{
+                                            scroll.scrollTo(0, 0);
+                                        }
+                                    }
+                                }), 5);
+                            }
+
+                            return true;
+
+                        } else if (mCurPosX - mPosX < 0
+                                && (Math.abs(mCurPosX - mPosX) > 135)) {
+                            //向左滑动
+                            final int index=host.getCurrentTab();
+                            if(index!=0){
+                                host.setCurrentTab(index-1);
+                                //set the display of current tab
+                                scroll=(HorizontalScrollView) findViewById(R.id.scroll);
+                                scroll.setLeft(0);
+                                new Handler().postDelayed((new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (host.getCurrentTab() <=3) {
+                                            scroll.scrollTo(0, 0);
+                                            //scroll.setLeft(0);
+                                        }else{
+                                            scroll.scrollTo(screenWidth, 0);
+                                        }
+
+                                    }
+                                }), 5);
+                            }
+                            return true;
+                        }
+
+                        break;
+                }
+                return false;//will not affect other clicks
+            }
+
+        });
+    }
+
+
     /**
      * Called when the activity is first created.
      */
@@ -91,9 +178,6 @@ public class MyScheduledPapers extends Activity implements Runnable {
 
         if (Conference.userSignin) {
             Bundle b = getIntent().getExtras();
-//            if (b != null) {
-
-//            }
             us2s = new UserScheduledToServer();
             fl.setVisibility(View.VISIBLE);
 
@@ -107,10 +191,6 @@ public class MyScheduledPapers extends Activity implements Runnable {
             day7lv = (ExpandableListView) findViewById(R.id.day7);
             day8lv = (ExpandableListView) findViewById(R.id.day8);
 
-
-            // Set up the tabs
-            host = (TabHost) findViewById(R.id.tabdates);
-            host.setup();
 
             // Set up the tabs
             host = (TabHost) findViewById(R.id.tabdates);
@@ -204,10 +284,23 @@ public class MyScheduledPapers extends Activity implements Runnable {
             new Handler().postDelayed((new Runnable() {
                 @Override
                 public void run() {
-                        scroll.scrollTo(screenWidth * (host.getCurrentTab()/4), 0);
+                    scroll.scrollTo(screenWidth * (host.getCurrentTab() / 4), 0);
 
                 }
             }), 5);
+
+
+            //set the Gesture
+            setGestureListener(day1lv);
+            setGestureListener(day2lv);
+            setGestureListener(day3lv);
+            setGestureListener(day4lv);
+            setGestureListener(day5lv);
+            setGestureListener(day6lv);
+            setGestureListener(day7lv);
+            setGestureListener(day8lv);
+
+
 
             reGene();
             //Changetab(sday);
@@ -271,7 +364,6 @@ public class MyScheduledPapers extends Activity implements Runnable {
                             .show();
             }
         });
-
 
     }
 
