@@ -108,7 +108,7 @@ public class PaperContentParse {
                 se.track = sb.toString();
                 return;
             }
-            if(localName.equals("authorID")){
+            if(localName.equals("authorID")&& contentStart){
                 author.ID=sb.toString();
                 se.authorIDList.add(author.ID);
                 return;

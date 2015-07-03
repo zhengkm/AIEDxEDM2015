@@ -179,7 +179,7 @@ public class ProgramByDay extends Activity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         final int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
+       // int screenHeight = displayMetrics.heightPixels;
 
 
         //1st day tab
