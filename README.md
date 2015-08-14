@@ -7,3 +7,5 @@ The app allows to view conference schedule, presented papers, workshops, tutoria
 The schedule is being synchronized with the Web version of the AIED and EDM 2015 Conference Navigator (http://halley.exp.sis.pitt.edu/cn3/conferenceHomePage.php?conferenceID=135).
 
 Google play : https://play.google.com/store/apps/details?id=pitt.edu.AIEDxEDM2015
+
+Features:
