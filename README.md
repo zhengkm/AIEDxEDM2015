@@ -1,4 +1,4 @@
-# UMAP2015
+# AIED and EDM 2015
 What is it?
 This is an Android app of Conference Navigator for AIED and EDM 2015, 17th International Conference on Artificial Intelligence in Education & The 8th International Conference on Education Data Mining.
 
